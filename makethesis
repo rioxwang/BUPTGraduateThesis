@@ -1,0 +1,156 @@
+#!/bin/bash
+# --------------------------------------------------------------------------
+# Filename: makethesis
+# Author: WANG Xianling
+# Created: 2013-07-08
+# Version: 1.0
+# --------------------------------------------------------------------------
+# Change Log
+# v1.0: Batch file created.
+#       1. 'clean', 'install' and 'thesis' functions are defined.
+#       2. 'xetex' engine w/o chapbib are defined.
+# --------------------------------------------------------------------------
+# User Configuration
+# Project name
+PROJECT="buptgraduatethesis"
+# File name of your top-level tex file.
+TARGET="bare_thesis"
+# File name list of tex files for mainmatters.
+MAINMATTERS=("ch_intro" "ch_concln")
+# Driver type to build PDF.
+# 'xetex' for xetex engine;
+DRIVER="xetex"
+# Bib type to construct bibliography.
+# 'chapbib' for bib per chapter; 'allbib' for bib in thesis end.
+BIBTYPE="chapbib"
+# --------------------------------------------------------------------------
+# Function: Clearance
+# TMP File Clearance
+function clean()
+{
+    echo Clearing TMP files...
+    echo Clearing TMP files in installation...
+    rm -f *.dvi *.ps > /dev/null
+    echo Clearing TMP files in thesis generation...
+    rm -f *.bbl *.blg *.aux *.log *.acn *.glo *.ist *.acr *.alg *.out *.toc *.thm *.ps *.dvi > /dev/null
+    echo ===========================================
+    echo = Mission Done!
+    echo = ALL TMP files are cleared!
+    echo ===========================================
+    exit
+}
+# --------------------------------------------------------------------------
+# Function: Making Thesis PDF
+# Thesis PDF Generation
+function thesis()
+{
+    # Check the user input configuration.
+    echo ===========================================
+    echo =
+    echo = TARGET=${TARGET}
+    echo = MAINMATTERS=${MAINMATTERS[@]}
+    echo = DRIVER=${DRIVER}
+    echo = BIBTYPE=${BIBTYPE}
+    echo =
+    echo ===========================================
+    echo Double check above configurations! Press anykey to continue, CTRL+C to stop!
+    read -n1
+    # Check the integrity of the installation.
+    echo Checking Existence of Essential Files...
+    if [ -f "${PROJECT}.cls" -a -f "${PROJECT}.cfg" -a -f "${PROJECT}.bst" ]; then
+        echo Document class installed! Generating Thesis PDF...
+    else
+        echo ===========================================
+        echo = Mission Failed!
+        echo = Cannot find essential files!
+        echo = Please './makethesis install' to reinstall BUPTGraduateThesis!
+        echo ===========================================
+        exit
+    fi
+
+    # Generate the thesis PDF according to different configurations.
+    if [ ${DRIVER} = "xetex" ]; then
+        echo Building thesis PDF...
+        xelatex ${TARGET}
+        echo Processing BIB files...
+        if [ ${BIBTYPE} = "chapbib" ]; then
+            for MATTER in ${MAINMATTERS}
+            do
+                bibtex ${MATTER} > /dev/null
+            done
+        else
+            bibtex ${TARGET} > /dev/null
+        fi
+        bibtex jrnl.aux > /dev/null
+        bibtex conf.aux > /dev/null
+        echo Processing index files...
+        makeindex -s ${TARGET}.ist -t ${TARGET}.alg -o ${TARGET}.acr ${TARGET}.acn > /dev/null
+        echo Rebuilding to generate cross-reference...
+        xelatex ${TARGET} > /dev/null
+        xelatex ${TARGET} > /dev/null
+    else
+        echo Engine Undefined!
+        exit
+    fi
+    echo ===========================================
+    echo = Mission Done!
+    echo = Thesis PDF is successfully generated!
+    echo ===========================================
+    clean
+    exit
+}
+# --------------------------------------------------------------------------
+# Function: Installation
+# Document Class and Help PDF File Generation
+function install()
+{
+    mkdir example
+    echo Extracting and installing files...
+    xetex install/${PROJECT}.ins > /dev/null
+    echo Building user guide...
+    xelatex -no-pdf install/${PROJECT}.dtx > /dev/null
+    makeindex -q -s gglo.ist -o ${PROJECT}.gls ${PROJECT}.glo > /dev/null
+    echo Rebuilding to generate change-log...
+    xelatex -no-pdf install/${PROJECT}.dtx > /dev/null
+    makeindex -q -s gglo.ist -o ${PROJECT}.gls ${PROJECT}.glo > /dev/null
+    echo Rebuilding to generate cross-reference...
+    xelatex install/${PROJECT}.dtx > /dev/null
+    echo Clearing TMP files...
+    rm -f ${PROJECT}.aux ${PROJECT}.glo ${PROJECT}.ilg ${PROJECT}.ind > /dev/null
+    rm -f ${PROJECT}.out ${PROJECT}.toc ${PROJECT}.idx ${PROJECT}.hd ${PROJECT}.xdv ${PROJECT}.gls > /dev/null
+    echo ===========================================
+    echo = Mission Done!
+    echo = BUPTThesis is successfully installed!
+    echo ===========================================
+    exit
+}
+
+# --------------------------------------------------------------------------
+# Main Function Selection
+# Default Selection: thesis
+if [ "$#" = 1 ]; then
+    if [ "$1" = "install" ]; then
+        install
+    elif [ "$1" = "thesis" ]; then
+        thesis
+    elif [ "$1" = "clean" ]; then
+        clean
+    else
+        echo ===========================================
+        echo = Undefined Parameter!
+        echo ===========================================
+    fi
+elif [ "$#" = 0 ]; then
+    thesis
+else
+    echo ===========================================
+    echo = Input Parameter Error!
+    echo = You should input at most 1 parameter: 
+    echo =     install
+    echo =     thesis
+    echo =     clean
+    echo = or leave it blank for default!
+    echo ===========================================
+fi
+# EOF
+

@@ -1,0 +1,149 @@
+%%
+%% Copyright (C) 2013 by WANG Xianling <baggiorio18@gmail.com>
+%%
+%% This file is a modified version of BUPTThesis project,
+%% maintained by Yu Zhang <yu_zhang@ieee.org>.
+%%
+%% The changes to the original work include the application
+%% of xeCJK as Chinese solution, and the format modification
+%% according to the latest format requirement introduced by
+%% the Graduate School of BUPT. 
+%%
+%% This file is part of the BUPTGraduateThesis project.
+%% ---------------------------------------------------------
+%%
+%% This file may be distributed and/or modified under the 
+%% conditions of the LaTeX Project Public License, either 
+%% version 1.3 of this license or (at your option) any later 
+%% version. The latest version of this license is in:
+%%
+%% http://www.latex-project.org/lppl.txt
+%%
+%% and version 1.3c or later is part of all distributions of 
+%% LaTeX version 2005/12/01 or later.
+%%
+
+\input l3docstrip.tex
+
+\askforoverwritefalse
+\showprogress
+\keepsilent
+
+\preamble
+
+Copyright (C) 2013-\the\year by WANG Xianling <baggiorio18@gmail.com>
+
+This file is a modified version of BUPTThesis project,
+maintained by Yu Zhang <yu_zhang@ieee.org>.
+
+The changes to the original work include the application
+of xeCJK as Chinese solution, and the format modification
+according to the latest format requirement introduced by
+the Graduate School of BUPT. 
+
+This file is part of the BUPTGraduateThesis project.
+---------------------------------------------------------
+
+This file may be distributed and/or modified under the 
+conditions of the LaTeX Project Public License, either 
+version 1.3 of this license or (at your option) any later 
+version. The latest version of this license is in:
+
+http://www.latex-project.org/lppl.txt
+
+and version 1.3c or later is part of all distributions of 
+LaTeX version 2005/12/01 or later.
+
+This work has the LPPL maintenance status `maintained'.
+
+The current Maintainer of this work is WANG Xianling.
+
+This work consists of the files buptgraduatethesis.dtx and 
+buptgraduatethesis.ins and the derived file buptgraduatethesis.cls,
+buptgraduatethesis.cfg, buptgraduatethesis.bst, xeCJK-fonts.def.
+
+To produce the documentation run the original source files 
+ending with `.dtx' through LaTeX.
+ 
+\endpreamble
+
+\declarepreamble\cfgpreamble
+
+Copyright (C) 2013-\the\year by WANG Xianling <baggiorio18@gmail.com>
+
+This file is a modified version of BUPTThesis project,
+maintained by Yu Zhang <yu_zhang@ieee.org>.
+
+The changes to the original work include the application
+of xeCJK as Chinese solution, and the format modification
+according to the latest format requirement introduced by
+the Graduate School of BUPT. 
+
+This file is part of the BUPTGraduateThesis project.
+---------------------------------------------------------
+
+This file may be distributed and/or modified under the 
+conditions of the LaTeX Project Public License, either 
+version 1.3 of this license or (at your option) any later 
+version. The latest version of this license is in:
+
+http://www.latex-project.org/lppl.txt
+
+and version 1.3c or later is part of all distributions of 
+LaTeX version 2005/12/01 or later.
+
+This is the configuration file of the buptthesis package 
+with LaTeX2e.
+
+\endpreamble
+
+\declarepreamble\examplepreamble
+
+This file is a part of the example of BUPTGraduateThesis.
+
+\endpreamble
+
+\declarepreamble\fontsdefpreamble
+
+Copyright (C) 2013-\the\year by WANG Xianling <baggiorio18@gmail.com>
+
+This file is part of the BUPTGraduateThesis project.
+
+\endpreamble
+
+\usedir{tex/latex/buptgraduatethesis}
+\generate{
+  \file{\jobname.cls}{\from{install/\jobname.dtx}{cls}}
+  \usepreamble\cfgpreamble\nopostamble
+  \file{\jobname.cfg}{\from{install/\jobname.dtx}{cfg}}
+  \file{\jobname.bst}{\from{install/\jobname.dtx}{bst}}
+  \usepreamble\fontsdefpreamble\nopostamble
+  \file{xeCJK-fonts.def}{\from{install/\jobname.dtx}{def}}
+  \usepreamble\examplepreamble\nopostamble
+  \file{example/bare_thesis.tex}{\from{install/\jobname.dtx}{bare-thesis}}
+  \file{example/ch_intro.tex}{\from{install/\jobname.dtx}{ch-intro}}
+  \file{example/ch_concln.tex}{\from{install/\jobname.dtx}{ch-concln}}
+  \file{example/metadata.tex}{\from{install/\jobname.dtx}{metadata}}
+  \file{example/pubs.tex}{\from{install/\jobname.dtx}{pubs}}
+  \file{example/pubs.bib}{\from{install/\jobname.dtx}{pubs-bib}}
+  \file{example/bare_thesis.bib}{\from{install/\jobname.dtx}{bare-thesis-bib}}
+  \file{example/ackgmt.tex}{\from{install/\jobname.dtx}{ackgmt}}
+  \file{example/acronyms.tex}{\from{install/\jobname.dtx}{acronyms}}
+  \file{example/notations.tex}{\from{install/\jobname.dtx}{notations}}
+  \file{example/app_lhospital.tex}{\from{install/\jobname.dtx}{app-lhospital}}
+}
+
+\ifToplevel{
+\obeyspaces
+\Msg{****************************************************}
+\Msg{*                                                   }
+\Msg{* BUPTGraduateThesis installed!                     }
+\Msg{*                                                   }
+\Msg{* Example files also generated!                     }
+\Msg{*                                                   }
+\Msg{* Happy TeXing!                                     }
+\Msg{*                                                   }
+\Msg{****************************************************}
+}
+
+\endbatchfile
