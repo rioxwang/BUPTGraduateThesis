@@ -3,12 +3,15 @@ REM --------------------------------------------------------------------------
 REM Filename: makethesis.bat
 REM Author: WANG Xianling
 REM Created: 2013-07-08
-REM Version: 1.0
+REM Modified: 2013-07-30
+REM Version: 1.1
 REM --------------------------------------------------------------------------
 REM Change Log
 REM v1.0: Batch file created.
 REM       1. 'clean', 'install' and 'thesis' functions are defined.
 REM       2. 'xetex' engine w/o chapbib are defined.
+REM v1.1: Function added.
+REM       1. 'wordcount' function is defined.
 REM --------------------------------------------------------------------------
 REM User Configuration
 REM Project name
@@ -29,6 +32,7 @@ REM Main Function Selection
 if /I {%1}=={clean} goto clean
 if /I {%1}=={install} goto install
 if /I {%1}=={thesis} goto thesis
+if /I {%1}=={wordcount} goto wordcount
 REM Default Selection: thesis
 goto thesis
 
@@ -43,6 +47,17 @@ del *.bbl *.blg *.aux *.log *.acn *.glo *.ist *.acr *.alg *.out *.toc *.thm *.ps
 echo ===========================================
 echo = Mission Done!
 echo = ALL TMP files are cleared!
+echo ===========================================
+goto end
+
+REM --------------------------------------------------------------------------
+REM Word Count
+:wordcount
+echo Counting word...
+texcount -ch -inc -html -v -sum bare_thesis.tex > wordcount.html
+echo ===========================================
+echo = Counting Mission Done!
+echo = Word-counting Results are recorded in 'wordcount.html'!
 echo ===========================================
 goto end
 

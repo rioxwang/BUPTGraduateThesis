@@ -32,7 +32,7 @@
 %<cls>\NeedsTeXFormat{LaTeX2e}[2005/12/01] 
 %<cls>\ProvidesClass{buptgraduatethesis.cls}
 %<cfg>\ProvidesFile{buptgraduatethesis.cfg}
-%<cls|cfg>[2013/07/07 v1.0 BUPT graduate thesis LaTeX2e class]
+%<cls|cfg>[2013/07/30 v1.1 BUPT graduate thesis LaTeX2e class]
 %<*driver>
 \documentclass[numbered,a4paper,full]{l3doc}
 \hypersetup{pdfstartview=FitH}
@@ -177,9 +177,10 @@
 %
 %
 % \changes{v1.0}{2013/07/08}{初始版本}
+% \changes{v1.1}{2013/07/30}{更新 makethesis 的换行模式}
 %
-% \def\fileversion{v1.0}
-% \def\filedate{2013/07/08}
+% \def\fileversion{v1.1}
+% \def\filedate{2013/07/30}
 %
 % \def\BUPTGraduateThesis{\textsc{BUPT}\-\textsc{Graduate}\-\textsc{Thesis}}
 % \def\BUPTThesis{\textsc{BUPT}\-\textsc{Thesis}}
@@ -272,7 +273,28 @@
 % ./makethesis install
 % \end{Verbatim}
 % Linux 用户需要注意保证 makethesis 文件的可执行性，并且保证系统中已经安装了生成用户文档需要的 Adobe 系列字体以及 TeX Gyre Pagella 系列字体。
-% 其中，Adobe 字体需要上网下载，而 TeX Gyre Pagella 字体在 \TeXLive{} 2013 安装目录中有提供，请自行搜索。
+% 其中，Adobe 字体需要上网下载，而 TeX Gyre Pagella 字体在 \TeXLive{} 2013 安装目录中有提供，请自行搜索。字体文件名参见表 \ref{tab:font-name}。
+% \changes{v1.1}{2013/07/30}{增添安装所需字体文件名的说明}
+% \begin{table}[!h]
+%   \centering
+%   \caption{用户文档所需字体文件名}
+%   \label{tab:font-name}
+%   \begin{tabular}{ll}
+%     \toprule
+%     字体名 & 说明\\
+%     \midrule
+%       |AdobeSongStd-Light.otf| & Adobe 宋体\\
+%       |AdobeHeitiStd-Regular.otf| & Adobe 黑体\\
+%       |AdobeKaitiStd-Regular.otf| & Adobe 楷体\\
+%       |AdobeFangsongStd-Regular.otf| & Adobe 仿宋体\\
+%       |texgyrepagella-regular.otf| & TeX Gyre Pagella 系列字体\\
+%       |texgyrepagella-bold.otf| & \\
+%       |texgyrepagella-bolditalic.otf| & \\
+%       |texgyrepagella-italic.otf| & \\
+%       |texgyrepagella-math.otf| & \\
+%     \bottomrule
+%   \end{tabular}
+% \end{table}
 % 
 % 安装成功之后，会在根目录生成 buptgraduatethesis.cls 、buptgraduatethesis.cfg、buptgraduatethesis.bst 以及 example 文件夹。
 % 
@@ -345,7 +367,7 @@
 % 我们建议 Windows 用户在 CMD 下（Linux 用户在 SHELL 下）使用预先编写好的批处理文件 makethesis 编译。
 % 高阶用户可以阅读批处理文件，深入了解 \BUPTGraduateThesis{} 编译的过程。
 % 此外，为了达到预期的编译效果，用户在编译前需要对 makethesis 进行简单的配置。
-% 配置的方法为：定位到 makethesis 的 User Configuration 模块，对其中的 5 个参数进行配置，个参数的功能参见表 \ref{tab:makethesis}。
+% 配置的方法为：定位到 makethesis 的 User Configuration 模块，对其中的 5 个参数进行配置，各参数的功能参见表 \ref{tab:makethesis}。
 % \begin{table}[!h]
 %   \label{tab:makethesis}
 %   \centering
@@ -399,15 +421,15 @@
 % \end{function}
 % |classlevel|用于指定保密级别，包括国家标准规定的五种文献保密级别：
 % \begin{description}
-% \item[open] 公开级\quad可在国内外发行和交换；
-% \item[control] 限制级\quad不涉及国家秘密，但在一定时间内限制其交流和使用范围；
-% \item[confidential] 秘密级\quad涉及一般国家秘密； 
-% \item[classified] 机密级\quad涉及重要的国家秘密；
-% \item[topsecret] 绝密级\quad涉及最重要的国家秘密。
+% \item[open] 公开级\quad 可在国内外发行和交换；
+% \item[control] 限制级\quad 不涉及国家秘密，但在一定时间内限制其交流和使用范围；
+% \item[confidential] 秘密级\quad 涉及一般国家秘密； 
+% \item[classified] 机密级\quad 涉及重要的国家秘密；
+% \item[topsecret] 绝密级\quad 涉及最重要的国家秘密。
 % \end{description}
 % 论文的保密类型除了上述五种国标密级外，还可以设定为：
 % \begin{description}
-% \item[customized] 自定义密级\quad用于设定非国标保级级别的其他保密类型。
+% \item[customized] 自定义密级\quad 用于设定非国标保级级别的其他保密类型。
 % \end{description}
 % 在使用自定义密级时，需要用 |\customclasslevel| 设定密级。
 %
@@ -453,9 +475,9 @@
 % \end{function}
 % \BUPTGraduateThesis{} 支持三种输出类型：
 % \begin{description}
-% \item[print] 打印版\quad用于论文最终版本打印输出和图书馆在线系统提交；
-% \item[online] 电子版\quad用于个人或者实验室电子存档；
-% \item[peerreview] 盲审版\quad用于产生隐去作者和导师姓名的送审论文。
+% \item[print] 打印版\quad 用于论文最终版本打印输出和图书馆在线系统提交；
+% \item[online] 电子版\quad 用于个人或者实验室电子存档；
+% \item[peerreview] 盲审版\quad 用于产生隐去作者和导师姓名的送审论文。
 % \end{description}
 % 如果输出盲审版，则自动隐去论文封面的作者和导师信息，并将发表论文列表中的作者姓名自动替换为作者序次。
 %
@@ -835,6 +857,20 @@
 %   \end{tabular}
 % \end{table}
 %
+% \section{辅助功能}
+% \changes{v1.1}{2013/07/30}{增添字数统计方法说明}
+% \subsection{字数统计}
+% \LaTeX{} 的字数统计无法通过对 PDF 文件检测字数实现，只能借助 TeXcount\footnote{\url{http://app.uio.no/ifi/texcount/}} 工具。
+% TeXcount 通过 Perl 语言编写，对 \TeX{} 源文件进行字符过滤进行中文字符的统计。
+% \TeXLive{} 2013 和 \CTeX{} 发行版本中已经预装了 TeXcount，不过需要用户自行确认系统中是否已经安装 Perl\footnote{Unix/Linux 系统已经默认安装 Perl；Windows 系统需要自行安装 Perl，建议安装 ActivePerl （\url{http://www.activestate.com/activeperl}）。}。
+% 
+% 安装完成之后，进入工作文件夹并通过如下命令统计字符数：
+% \begin{Verbatim}[frame=single]
+% texcount -ch -inc -html -v -sum bare_thesis.tex > wordcount.html
+% \end{Verbatim}
+% TeXcount 会自动查找 bare_thesis.tex 文件中与其他 \TeX{} 文件的依赖关系，统计全文各个章节文件的字符数，并输出在 HTML 文件中。
+% 方便起见，我们已经将上述命令集成到 makethesis 中，用户可以通过选择 wordcount 参数调用 makethesis 实现相应功能。
+% 
 % \end{documentation}
 % 
 % \StopEventually{}

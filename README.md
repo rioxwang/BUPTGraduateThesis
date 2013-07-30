@@ -1,6 +1,8 @@
 Version
 ==================
-发行版v1.0
+发行版v1.0在GitHub的release条目下获得。
+开发版v1.1通过Git命令获得：
+    git clone https://github.com/baggiorio18/BUPTGraduateThesis.git
 
 BUPTGraduateThesis
 ==================
@@ -15,10 +17,27 @@ BUPTGraduateThesis提供北京邮电大学研究生学位论文LaTeX文档类，
 Quick Help
 ==================
 快速安装说明
-更具体的安装说明与帮助文档请参见 buptgraduatethesis.pdf.
+
+更具体的安装说明与帮助文档请参见buptgraduatethesis.pdf。
+
+为了生成用户帮助文档buptgraduatethesis.pdf，安装前请保证Adobe系列中文字体和TeX Gyre Pagella字体已经安装。
+
+Adobe系列字体用于提供免费的常用中文字体：
+*  AdobeFangsongStd-Regular.otf
+*  AdobeHeitiStd-Regular.otf
+*  AdobeKaitiStd-Regular.otf
+*  AdobeSongStd-Light.otf
+
+对于TeX Gyre Pagella字体，如果使用CTEX的发行版本，则该套字体已经装入系统中；如果使用TeX Live 2013的发行版本，则需要从"~/texmf-dist/fonts/opentype/public/tex-gyre"和"~/texmf-dist/fonts/opentype/public/tex-gyre-math"这两个文件夹获得如下字体文件：
+*  texgyrepagella-bold.otf
+*  texgyrepagella-bolditalic.otf
+*  texgyrepagella-italic.otf
+*  texgyrepagella-math.otf
+*  texgyrepagella-regular.otf
 
 Windows用户请打开CMD，输入如下命令进行安装：
-makethesis.bat install
-Linux用户请保证Adobe系列字体和TeX Gyre Pagella字体已经安装，然后打开SHELL输入如下命令进行安装：
-chmod a+x makethesis
-./makethesis install
+    makethesis.bat install
+
+然后打开SHELL输入如下命令进行安装：
+    chmod a+x makethesis
+    ./makethesis install

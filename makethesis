@@ -3,12 +3,16 @@
 # Filename: makethesis
 # Author: WANG Xianling
 # Created: 2013-07-08
-# Version: 1.0
+# Modified: 2013-07-30
+# Version: 1.1
 # --------------------------------------------------------------------------
 # Change Log
 # v1.0: Batch file created.
 #       1. 'clean', 'install' and 'thesis' functions are defined.
 #       2. 'xetex' engine w/o chapbib are defined.
+# v1.1: File mode modified, function added.
+#       1. Change the dos-style line break into unix-style line break: <CR><LF> -> <LF>.
+#       2. 'wordcount' function is defined.
 # --------------------------------------------------------------------------
 # User Configuration
 # Project name
@@ -36,6 +40,19 @@ function clean()
     echo ===========================================
     echo = Mission Done!
     echo = ALL TMP files are cleared!
+    echo ===========================================
+    exit
+}
+# --------------------------------------------------------------------------
+# Function: Wordcount
+# Word Count
+function wordcount()
+{
+    echo Counting word...
+    texcount -ch -inc -html -v -sum bare_thesis.tex > wordcount.html
+    echo ===========================================
+    echo = Counting Mission Done!
+    echo = Word-counting Results are recorded in 'wordcount.html'!
     echo ===========================================
     exit
 }
@@ -135,6 +152,8 @@ if [ "$#" = 1 ]; then
         thesis
     elif [ "$1" = "clean" ]; then
         clean
+    elif [ "$1" = "wordcount" ]; then
+        wordcount
     else
         echo ===========================================
         echo = Undefined Parameter!
