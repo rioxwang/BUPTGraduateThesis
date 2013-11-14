@@ -1,7 +1,7 @@
 Version
 ==================
 发行版v1.0在GitHub的release条目下获得。
-开发版v1.1通过Git命令获得：
+开发版v1.2通过Git命令获得：
     git clone https://github.com/baggiorio18/BUPTGraduateThesis.git
 
 BUPTGraduateThesis
@@ -38,6 +38,6 @@ Adobe系列字体用于提供免费的常用中文字体：
 Windows用户请打开CMD，输入如下命令进行安装：
     makethesis.bat install
 
-然后打开SHELL输入如下命令进行安装：
+Linux用户请打开SHELL输入如下命令进行安装：
     chmod a+x makethesis
     ./makethesis install

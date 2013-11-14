@@ -3,8 +3,8 @@ REM --------------------------------------------------------------------------
 REM Filename: makethesis.bat
 REM Author: WANG Xianling
 REM Created: 2013-07-08
-REM Modified: 2013-07-30
-REM Version: 1.1
+REM Modified: 2013-11-14
+REM Version: 1.2
 REM --------------------------------------------------------------------------
 REM Change Log
 REM v1.0: Batch file created.
@@ -12,6 +12,9 @@ REM       1. 'clean', 'install' and 'thesis' functions are defined.
 REM       2. 'xetex' engine w/o chapbib are defined.
 REM v1.1: Function added.
 REM       1. 'wordcount' function is defined.
+REM v1.2: Batch file BUG fixed.
+REM       1. 'example' folder should be existed in TeXLive release.
+REM       2. '\' in the path are changed into '//' for TeXLive Compatibility.
 REM --------------------------------------------------------------------------
 REM User Configuration
 REM Project name
@@ -64,16 +67,17 @@ goto end
 REM --------------------------------------------------------------------------
 REM Document Class and Help PDF File Generation
 :install
+mkdir example
 echo Extracting and installing files...
-xetex install\%PROJECT%.ins >nul
+xetex install//%PROJECT%.ins >nul
 echo Building user guide...
-xelatex -no-pdf install\%PROJECT%.dtx >nul
+xelatex -no-pdf install//%PROJECT%.dtx >nul
 makeindex -q -s gglo.ist -o %PROJECT%.gls %PROJECT%.glo >nul
 echo Rebuilding to generate change-log...
-xelatex -no-pdf install\%PROJECT%.dtx >nul
+xelatex -no-pdf install//%PROJECT%.dtx >nul
 makeindex -q -s gglo.ist -o %PROJECT%.gls %PROJECT%.glo >nul
 echo Rebuilding to generate cross-reference...
-xelatex install\%PROJECT%.dtx >nul
+xelatex install//%PROJECT%.dtx >nul
 echo Clearing TMP files...
 del /f /q %PROJECT%.aux %PROJECT%.glo %PROJECT%.ilg %PROJECT%.ind >nul
 del /f /q %PROJECT%.out %PROJECT%.toc %PROJECT%.idx %PROJECT%.hd %PROJECT%.xdv %PROJECT%.gls >nul
