@@ -15,6 +15,9 @@ REM       1. 'wordcount' function is defined.
 REM v1.2: Batch file BUG fixed.
 REM       1. 'example' folder should be existed in TeXLive release.
 REM       2. '\' in the path are changed into '//' for TeXLive Compatibility.
+REM v1.3: Batch file BUG fixed.
+REM       1. Missuse of 'if...else...' is fixed.
+REM       2. Missuse of 'for loop' is fixed.
 REM --------------------------------------------------------------------------
 REM User Configuration
 REM Project name
@@ -135,9 +138,10 @@ if %DRIVER%==xetex (
   xelatex %TARGET%
   echo Processing BIB files...
   if %BIBTYPE%==chapbib (
-    for %%MATTER in %MAINMATTERS% do ( bibtex %%MATTER >nul )
+    for %%M in %MAINMATTERS% do ( bibtex %%M >nul )
+  ) else (
+    bibtex %TARGET% >nul
   )
-  else bibtex %TARGET% .nul
   bibtex jrnl.aux >nul
   bibtex conf.aux >nul
   echo Processing index files...
@@ -145,8 +149,9 @@ if %DRIVER%==xetex (
   echo Rebuilding to generate cross-reference...
   xelatex %TARGET% >nul
   xelatex %TARGET% >nul
+) else (
+  echo Engine Undefined!
 )
-else echo Engine Undefined!
 echo ===========================================
 echo = Mission Done!
 echo = Thesis PDF is successfully generated!

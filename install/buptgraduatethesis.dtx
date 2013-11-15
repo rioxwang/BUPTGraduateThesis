@@ -32,7 +32,7 @@
 %<cls>\NeedsTeXFormat{LaTeX2e}[2005/12/01] 
 %<cls>\ProvidesClass{buptgraduatethesis.cls}
 %<cfg>\ProvidesFile{buptgraduatethesis.cfg}
-%<cls|cfg>[2013/11/14 v1.2 BUPT graduate thesis LaTeX2e class]
+%<cls|cfg>[2013/11/15 v1.3 BUPT graduate thesis LaTeX2e class]
 %<*driver>
 \documentclass[numbered,a4paper,full]{l3doc}
 \hypersetup{pdfstartview=FitH}
@@ -179,9 +179,10 @@
 % \changes{v1.0}{2013/07/08}{初始版本}
 % \changes{v1.1}{2013/07/30}{更新 makethesis 的换行模式}
 % \changes{v1.2}{2013/11/14}{修正 makethesis.bat 的 BUG}
+% \changes{v1.3}{2013/11/15}{修正 makethesis.bat 的 BUG；将Unicode指令替换为char指令用于引入Unicode字符；使用xeCJKsetcharclass命令修正xetex引擎下的带圈数字脚注}
 %
-% \def\fileversion{v1.2}
-% \def\filedate{2013/11/14}
+% \def\fileversion{v1.3}
+% \def\filedate{2013/11/15}
 %
 % \def\BUPTGraduateThesis{\textsc{BUPT}\-\textsc{Graduate}\-\textsc{Thesis}}
 % \def\BUPTThesis{\textsc{BUPT}\-\textsc{Thesis}}
@@ -998,8 +999,9 @@
 %    \begin{macrocode}
 \ifnum\bupt@driver=3
 \RequirePackage[CJKnumber,BoldFont,SlantFont,normalindentfirst]{xeCJK}
+\xeCJKsetcharclass{"2460}{"2473}{1}
 \punctstyle{quanjiao}
-\def\CJK@null{\kern\CJKnullspace\Unicode{48}{7}\kern\CJKnullspace}
+\def\CJK@null{\kern\CJKnullspace\char"3007 \kern\CJKnullspace}
 \defaultfontfeatures{Mapping=tex-text}
 \input{xeCJK-fonts.def}
 %</cls>
@@ -1171,24 +1173,34 @@
 % 特殊 CJK 符号: 空白字符、脚注用带圈数字
 %    \begin{macrocode}
 \ifnum\bupt@driver=3
-\def\CJK@spaceChar{\Unicode{48}{7}} % why 0x3007?
+\def\CJK@spaceChar{\char"3007} % why 0x3007?
 \def\CJKtwochars{\CJK@spaceChar\CJK@spaceChar}
 \def\bupt@circnum#1{%
-\ifnum \value{#1} = 1 \Unicode{36}{96}
-\else\ifnum \value{#1} = 2 \Unicode{36}{97}
-\else\ifnum \value{#1} = 3 \Unicode{36}{98}
-\else\ifnum \value{#1} = 4 \Unicode{36}{99}
-\else\ifnum \value{#1} = 5 \Unicode{36}{100}
-\else\ifnum \value{#1} = 6 \Unicode{36}{101}
-\else\ifnum \value{#1} = 7 \Unicode{36}{102}
-\else\ifnum \value{#1} = 8 \Unicode{36}{103}
-\else\ifnum \value{#1} = 9 \Unicode{36}{104}
-\else\ifnum \value{#1} = 10 \Unicode{36}{105}
+\ifnum \value{#1} = 1 \char"2460
+\else\ifnum \value{#1} = 2 \char"2461
+\else\ifnum \value{#1} = 3 \char"2462
+\else\ifnum \value{#1} = 4 \char"2463
+\else\ifnum \value{#1} = 5 \char"2464
+\else\ifnum \value{#1} = 6 \char"2465
+\else\ifnum \value{#1} = 7 \char"2466
+\else\ifnum \value{#1} = 8 \char"2467
+\else\ifnum \value{#1} = 9 \char"2468
+\else\ifnum \value{#1} = 10 \char"2469
+\else\ifnum \value{#1} = 11 \char"246A
+\else\ifnum \value{#1} = 12 \char"246B
+\else\ifnum \value{#1} = 13 \char"246C
+\else\ifnum \value{#1} = 14 \char"246D
+\else\ifnum \value{#1} = 15 \char"246E
+\else\ifnum \value{#1} = 16 \char"246F
+\else\ifnum \value{#1} = 17 \char"2470
+\else\ifnum \value{#1} = 18 \char"2471
+\else\ifnum \value{#1} = 19 \char"2472
+\else\ifnum \value{#1} = 20 \char"2473
   \else \textcircled{\qihao\arabic{#1}}
-  \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi
+  \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi
 }
-\def\CJKleftparen{\Unicode{255}{8}}
-\def\CJKrightparen{\Unicode{255}{9}}
+\def\CJKleftparen{\char"FF08}
+\def\CJKrightparen{\char"FF09}
 \else
 \def\CJKtwochars{\CJKchar{"030}{"000}\CJKchar{"030}{"000}}
 \def\bupt@circnum#1{%
@@ -1740,15 +1752,15 @@
 \def\bupt@page@head{北京邮电大学硕士学位论文}
 \def\bupt@label@covertitle{硕士研究生学位论文}
 \fi
-\def\bupt@label@cauthor{姓\hfill名}
-\def\bupt@label@cmajor{专\hfill业}
-\def\bupt@label@csupervisor{导\hfill师}
-\def\bupt@label@cdepartment{学\hfill院}
+\def\bupt@label@cauthor{姓\hfill 名}
+\def\bupt@label@cmajor{专\hfill 业}
+\def\bupt@label@csupervisor{导\hfill 师}
+\def\bupt@label@cdepartment{学\hfill 院}
 \def\bupt@label@ctitle{题目}
 \def\bupt@label@classlevel{密级}
 \def\bupt@label@classdur{保密期限}
 \def\bupt@schoolename{北京邮电大学}
-\def\bupt@label@studentid{学\hfill号}
+\def\bupt@label@studentid{学\hfill 号}
 \def\bupt@title@sep{：}
 \cdate{\CJKdigits{\the\year}年\CJKnumber{\the\month}月}
 %</cfg>
@@ -2149,7 +2161,7 @@
   \glossarystyle{long}                   % 以 long 样式为基础
   \renewcommand*{\glossaryentryfield}[5]{% 
   	\ifnum\bupt@driver=3
-  	\@glstarget{glo:##1}{##2} & ##3\Unicode{255}{12}##4\\%
+  	\@glstarget{glo:##1}{##2} & ##3\char"FF0C ##4\\%
   	\else
     \@glstarget{glo:##1}{##2} & ##3\CJKchar{"0FF}{"00C}##4\\
     \fi}%
@@ -2175,11 +2187,11 @@
 % 重载 \cs{glsdisplayfirst} 命令
 \renewcommand{\glsdisplayfirst}[4]{
   \ifnum\bupt@driver=3
-  \!\Unicode{255}{8}% 中文括号“（”
+  \!\char"FF08% 中文括号“（”
   \!{#2}%
-  \Unicode{255}{12}% 全宽逗号“，”
+  \char"FF0C% 全宽逗号“，”
   \!{#1}%
-  \!\Unicode{255}{9}% 中文括号“）”
+  \!\char"FF09% 中文括号“）”
   \else
   \!\CJKchar{"0FF}{"008}% 中文括号“（”
   \!{#2}%
@@ -5121,10 +5133,10 @@ EXECUTE {completed.message}       % 显示完成提示信息
 % 
 % \subsection{ch_concln.tex}
 %<*ch-concln>
-\chapter{绪论}
-北京邮电大学 \gls*{BUPT} 研究生院培养与学位办公室于 2010 年 3 月 1 日颁布了最新的《北京邮电大学关于研究生学位论文格式的统一要求》（下简称“要求”）\cite{BUPT_Thesis_Format_2010}，对原有研究生学位论文的格式要求做出了新的修订。
+\chapter{功能测试}
+北京邮电大学 \gls*{BUPT} 研究生院培养与学位办公室于 2010 年 3 月 1 日颁布了最新的《北京邮电大学关于研究生学位论文格式的统一要求》（下简称“要求”）\cite{BUPT_Thesis_Format_2010}，对原有研究生学位论文的格式要求做出了新的修订\footnote{测试脚注显示1}。
 但是迄今为止，研究生院尚未发布统一的论文模板。
-对于已经、正在或者即将撰写学位论文的同学都只能按照该要求的规定自行调整其学位论文的格式，一方面给大家增加了繁重的排版工作，另一方面也不利于统一全校的论文格式。
+对于已经、正在或者即将撰写学位论文的同学都只能按照该要求的规定自行调整其学位论文的格式，一方面给大家增加了繁重的排版工作，另一方面也不利于统一全校的论文格式\footnote{测试脚注显示2}。
 
 2007 年 9 月，北京邮电大学无线新技术研究所 \gls*{WTI} 的王旭博士制作并发布了 latex-bupt——北京邮电大学博士毕业论文 \LaTeX 模板（非官方版）\cite{latex-bupt}。
 该模板可以满足旧版官方论文格式要求\cite{BUPT_Thesis_Format_2004}，但是在一些细节上的处理还有待改进，例如：
