@@ -32,7 +32,7 @@
 %<cls>\NeedsTeXFormat{LaTeX2e}[2005/12/01] 
 %<cls>\ProvidesClass{buptgraduatethesis.cls}
 %<cfg>\ProvidesFile{buptgraduatethesis.cfg}
-%<cls|cfg>[2013/11/20 v2.0 BUPT graduate thesis LaTeX2e class]
+%<cls|cfg>[2013/11/20 v2.1 BUPT graduate thesis LaTeX2e class]
 %<*driver>
 \documentclass[numbered,a4paper,full]{l3doc}
 \hypersetup{pdfstartview=FitH}
@@ -181,8 +181,9 @@
 % \changes{v1.2}{2013/11/14}{修正 makethesis.bat 的 BUG}
 % \changes{v1.3}{2013/11/15}{修正 makethesis.bat 的 BUG；将Unicode指令替换为char指令用于引入Unicode字符；使用xeCJKsetcharclass命令修正xetex引擎下的带圈数字脚注}
 % \changes{v2.0}{2013/11/20}{增加部分参考文献自定义配置的功能；更新帮助文档}
+% \changes{v2.1}{2013/11/21}{修改article类型参考文献显示样式}
 %
-% \def\fileversion{v2.0}
+% \def\fileversion{v2.1}
 % \def\filedate{2013/11/20}
 %
 % \def\BUPTGraduateThesis{\textsc{BUPT}\-\textsc{Graduate}\-\textsc{Thesis}}
@@ -2540,7 +2541,7 @@ FUNCTION {is.print.banners.to.terminal} { #1 }
 % 版本与提示信息
 %%%%%%%%%%%%%%%%
 % 版本信息
-FUNCTION{bst.file.version} { "2.0" }
+FUNCTION{bst.file.version} { "2.1" }
 FUNCTION{bst.file.date} { "2013/11/20" }
 FUNCTION{bst.file.website} { "https://github.com/baggiorio18/BUPTGraduateThesis" }
 
@@ -3722,6 +3723,27 @@ FUNCTION {format.year.volume.number} {
   if$
 }
 
+% 卷（期），年
+FUNCTION {format.volume.number.year} {
+  year empty$
+  { "" }
+  { type$ "periodical" =
+    { new.block }
+    { mid.sentence 'output.state := }
+    if$
+    volume empty$
+    { skip$ }
+    { volume }
+    if$
+    number empty$
+    { skip$ }
+    { "~(" * number * ")" * }
+    if$
+    bbl.comma * year *
+  }
+  if$
+}
+
 FUNCTION {format.date} {
   year empty$
   { month empty$
@@ -4546,7 +4568,7 @@ FUNCTION {article} {
   format.authors "author"         output.warn
   format.book.title "title"       output.warn
   format.journal.title "journal"  output.warn
-  format.year.volume.number       output
+  format.volume.number.year       output
   format.pages "pages"            output.warn
   format.reference.date           output
   format.url                      output
