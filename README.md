@@ -1,11 +1,11 @@
 Version
 ==================
-发行版v1.0在GitHub的release条目下获得。
-开发版v1.3通过Git命令获得：
+发行版v2.0在GitHub的release条目下获得。
+开发版v2.0与发行版v2.0内容相同，可以通过Git命令获得：
 
     git clone https://github.com/baggiorio18/BUPTGraduateThesis.git
 
-BUPTGraduateThesis
+About
 ==================
 BUPTGraduateThesis提供北京邮电大学研究生学位论文LaTeX文档类，其符合北邮研究生院2010年3月1日发布的《关于研究生学位论文格式的统一要求》。
 
