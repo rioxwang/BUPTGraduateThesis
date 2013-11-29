@@ -32,7 +32,7 @@
 %<cls>\NeedsTeXFormat{LaTeX2e}[2005/12/01] 
 %<cls>\ProvidesClass{buptgraduatethesis.cls}
 %<cfg>\ProvidesFile{buptgraduatethesis.cfg}
-%<cls|cfg>[2013/11/29 v2.2 BUPT graduate thesis LaTeX2e class]
+%<cls|cfg>[2013/11/29 v2.3 BUPT graduate thesis LaTeX2e class]
 %<*driver>
 \documentclass[numbered,a4paper,full]{l3doc}
 \hypersetup{pdfstartview=FitH}
@@ -179,12 +179,13 @@
 % \changes{v1.0}{2013/07/08}{初始版本}
 % \changes{v1.1}{2013/07/30}{更新 makethesis 的换行模式}
 % \changes{v1.2}{2013/11/14}{修正 makethesis.bat 的 BUG}
-% \changes{v1.3}{2013/11/15}{修正 makethesis.bat 的 BUG；将Unicode指令替换为char指令用于引入Unicode字符；使用xeCJKsetcharclass命令修正xetex引擎下的带圈数字脚注}
+% \changes{v1.3}{2013/11/15}{修正 makethesis.bat 的 BUG；将 Unicode 指令替换为 char 指令用于引入 Unicode 字符；使用 xeCJKsetcharclass 命令修正 xetex 引擎下的带圈数字脚注}
 % \changes{v2.0}{2013/11/20}{增加部分参考文献自定义配置的功能；更新帮助文档}
-% \changes{v2.1}{2013/11/21}{修改article类型参考文献显示样式}
+% \changes{v2.1}{2013/11/21}{修改 article 类型参考文献显示样式}
 % \changes{v2.2}{2013/11/29}{修正缩略语在第一次引用时无法出现中文释义的 BUG}
+% \changes{v2.3}{2013/11/29}{修改 bibtex 生成的参考文献中 URL 的字体}
 %
-% \def\fileversion{v2.2}
+% \def\fileversion{v2.3}
 % \def\filedate{2013/11/29}
 %
 % \def\BUPTGraduateThesis{\textsc{BUPT}\-\textsc{Graduate}\-\textsc{Thesis}}
@@ -254,7 +255,7 @@
 %     |everysel|    & 2011/10/28 v1.2     & |wallpaper|   & 2006/04/21 v1.10 \\
 %     |fontenc|     & 2005/09/27 v1.99g   & |xcolor|      & 2007/01/21 v2.11 \\
 %     |glossaries|  & 2010/02/06 v2.05    & |xkeyval|     & 2008/08/13 v2.6a \\
-%     |xeCJK|       & 2013/01/11 v3.1.2   &               & \\
+%     |xeCJK|       & 2013/11/11 v3.2.7   & |url|         & 2006/04/12 v3.3 \\
 %     \bottomrule
 %   \end{tabular}
 % \end{table}
@@ -1099,6 +1100,9 @@
 \RequirePackage{CJKnumb}
 \RequirePackage{CJKpunct}
 \fi
+% 控制bibtex生成的参考文献中URL的字体与正文字体相同
+\RequirePackage{url}
+\urlstyle{same}
 \RequirePackage{indentfirst}
 %    \end{macrocode}
 %

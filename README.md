@@ -1,7 +1,7 @@
 Version
 ==================
 发行版v2.0在GitHub的release条目下获得。
-开发版v2.2，可以通过Git命令获得：
+开发版v2.3，可以通过Git命令获得：
 
     git clone https://github.com/baggiorio18/BUPTGraduateThesis.git
 
