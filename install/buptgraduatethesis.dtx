@@ -32,7 +32,7 @@
 %<cls>\NeedsTeXFormat{LaTeX2e}[2005/12/01] 
 %<cls>\ProvidesClass{buptgraduatethesis.cls}
 %<cfg>\ProvidesFile{buptgraduatethesis.cfg}
-%<cls|cfg>[2013/11/20 v2.1 BUPT graduate thesis LaTeX2e class]
+%<cls|cfg>[2013/11/29 v2.2 BUPT graduate thesis LaTeX2e class]
 %<*driver>
 \documentclass[numbered,a4paper,full]{l3doc}
 \hypersetup{pdfstartview=FitH}
@@ -182,9 +182,10 @@
 % \changes{v1.3}{2013/11/15}{修正 makethesis.bat 的 BUG；将Unicode指令替换为char指令用于引入Unicode字符；使用xeCJKsetcharclass命令修正xetex引擎下的带圈数字脚注}
 % \changes{v2.0}{2013/11/20}{增加部分参考文献自定义配置的功能；更新帮助文档}
 % \changes{v2.1}{2013/11/21}{修改article类型参考文献显示样式}
+% \changes{v2.2}{2013/11/29}{修正缩略语在第一次引用时无法出现中文释义的 BUG}
 %
-% \def\fileversion{v2.1}
-% \def\filedate{2013/11/20}
+% \def\fileversion{v2.2}
+% \def\filedate{2013/11/29}
 %
 % \def\BUPTGraduateThesis{\textsc{BUPT}\-\textsc{Graduate}\-\textsc{Thesis}}
 % \def\BUPTThesis{\textsc{BUPT}\-\textsc{Thesis}}
@@ -2251,6 +2252,7 @@
 }
 % 重载 \cs{glsdisplayfirst} 命令
 \renewcommand{\glsdisplayfirst}[4]{
+  \!{#3}%
   \ifnum\bupt@driver=3
   \!\char"FF08% 中文括号“（”
   \!{#2}%
