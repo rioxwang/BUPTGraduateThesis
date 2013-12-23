@@ -1,13 +1,14 @@
 Version
 ==================
-发行版v2.0在GitHub的release条目下获得。
-开发版v2.3，可以通过Git命令获得：
+发行版v3.0在GitHub的release条目下获得。
+开发版同发行版，可以通过Git命令获得：
 
     git clone https://github.com/baggiorio18/BUPTGraduateThesis.git
 
 About
 ==================
 BUPTGraduateThesis提供北京邮电大学研究生学位论文LaTeX文档类，其符合北邮研究生院2010年3月1日发布的《关于研究生学位论文格式的统一要求》。
+2013年12月16日，北邮研究生院再次发布新版《关于研究生学位论文格式的统一要求》，BUPTGraduateThesis从v3.0起将依据新版格式要求修正模板。
 
 该项目源于张煜博士（Dazzle Zhang）发起并维护的BUPTThesis项目。BUPTThesis造福了几代硕博研究生，大大推动北邮的LaTeX学习氛围。在此，特别感谢Dazzle Zhang所做的贡献！
 

@@ -32,7 +32,7 @@
 %<cls>\NeedsTeXFormat{LaTeX2e}[2005/12/01] 
 %<cls>\ProvidesClass{buptgraduatethesis.cls}
 %<cfg>\ProvidesFile{buptgraduatethesis.cfg}
-%<cls|cfg>[2013/11/29 v2.3 BUPT graduate thesis LaTeX2e class]
+%<cls|cfg>[2013/12/23 v3.0 BUPT graduate thesis LaTeX2e class]
 %<*driver>
 \documentclass[numbered,a4paper,full]{l3doc}
 \hypersetup{pdfstartview=FitH}
@@ -184,9 +184,10 @@
 % \changes{v2.1}{2013/11/21}{修改 article 类型参考文献显示样式}
 % \changes{v2.2}{2013/11/29}{修正缩略语在第一次引用时无法出现中文释义的 BUG}
 % \changes{v2.3}{2013/11/29}{修改 bibtex 生成的参考文献中 URL 的字体}
+% \changes{v3.0}{2013/12/23}{根据新版论文格式要求更新模板}
 %
-% \def\fileversion{v2.3}
-% \def\filedate{2013/11/29}
+% \def\fileversion{v3.0}
+% \def\filedate{2013/12/23}
 %
 % \def\BUPTGraduateThesis{\textsc{BUPT}\-\textsc{Graduate}\-\textsc{Thesis}}
 % \def\BUPTThesis{\textsc{BUPT}\-\textsc{Thesis}}
@@ -211,10 +212,11 @@
 % \begin{documentation}
 % 
 % \section{简介}
-%   \BUPTGraduateThesis{} 源于张煜博士维护的 \BUPTThesis{} ，是根据北京邮电大学研究生院培养与学位办公室于 2010 年 3 月 1 日颁布的《北京邮电大学关于研究生学位论文格式的统一要求》制作的 \LaTeXe{} 文档类。
+% \BUPTGraduateThesis{} 源于张煜博士维护的 \BUPTThesis{} ，是根据北京邮电大学研究生院培养与学位办公室于 2010 年 3 月 1 日颁布的《北京邮电大学关于研究生学位论文格式的统一要求》制作的 \LaTeXe{} 文档类。
+% 2013 年 12 月 16 日，北邮研究生院再次发布新版《关于研究生学位论文格式的统一要求》，\BUPTGraduateThesis{} 从 v3.0 起也将依据新版格式要求修正模板。
 % 
-%   尽管已有数位北邮人使用 \BUPTThesis{} 完成其学位论文并成功提交，但目前尚未有人尝试使用 \BUPTGraduateThesis{} 进行提交，且不论是\BUPTThesis{} 还是 \BUPTGraduateThesis{} 均未经过官方认可。
-%   {\bfseries 因使用本模板造成的一切后果由使用者自己承担。}
+% 尽管已有数位北邮人使用 \BUPTThesis{} 完成其学位论文并成功提交，但目前尚未有人尝试使用 \BUPTGraduateThesis{} 进行提交，且不论是\BUPTThesis{} 还是 \BUPTGraduateThesis{} 均未经过官方认可。
+% {\bfseries 因使用本模板造成的一切后果由使用者自己承担。}
 % 
 % \section{安装}
 % \subsection{基本要求}
@@ -400,7 +402,7 @@
 %   mathfont=mathptmx,%
 %   dedication=false,%
 %   chapbib=true,%
-%   finish=online,%
+%   finish=print,%
 %   driver=xetex]{buptgraduatethesis}
 % \end{Verbatim}
 %
@@ -411,13 +413,14 @@
 % \subsubsection{类选项}
 % \begin{function}{学位类别}
 %   \begin{syntax}
-%     degree=\meta{doctor\orvar{}\defaultvar{master}}
+%     degree=\meta{doctor\orvar{}\defaultvar{master}\orvar{}pmaster}
 %   \end{syntax}
 % \end{function}
 % |degree| 用于指定论文的学位类别：
 % \begin{description}
 % \item[doctor] 博士学位
-% \item[master] 硕士学位
+% \item[master] 学术型硕士学位
+% \item[pmaster] 专业硕士学位
 % \end{description}
 % 
 % \begin{function}{保密类型}
@@ -476,7 +479,7 @@
 % 
 % \begin{function}{输出类型}
 %   \begin{syntax}
-%     finish=\meta{\defaultvar{online}\orvar{}print\orvar{}peerreview}
+%     finish=\meta{online\orvar{}\defaultvar{print}\orvar{}peerreview}
 %   \end{syntax}
 % \end{function}
 % \BUPTGraduateThesis{} 支持三种输出类型：
@@ -960,7 +963,7 @@
 %    \begin{macrocode}
 %<*cls>
 \define@choicekey*[bupt]{class}{degree}[\bupt@tempa\bupt@degree]{%
-  doctor,master}[doctor]{\relax}
+  doctor,master,pmaster}[doctor]{\relax}
 %    \end{macrocode}
 %
 % 保密等级选项
@@ -1010,7 +1013,7 @@
   dedication=false,%
   mathfont=mathptmx,%
   chapbib=false,%
-  finish=online,%
+  finish=print,%
   driver=xetex%
 }{}
 \DeclareOptionX*{\PassOptionsToClass{\CurrentOption}{book}}
@@ -1067,6 +1070,7 @@
 \ifnum\bupt@driver=3
 \RequirePackage[CJKnumber,BoldFont,SlantFont,normalindentfirst]{xeCJK}
 \xeCJKsetcharclass{"2460}{"2473}{1}
+\xeCJKsetup{EmboldenFactor=3}
 \punctstyle{quanjiao}
 \def\CJK@null{\kern\CJKnullspace\char"3007 \kern\CJKnullspace}
 \defaultfontfeatures{Mapping=tex-text}
@@ -1629,8 +1633,8 @@
 \setlength\marginparsep{0mm}          %
 \setlength{\textwidth}{\paperwidth}   %
 \addtolength{\textwidth}{-55mm}       % 版芯宽度: 155mm = 210mm - 55mm
-\setlength{\oddsidemargin}{25mm}      % 内侧页边距: 奇数页左侧页边距
-\setlength{\evensidemargin}{20mm}     % 外侧页边距: 偶数页左侧页边距 
+\setlength{\oddsidemargin}{22.5mm}    % 内侧页边距: 奇数页左侧页边距
+\setlength{\evensidemargin}{22.5mm}   % 外侧页边距: 偶数页左侧页边距 
 \setlength{\textheight}{\paperheight} %
 \setlength{\headheight}{20pt}         % 页眉高度: 20pt
 \setlength{\topskip}{0pt}             % 
@@ -1738,7 +1742,7 @@
   \def\@oddhead{%
     \vbox to\headheight{%
       \hb@xt@\textwidth{%
-        \wuhao\song\hfill\bupt@page@head%
+        \xiaowu\song\hfill\leftmark%
       }%
       \vskip3pt\hbox{%
         \vrule width\textwidth height0.4pt depth0pt
@@ -1748,7 +1752,32 @@
   \def\@evenhead{%
     \vbox to\headheight{%
       \hb@xt@\textwidth{%
-        \wuhao\song\leftmark\hfill
+        \xiaowu\song\bupt@page@head\hfill
+      }%
+      \vskip3pt\hbox{%
+        \vrule width\textwidth height0.4pt depth0pt
+      }
+    }
+  }
+  \def\@oddfoot{\hfil\wuhao\thepage\hfil}
+  \let\@evenfoot=\@oddfoot
+}
+%% ps@bupt@pubheadings 有页眉有页脚（发表文章）
+\def\ps@bupt@pubheadings{%
+  \def\@oddhead{%
+    \vbox to\headheight{%
+      \hb@xt@\textwidth{%
+        \xiaowu\song\hfill\bupt@label@tableofpublications%
+      }%
+      \vskip3pt\hbox{%
+        \vrule width\textwidth height0.4pt depth0pt
+      }
+    }
+  }
+  \def\@evenhead{%
+    \vbox to\headheight{%
+      \hb@xt@\textwidth{%
+        \xiaowu\song\bupt@page@head\hfill
       }%
       \vskip3pt\hbox{%
         \vrule width\textwidth height0.4pt depth0pt
@@ -1783,6 +1812,7 @@
 % 声明元数据
 %    \begin{macrocode}
 %<*cls>
+\bupt@def@metadata{cdegreeclass}
 \bupt@def@metadata{studentid}
 \bupt@def@metadata{ctitle}
 \bupt@def@metadata{cdegree}
@@ -1816,21 +1846,27 @@
 %    \begin{macrocode}
 %<*cfg>
 \ifcase\bupt@degree\relax
-\def\bupt@page@head{北京邮电大学博士学位论文}
-\def\bupt@label@covertitle{博士研究生学位论文}
+\def\bupt@page@head{北京邮电大学工学博士学位论文}
+\def\bupt@label@covertitle{博士学位论文}
+\def\bupt@label@cmajor{专\hspace{2em}业}
 \or
-\def\bupt@page@head{北京邮电大学硕士学位论文}
-\def\bupt@label@covertitle{硕士研究生学位论文}
+\def\bupt@page@head{北京邮电大学工学硕士学位论文}
+\def\bupt@label@covertitle{硕士学位论文}
+\def\bupt@label@cmajor{专\hspace{2em}业}
+\or
+\def\bupt@page@head{北京邮电大学工学硕士学位论文}
+\def\bupt@label@covertitle{硕士学位论文}
+\def\bupt@label@cmajor{专业领域}
 \fi
-\def\bupt@label@cauthor{姓\hfill 名}
-\def\bupt@label@cmajor{专\hfill 业}
-\def\bupt@label@csupervisor{导\hfill 师}
-\def\bupt@label@cdepartment{学\hfill 院}
+\def\bupt@label@cdegreeclass{学位类别}
+\def\bupt@label@cauthor{姓\hspace{2em}名}
+\def\bupt@label@csupervisor{导\hspace{2em}师}
+\def\bupt@label@cdepartment{学\hspace{2em}院}
 \def\bupt@label@ctitle{题目}
 \def\bupt@label@classlevel{密级}
 \def\bupt@label@classdur{保密期限}
 \def\bupt@schoolename{北京邮电大学}
-\def\bupt@label@studentid{学\hfill 号}
+\def\bupt@label@studentid{学\hspace{2em}号}
 \def\bupt@title@sep{：}
 \cdate{\CJKdigits{\the\year}年\CJKnumber{\the\month}月}
 %</cfg>
@@ -1887,77 +1923,79 @@
 \newlength\bupt@titlewidth
 \newcommand{\titlebreak}{}
 \newcommand{\bupt@front@cover}{%
+  \song\bfseries
   \ifnum\bupt@finish=0
   \bupt@cover@texture
   \fi
-  \vspace*{-1.3cm}
+  \vspace*{-1.15cm}
   \begin{minipage}[t]{\textwidth}
     \sihao
+    \hspace*{76.6mm}
     \bupt@label@classlevel\bupt@title@sep\bupt@meta@classlevel
-    \qquad\bupt@label@classdur\bupt@title@sep
+    \hspace{2em}\bupt@label@classdur\bupt@title@sep
     \ifnum\bupt@classlevel>0
     \bupt@meta@classdur
     \fi
-  \end{minipage}\\[2cm]
+  \end{minipage}\\[1.71cm]
   \begin{minipage}[t]{\textwidth}
     \centering
-    \includegraphics[width=12cm]{logo/buptname}\par
-    \vspace{0.4cm}
+    \hspace{0.3cm}
+    \includegraphics[width=11.6cm]{logo/buptname}\par
+    \vspace{0.24cm}
     \covertitlesize[1.0]{\hei\bupt@label@covertitle}\par
-    \vspace{1cm}
-    \includegraphics[width=3.5cm]{logo/buptseal}
-  \end{minipage}\\[\stretch{1}]
-  \parbox[t]{\textwidth}{%
+    \vspace{0.95cm}
+    \includegraphics[width=3.09cm]{logo/buptseal}
+  \end{minipage}\\[1.3cm]
+  \begin{minipage}[t]{\textwidth}%
     \centering
     \xiaoer[1.5]
+    \vspace{0.5cm}
     \settowidth{\bupt@titlewidth}{\bupt@meta@ctitle}
     \setlength{\extrarowheight}{0pt}
     \setlength{\arrayrulewidth}{0.5bp}
-    \begin{tabular}{@{}p{36bp}@{\bupt@title@sep}p{105mm}@{}}
+    \begin{tabular}{@{}p{36bp}@{\bupt@title@sep}p{95mm}@{}}
       \bupt@label@ctitle & %
-      \parbox[t]{105mm}{%
+      \parbox[t]{95mm}{%
         \centering%
         \renewcommand\titlebreak{\\\global\let\bupt@long@title\@empty}
-        \rule[-5bp]{105mm}{0.5bp}\\[-27bp]
+        \rule[-5bp]{95mm}{0.5bp}\\[-27bp]
         \bupt@meta@ctitle%
       }%
       \\%
       \ifx\bupt@long@title\@empty
       \cline{2-2}
       \else
-        \ifdim\bupt@titlewidth>105mm
+        \ifdim\bupt@titlewidth>95mm
         \cline{2-2}
         \fi
       \fi
     \end{tabular}
-  }\\[1cm]
+  \end{minipage}\\[0.8cm]
   \begin{minipage}[t]{\textwidth}
     \centering
     \sihao[1.24]
     \setlength{\extrarowheight}{0pt}
     \setlength{\arrayrulewidth}{0.5bp}
-    \begin{tabular}{@{}p{1.96cm}@{}c@{}l@{}p{4.2cm}}
-      \bupt@label@studentid & \bupt@title@sep 
-      & {\hfill\bupt@hide{\bupt@meta@studentid}\hfill} \\
-      [-3pt] \cline{3-3} \\
-      \bupt@label@cauthor & \bupt@title@sep 
-      & {\hfill\bupt@hide{\bupt@meta@cauthor}\hfill} \\
-      [-3pt] \cline{3-3} \\
-      \bupt@label@cmajor & \bupt@title@sep 
-      & {\hfill\bupt@meta@cmajor\hfill} \\
-      [-3pt] \cline{3-3} \\
-      \bupt@label@csupervisor & \bupt@title@sep 
-      & {\hfill\bupt@hide{\bupt@meta@csupervisor}\hfill} \\
-      [-3pt] \cline{3-3} \\
-      \bupt@label@cdepartment & \bupt@title@sep 
-      & {\hfill\bupt@meta@cdepartment\hfill} \\
-      [-2pt] \cline{3-3} \\
+    \begin{tabular}{@{}lc@{}}
+      \bupt@label@cdegreeclass\bupt@title@sep & {\hfill\bupt@hide{\bupt@meta@cdegreeclass}\hfill} \\
+      [-3pt] \cline{2-2} \\
+      \bupt@label@studentid\bupt@title@sep & {\hfill\bupt@hide{\bupt@meta@studentid}\hfill} \\
+      [-3pt] \cline{2-2} \\
+      \bupt@label@cauthor\bupt@title@sep & {\hfill\bupt@hide{\bupt@meta@cauthor}\hfill} \\
+      [-3pt] \cline{2-2} \\
+      \bupt@label@cmajor\bupt@title@sep & {\hfill\bupt@meta@cmajor\hfill} \\
+      [-3pt] \cline{2-2} \\
+      \bupt@label@csupervisor\bupt@title@sep & {\hfill\bupt@hide{\bupt@meta@csupervisor}\hfill} \\
+      [-3pt] \cline{2-2} \\
+      \bupt@label@cdepartment\bupt@title@sep & {\hfill\bupt@meta@cdepartment\hfill} \\
+      [-3pt] \cline{2-2} \\
     \end{tabular}
-  \end{minipage}\\[1.5cm]
+  \end{minipage}\\[0.1cm]
   \begin{minipage}[t]{\textwidth}
     \centering
     {\sihao[1.0] \song \bupt@meta@cdate}
   \end{minipage}
+  \normalfont
 }
 %</cls>
 %    \end{macrocode}
@@ -4824,7 +4862,7 @@ EXECUTE {completed.message}           % 显示完成提示信息
   mathfont=mathptmx,%
   dedication=false,%
   chapbib=true,%
-  finish=online,%
+  finish=print,%
   driver=xetex]{buptgraduatethesis}
 
 %% 自定义导言区
@@ -5013,6 +5051,9 @@ EXECUTE {completed.message}           % 显示完成提示信息
 %% 涉密论文保密年限
 \classdur{三年}
 
+%% 学位类别
+\cdegreeclass{学术型学位}
+
 %% 学号
 \studentid{2011000000}             
 
@@ -5072,8 +5113,8 @@ EXECUTE {completed.message}           % 显示完成提示信息
 %% 攻读学位期间发表论文列表用 tableofpublications 环境产生。需要
 %% 在 bare_thesis.tex 的导言区用 \newcite{<name>}{<caption>} 声明不同类
 %% 型的论文，具体见导言区说明。
-
 \begin{tableofpublications}
+  \thispagestyle{bupt@pubheadings}%
   \bibliographyjrnl{pubs}
   \nocitejrnl{paper1}
 
