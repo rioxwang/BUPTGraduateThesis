@@ -32,7 +32,7 @@
 %<cls>\NeedsTeXFormat{LaTeX2e}[2005/12/01] 
 %<cls>\ProvidesClass{buptgraduatethesis.cls}
 %<cfg>\ProvidesFile{buptgraduatethesis.cfg}
-%<cls|cfg>[2013/12/23 v3.0 BUPT graduate thesis LaTeX2e class]
+%<cls|cfg>[2013/12/26 v4.0 BUPT graduate thesis LaTeX2e class]
 %<*driver>
 \documentclass[numbered,a4paper,full]{l3doc}
 \hypersetup{pdfstartview=FitH}
@@ -185,9 +185,10 @@
 % \changes{v2.2}{2013/11/29}{修正缩略语在第一次引用时无法出现中文释义的 BUG}
 % \changes{v2.3}{2013/11/29}{修改 bibtex 生成的参考文献中 URL 的字体}
 % \changes{v3.0}{2013/12/23}{根据新版论文格式要求更新模板}
+% \changes{v4.0}{2013/12/26}{根据 xeCJK 宏包的更新修改宏包加载项；修复由于伪粗体带来的复制粘贴的 BUG}
 %
-% \def\fileversion{v3.0}
-% \def\filedate{2013/12/23}
+% \def\fileversion{v4.0}
+% \def\filedate{2013/12/26}
 %
 % \def\BUPTGraduateThesis{\textsc{BUPT}\-\textsc{Graduate}\-\textsc{Thesis}}
 % \def\BUPTThesis{\textsc{BUPT}\-\textsc{Thesis}}
@@ -217,6 +218,9 @@
 % 
 % 尽管已有数位北邮人使用 \BUPTThesis{} 完成其学位论文并成功提交，但目前尚未有人尝试使用 \BUPTGraduateThesis{} 进行提交，且不论是\BUPTThesis{} 还是 \BUPTGraduateThesis{} 均未经过官方认可。
 % {\bfseries 因使用本模板造成的一切后果由使用者自己承担。}
+% 
+% 2013 年 12 月 16 日发布的新版格式要求将研究生论文分为十一个部分：1.封面，2.内封（扉页），3.声明，4.摘要，5.目录，6.符号说明，7.论文正文，8.参考文献，9.附录，10.致谢，11.攻读学位期间发表的学术论文目录。
+% 目前 \BUPTGraduateThesis{} 除了封面依然在加强中，其余十个部分内容都可以生成符合格式要求的 PDF 文档，封面部分内容仍然需要用户自己利用 WORD 模板生成。
 % 
 % \section{安装}
 % \subsection{基本要求}
@@ -484,8 +488,8 @@
 % \end{function}
 % \BUPTGraduateThesis{} 支持三种输出类型：
 % \begin{description}
-% \item[print] 打印版\quad 用于论文最终版本打印输出和图书馆在线系统提交；
 % \item[online] 电子版\quad 用于个人或者实验室电子存档；
+% \item[print] 打印版\quad 用于论文最终版本打印输出和图书馆在线系统提交；
 % \item[peerreview] 盲审版\quad 用于产生隐去作者和导师姓名的送审论文。
 % \end{description}
 % 如果输出盲审版，则自动隐去论文封面的作者和导师信息，并将发表论文列表中的作者姓名自动替换为作者序次。
@@ -737,7 +741,7 @@
 %   \end{syntax}
 % \end{function}
 % 
-% 当使用 \XeTeX{} 引擎时，\BUPTGraduateThesis{} 使用字体配置文件 xeCJK-fonts.def 来配置中文字体，其中默认定义了四种常用中文字体。
+% 当使用 \XeTeX{} 引擎时，\BUPTGraduateThesis{} 使用字体配置文件 xeCJK-fonts.def 来配置中文字体，其中默认定义了四种常用中文字体，为 Windows 下默认使用的中易系列字体。\footnote{\bfseries 注意：新版格式要求中明确要求在封面使用粗宋体和粗黑体这两种伪粗体，而 xeCJK 在中易系列字体的伪粗体和正常体混排时，存在复制粘贴乱码的 BUG。此问题已经在 CTEX 论坛上提交，尚未获得回复。目前 BUPTGraduateThesis 在 v4.0 上采用了一定的权宜之计，将封面需要加粗的字体修改为 Adobe 系列字体（字体无法统一，实在是权宜之计），避免伪粗中易宋体/黑体和正常中易宋体/黑体同时出现，暂时解决了这个 BUG。}
 % 四种字体选择命令如下：
 % \begin{description}
 % \item[\cs{song}] {\song 宋体 \quad 默认字体，用于除标题、引文、图注和表注之外的所有其他文字；}
@@ -931,6 +935,7 @@
 %
 % \section{辅助功能}
 % \changes{v1.1}{2013/07/30}{增添字数统计方法说明}
+% \changes{v4.0}{2013/12/26}{增添 Windows 下修正 TeXcount 的说明}
 % \subsection{字数统计}
 % \LaTeX{} 的字数统计无法通过对 PDF 文件检测字数实现，只能借助 TeXcount\footnote{\url{http://app.uio.no/ifi/texcount/}} 工具。
 % TeXcount 通过 Perl 语言编写，对 \TeX{} 源文件进行字符过滤进行中文字符的统计。
@@ -940,8 +945,26 @@
 % \begin{Verbatim}[frame=single]
 % texcount -ch -inc -html -v -sum bare_thesis.tex > wordcount.html
 % \end{Verbatim}
-% TeXcount 会自动查找 bare_thesis.tex 文件中与其他 \TeX{} 文件的依赖关系，统计全文各个章节文件的字符数，并输出在 HTML 文件中。
+% TeXcount 会自动查找 bare_thesis.tex 文件中与其他 \TeX{} 文件的依赖关系，统计全文各个章节文件的字符数，并\textbf{输出在 HTML 文件中}。
 % 方便起见，我们已经将上述命令集成到 makethesis 中，用户可以通过选择 wordcount 参数调用 makethesis 实现相应功能。
+% \textbf{注意：Windows 下，由于 CMD 对 ANSI 颜色支持不足，因此为了顺利实现字数的统计，需要搜索 texcount.pl 文件，并将第 11 行左右的如下语句注释掉}：
+% \begin{Verbatim}[frame=single]
+% require Win32::console::ANSI;
+% #Win32::Console::ANSI::->import();
+% \end{Verbatim}
+% 
+% \changes{v4.0}{2013/12/26}{添加常见问题解答}
+% \subsection{常见问题解答}
+% \begin{enumerate}
+%   \item Q：为何我的电脑安装 \BUPTGraduateThesis{} 失败？\\
+% A：\BUPTGraduateThesis{} 在 Windows+\TeXLive{} 2013、Windows+\CTeX{} 2.9.2.164 以及 Linux+\TeXLive{} 2013 下均测试通过，如果在这几种组合下安装失败，请优先检查所需字体是否齐全。
+% 对于 \CTeX{} 的用户，请确保安装的是 full 版本的 \CTeX{}，以保证宏包的完整性。
+% 另外，强烈建议用户定时更新宏包，以保证宏包的时效性。
+%   \item Q：为何使用 \BUPTGraduateThesis{} 时，段落的间距会忽大忽小？\\
+% A：这是 \LaTeX{} 根据当前页的内容以及标题不能单独位于页底等各种情况，自动将段落之间的空白间距弹性地自动调整。
+% 如果不希望 \LaTeX{} 进行自动调整，请在 bare_thesis.tex 文件内的 |\begin{document}| 后添加命令 |\raggedbottom|。
+% \end{enumerate}
+% 
 % 
 % \end{documentation}
 % 
@@ -1068,7 +1091,7 @@
 % 中文相关：\XeTeX{} 采用字体配置文件设定中文字体
 %    \begin{macrocode}
 \ifnum\bupt@driver=3
-\RequirePackage[CJKnumber,BoldFont,SlantFont,normalindentfirst]{xeCJK}
+\RequirePackage[CJKnumber,AutoFakeBold,AutoFakeSlant,indentfirst]{xeCJK}
 \xeCJKsetcharclass{"2460}{"2473}{1}
 \xeCJKsetup{EmboldenFactor=3}
 \punctstyle{quanjiao}
@@ -1086,17 +1109,23 @@
 \setCJKfamilyfont{kai}{KaiTi}
 \setCJKfamilyfont{li}{LiSu}
 \setCJKfamilyfont{you}{YouYuan}
+\setCJKfamilyfont{asong}{Adobe Song Std}
+\setCJKfamilyfont{ahei}{Adobe Heiti Std}
 \setmainfont{Times New Roman}
 \setsansfont{Arial}
 \setmonofont{Courier New}
-\newcommand{\song}{\CJKfamily{song}}    % 宋体
+\newcommand{\song}{\CJKfamily{song}}    % 中易宋体
 \def\songti{\song}
-\newcommand{\fs}{\CJKfamily{fs}}        % 仿宋体
-\def\fangsong{\fs}
-\newcommand{\kai}{\CJKfamily{kai}}      % 楷体
-\def\kaishu{\kai}
-\newcommand{\hei}{\CJKfamily{hei}}      % 黑体
+\newcommand{\hei}{\CJKfamily{hei}}      % 中易黑体
 \def\heiti{\hei}
+\newcommand{\fs}{\CJKfamily{fs}}        % 中易仿宋体
+\def\fangsong{\fs}
+\newcommand{\kai}{\CJKfamily{kai}}      % 中易楷体
+\def\kaishu{\kai}
+\newcommand{\asong}{\CJKfamily{asong}}  % Adobe宋体
+\def\asongti{\asong}
+\newcommand{\ahei}{\CJKfamily{ahei}}    % Adobe黑体
+\def\aheiti{\ahei}
 %</def>
 %<*cls>
 \else
@@ -1923,7 +1952,7 @@
 \newlength\bupt@titlewidth
 \newcommand{\titlebreak}{}
 \newcommand{\bupt@front@cover}{%
-  \song\bfseries
+  \asong\bfseries
   \ifnum\bupt@finish=0
   \bupt@cover@texture
   \fi
@@ -1942,7 +1971,7 @@
     \hspace{0.3cm}
     \includegraphics[width=11.6cm]{logo/buptname}\par
     \vspace{0.24cm}
-    \covertitlesize[1.0]{\hei\bupt@label@covertitle}\par
+    \covertitlesize[1.0]{\ahei\bupt@label@covertitle}\par
     \vspace{0.95cm}
     \includegraphics[width=3.09cm]{logo/buptseal}
   \end{minipage}\\[1.3cm]
@@ -1976,7 +2005,7 @@
     \sihao[1.24]
     \setlength{\extrarowheight}{0pt}
     \setlength{\arrayrulewidth}{0.5bp}
-    \begin{tabular}{@{}lc@{}}
+    \begin{tabular}{lc}
       \bupt@label@cdegreeclass\bupt@title@sep & {\hfill\bupt@hide{\bupt@meta@cdegreeclass}\hfill} \\
       [-3pt] \cline{2-2} \\
       \bupt@label@studentid\bupt@title@sep & {\hfill\bupt@hide{\bupt@meta@studentid}\hfill} \\
@@ -1993,7 +2022,7 @@
   \end{minipage}\\[0.1cm]
   \begin{minipage}[t]{\textwidth}
     \centering
-    {\sihao[1.0] \song \bupt@meta@cdate}
+    {\sihao[1.0] \asong \bupt@meta@cdate}
   \end{minipage}
   \normalfont
 }
