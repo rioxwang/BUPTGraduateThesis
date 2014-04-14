@@ -3,8 +3,8 @@ REM --------------------------------------------------------------------------
 REM Filename: makethesis.bat
 REM Author: WANG Xianling
 REM Created: 2013-07-08
-REM Modified: 2013-11-14
-REM Version: 1.2
+REM Modified: 2014-04-14
+REM Version: 1.3
 REM --------------------------------------------------------------------------
 REM Change Log
 REM v1.0: Batch file created.
@@ -60,7 +60,7 @@ REM --------------------------------------------------------------------------
 REM Word Count
 :wordcount
 echo Counting word...
-texcount -ch -inc -html -v -sum bare_thesis.tex > wordcount.html
+texcount -ch -inc -incbib -html -v -sum bare_thesis.tex > wordcount.html
 echo ===========================================
 echo = Counting Mission Done!
 echo = Word-counting Results are recorded in 'wordcount.html'!
@@ -72,18 +72,18 @@ REM Document Class and Help PDF File Generation
 :install
 mkdir example
 echo Extracting and installing files...
-xetex install//%PROJECT%.ins >nul
+xetex install//%PROJECT%.ins
 echo Building user guide...
-xelatex -no-pdf install//%PROJECT%.dtx >nul
-makeindex -q -s gglo.ist -o %PROJECT%.gls %PROJECT%.glo >nul
+xelatex -no-pdf install//%PROJECT%.dtx
+makeindex -q -s gglo.ist -o %PROJECT%.gls %PROJECT%.glo
 echo Rebuilding to generate change-log...
-xelatex -no-pdf install//%PROJECT%.dtx >nul
-makeindex -q -s gglo.ist -o %PROJECT%.gls %PROJECT%.glo >nul
+xelatex -no-pdf install//%PROJECT%.dtx
+makeindex -q -s gglo.ist -o %PROJECT%.gls %PROJECT%.glo
 echo Rebuilding to generate cross-reference...
-xelatex install//%PROJECT%.dtx >nul
+xelatex install//%PROJECT%.dtx
 echo Clearing TMP files...
-del /f /q %PROJECT%.aux %PROJECT%.glo %PROJECT%.ilg %PROJECT%.ind >nul
-del /f /q %PROJECT%.out %PROJECT%.toc %PROJECT%.idx %PROJECT%.hd %PROJECT%.xdv %PROJECT%.gls >nul
+del /f /q %PROJECT%.aux %PROJECT%.glo %PROJECT%.ilg %PROJECT%.ind
+del /f /q %PROJECT%.out %PROJECT%.toc %PROJECT%.idx %PROJECT%.hd %PROJECT%.xdv %PROJECT%.gls
 echo ===========================================
 echo = Mission Done!
 echo = BUPTThesis is successfully installed!
