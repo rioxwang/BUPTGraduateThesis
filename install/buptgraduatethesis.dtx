@@ -32,7 +32,7 @@
 %<cls>\NeedsTeXFormat{LaTeX2e}[2005/12/01] 
 %<cls>\ProvidesClass{buptgraduatethesis.cls}
 %<cfg>\ProvidesFile{buptgraduatethesis.cfg}
-%<cls|cfg>[2014/05/31 v5.1 BUPT graduate thesis LaTeX2e class]
+%<cls|cfg>[2014/07/17 v5.2 BUPT graduate thesis LaTeX2e class]
 %<*driver>
 \documentclass[numbered,a4paper,full]{l3doc}
 \hypersetup{pdfstartview=FitH}
@@ -187,10 +187,11 @@
 % \changes{v3.0}{2013/12/23}{根据新版论文格式要求更新模板}
 % \changes{v4.0}{2013/12/26}{根据 xeCJK 宏包的更新修改宏包加载项；修复由于伪粗体带来的复制粘贴的 BUG}
 % \changes{v5.0}{2014/04/14}{增添数学字体选项，可以使用 Computer Modern 字体；盲审版本将隐去致谢和独创性等声明页；根据新版硕、博士论文格式要求更新模板和封面；修改参考文献中英文姓名出现 Jr 时的排版，并添加说明；修改帮助文档的字体，不用再依赖 TeX Gyre Pagella 字体；修正图名和表名的字体；改进一系列参考文献排版规则；增加免安装版，解压即可用；去除 makethesis 中安装时的输出重定向，方便排错}
-% \changes{v5.1}{2014/05/31}{修正 makethesis 中分章参考文献编译的 BUG，此 BUG 会影响 Linux 和 Unix 用户的分章参考文献输出；}
+% \changes{v5.1}{2014/05/31}{修正 makethesis 中分章参考文献编译的 BUG，此 BUG 会影响 Linux 和 Unix 用户的分章参考文献输出}
+% \changes{v5.2}{2014/07/17}{根据新版论文格式对文档类进行精简；修正封面的 BUG；修正最新版 xeCJK 带来的问题；更新帮助文档}
 %
-% \def\fileversion{v5.1}
-% \def\filedate{2014/05/31}
+% \def\fileversion{v5.2}
+% \def\filedate{2014/07/17}
 %
 % \def\BUPTGraduateThesis{\textsc{BUPT}\-\textsc{Graduate}\-\textsc{Thesis}}
 % \def\BUPTThesis{\textsc{BUPT}\-\textsc{Thesis}}
@@ -371,7 +372,7 @@
 % \subsubsection{编译说明}
 % \BUPTGraduateThesis{} 支持使用 |xelatex| 进行编译。
 % 此外，\BUPTGraduateThesis{} 源于 \BUPTThesis{}，因此严格意义上说，同样支持使用 |pdflatex| 与 |latex| 的编译方式。
-% 不过使用 |pdflatex| 与 |latex| 的编译方式需要用户自行生成字体文件，我们不建议用户使用 |pdflatex| 与 |latex| 的编译方式，而强烈建议使用 |xelatex| 的编译方式。
+% 不过使用 |pdflatex| 与 |latex| 的编译方式需要用户自行生成字体文件，我们在后期的各种维护中也没有针对 |pdflatex| 与 |latex| 的编译方式进行测试，所以我们不建议用户使用 |pdflatex| 与 |latex| 的编译方式，而强烈建议使用 |xelatex| 的编译方式。
 % 
 % 此外，我们还不建议 Windows 用户使用 WinEdt 上的按钮进行编译，因为这种方式的编译不方便输入参数。
 % 我们建议 Windows 用户在 CMD 下（Linux 用户在 SHELL 下）使用预先编写好的批处理文件 makethesis 编译。
@@ -978,6 +979,7 @@
 % 
 % \changes{v4.0}{2013/12/26}{添加常见问题解答}
 % \changes{v5.0}{2014/04/14}{修改关于安装的常见问题解答}
+% \changes{v5.2}{2014/07/17}{添加新问题解答}
 % \subsection{常见问题解答}
 % \begin{enumerate}
 %   \item Q：为何我的电脑安装 \BUPTGraduateThesis{} 失败？\\
@@ -991,6 +993,10 @@
 %   \item Q：为何使用 \BUPTGraduateThesis{} 时，段落的间距会忽大忽小？\\
 % A：这是 \LaTeX{} 根据当前页的内容以及标题不能单独位于页底等各种情况，自动将段落之间的空白间距弹性地自动调整。
 % 如果不希望 \LaTeX{} 进行自动调整，请在 bare_thesis.tex 文件内的 |\begin{document}| 后添加命令 |\raggedbottom|。
+% 
+%   \item Q：我用 VISIO 导出的矢量图非常大，编译非常耗时，最后生成的文件也非常硕大，是否有比较好的解决方法？\\
+% A：解决办法有两种：第一种是在生成图片的时候尽可能减少点和线条的数量；第二种是抛弃矢量图，另存为 JPG 图的时候提高生成图片的 DPI，也就是每英寸所打印的点数，提高到 150 以上已经可以保证显示器和打印机的输出质量了。
+% 毕业论文格式要求中并没有限制必须使用矢量图，因此此法是可行的。
 % \end{enumerate}
 % 
 % 
@@ -1119,10 +1125,12 @@
 \RequirePackage[amsmath,thmmarks,hyperref]{ntheorem}
 %    \end{macrocode}
 %
+% \changes{v5.2}{2014/07/17}{新版 xeCJK 取消对 CJKnumber 选项的支持，改为手动添加该宏包}
 % 中文相关：\XeTeX{} 采用字体配置文件设定中文字体
 %    \begin{macrocode}
 \ifnum\bupt@driver=3
-\RequirePackage[CJKnumber,AutoFakeBold,AutoFakeSlant,indentfirst]{xeCJK}
+\RequirePackage[AutoFakeBold,AutoFakeSlant,indentfirst]{xeCJK}
+\RequirePackage{CJKnumb}
 \xeCJKsetcharclass{"2460}{"2473}{1}
 \xeCJKsetup{EmboldenFactor=3}
 \punctstyle{quanjiao}
@@ -1934,26 +1942,13 @@
 %    \end{macrocode}
 %
 % 盲审隐藏命令
-%\begin{macrocode}
+%    \begin{macrocode}
 %<*cls>
 \def\bupt@hide#1{%
   \ifnum\bupt@finish=2
   \bupt@meta@hiddenmark
   \else
   {#1}
-  \fi%
-}
-%    \end{macrocode}
-%
-%% 封面彩云纸背景
-%% 尺寸 1.633 x 2.333 in
-%    \begin{macrocode}
-\def\bupt@cover@texture{%
-  \setlength{\wpYoffset}{-1in}%
-  \ifcase\bupt@degree\relax%
-  \ThisTileWallPaper{1.6in}{2.3in}{logo/bupttexturec}%
-  \or%
-  \ThisTileWallPaper{1.6in}{2.3in}{logo/bupttexturey}%
   \fi%
 }
 %</cls>
@@ -1985,17 +1980,16 @@
 \newcommand{\titlebreak}{}
 \newcommand{\bupt@front@cover}{%
   \asong\bfseries
-  \ifnum\bupt@finish=0
-  \bupt@cover@texture
-  \fi
   \vspace*{-1.15cm}
   \begin{minipage}[t]{\textwidth}
     \sihao
     \hspace*{76.6mm}
+    \ifnum\bupt@classlevel=0
+    \bupt@label@classlevel\bupt@title@sep
+    \hspace{4em}\bupt@label@classdur\bupt@title@sep
+    \else
     \bupt@label@classlevel\bupt@title@sep\bupt@meta@classlevel
-    \hspace{2em}\bupt@label@classdur\bupt@title@sep
-    \ifnum\bupt@classlevel>0
-    \bupt@meta@classdur
+    \hspace{2em}\bupt@label@classdur\bupt@title@sep\bupt@meta@classdur
     \fi
   \end{minipage}\\[1.71cm]
   \begin{minipage}[t]{\textwidth}
@@ -2063,28 +2057,12 @@
 %    \begin{macrocode}
 %<*cls>
 \newcommand{\bupt@inside@front@cover}{%
-  \ifnum\bupt@finish=0%
-  \clearpage
-  \bupt@cover@texture
-  \clearpage
-  \else
   \cleardoublepage
-  \fi
 }
 \newcommand{\bupt@inside@back@cover}{%
   \cleardoublepage
-  \ifnum\bupt@finish=0%
-  \thispagestyle{bupt@empty}%
-  \bupt@cover@texture\ %
-  \fi
 }
 \newcommand{\bupt@back@cover}{%
-  \ifnum\bupt@finish=0%
-  \clearpage
-  \thispagestyle{bupt@empty}
-  \bupt@cover@texture\ %
-  \clearpage
-  \fi
 }
 %</cls>
 %    \end{macrocode}
@@ -5210,7 +5188,7 @@ EXECUTE {completed.message}           % 显示完成提示信息
 \csupervisor{导师姓名}
 
 %% 日期自动生成，也可以取消注释下面一行，自行指定日期
-\cdate{\CJKdigits{2013}年\CJKnumber{12}月}
+\cdate{\CJKdigits{2013}年\CJKnumber{12}月\CJKnumber{25}日}
 
 %% 中文摘要
 \cabstract{%

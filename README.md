@@ -1,7 +1,12 @@
+声明
+==================
+最新版的xeCJK宏包去除了宏包加载时的CJKnumber选项，只能手动加载CJKnumb宏包，因此v5.1及以下版本的BUPTGraduateThesis在使用最新的xeCJK宏包时均无法编译通过。
+在BYR论坛fitsir同学的帮助下，此BUG已经在v5.2版本下修正，请各位尽早更新到此版本。
+
 Version
 ==================
 发行版v5.0在GitHub的release条目下获得。
-开发版v5.1，可以通过Git命令获得：
+开发版v5.2，可以通过Git命令获得：
 
     git clone https://github.com/baggiorio18/BUPTGraduateThesis.git
 
