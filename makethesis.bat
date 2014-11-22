@@ -86,7 +86,7 @@ del /f /q %PROJECT%.aux %PROJECT%.glo %PROJECT%.ilg %PROJECT%.ind
 del /f /q %PROJECT%.out %PROJECT%.toc %PROJECT%.idx %PROJECT%.hd %PROJECT%.xdv %PROJECT%.gls
 echo ===========================================
 echo = Mission Done!
-echo = BUPTThesis is successfully installed!
+echo = BUPTGraduateThesis is successfully installed!
 echo ===========================================
 goto end
 

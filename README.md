@@ -1,12 +1,7 @@
-声明
-==================
-最新版的xeCJK宏包去除了宏包加载时的CJKnumber选项，只能手动加载CJKnumb宏包，因此v5.1及以下版本的BUPTGraduateThesis在使用最新的xeCJK宏包时均无法编译通过。
-在BYR论坛fitsir同学的帮助下，此BUG已经在v5.2版本下修正，请各位尽早更新到此版本。
-
 Version
 ==================
 发行版v5.0在GitHub的release条目下获得。
-开发版v5.2，可以通过Git命令获得：
+开发版v5.3，可以通过Git命令获得：
 
     git clone https://github.com/baggiorio18/BUPTGraduateThesis.git
 
@@ -50,3 +45,19 @@ Linux用户请打开SHELL输入如下命令进行安装：
     chmod a+x makethesis
     ./makethesis install
 
+Change Logs
+==================
+*  v1.0：2013/07/08，初始版本
+*  v1.1：2013/07/30，更新 makethesis 的换行模式
+*  v1.2：2013/11/14，修正 makethesis.bat 的 BUG
+*  v1.3：2013/11/15，修正 makethesis.bat 的 BUG；将 Unicode 指令替换为 char 指令用于引入 Unicode 字符；使用 xeCJKsetcharclass 命令修正 xetex 引擎下的带圈数字脚注
+*  v2.0：2013/11/20，增加部分参考文献自定义配置的功能；更新帮助文档
+*  v2.1：2013/11/21，修改 article 类型参考文献显示样式
+*  v2.2：2013/11/29，修正缩略语在第一次引用时无法出现中文释义的 BUG
+*  v2.3：2013/11/29，修改 bibtex 生成的参考文献中 URL 的字体
+*  v3.0：2013/12/23，根据新版论文格式要求更新模板
+*  v4.0：2013/12/26，根据 xeCJK 宏包的更新修改宏包加载项；修复由于伪粗体带来的复制粘贴的 BUG
+*  v5.0：2014/04/14，增添数学字体选项，可以使用 Computer Modern 字体；盲审版本将隐去致谢和独创性等声明页；根据新版硕、博士论文格式要求更新模板和封面；修改参考文献中英文姓名出现 Jr 时的排版，并添加说明；修改帮助文档的字体，不用再依赖 TeX Gyre Pagella 字体；修正图名和表名的字体；改进一系列参考文献排版规则；增加免安装版，解压即可用；去除 makethesis 中安装时的输出重定向，方便排错
+*  v5.1：2014/05/31，修正 makethesis 中分章参考文献编译的 BUG，此 BUG 会影响 Linux 和 Unix 用户的分章参考文献输出
+*  v5.2：2014/07/17，根据新版论文格式对文档类进行精简；修正封面的 BUG；修正最新版 xeCJK 带来的问题；更新帮助文档
+*  v5.3：2014/11/22，修正 buptgraduatethesis.bst 中学位论文类参考文献格式的 BUG

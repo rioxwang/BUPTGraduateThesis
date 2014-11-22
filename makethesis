@@ -137,7 +137,7 @@ function install()
     rm -f ${PROJECT}.out ${PROJECT}.toc ${PROJECT}.idx ${PROJECT}.hd ${PROJECT}.xdv ${PROJECT}.gls
     echo ===========================================
     echo = Mission Done!
-    echo = BUPTThesis is successfully installed!
+    echo = BUPTGraduateThesis is successfully installed!
     echo ===========================================
     exit
 }
