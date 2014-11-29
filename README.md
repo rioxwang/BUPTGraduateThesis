@@ -1,22 +1,23 @@
 Version
 ==================
 发行版v5.0在GitHub的release条目下获得。
-开发版v5.3，可以通过Git命令获得：
+开发版v5.4，可以通过Git命令获得：
 
     git clone https://github.com/baggiorio18/BUPTGraduateThesis.git
 
 About
 ==================
-BUPTGraduateThesis提供北京邮电大学研究生学位论文LaTeX文档类，其符合北邮研究生院2010年3月1日发布的《关于研究生学位论文格式的统一要求》。
-2013年12月16日，北邮研究生院再次发布新版《关于研究生学位论文格式的统一要求》以及硕士论文封面要求，并于2014年3月20日发布博士论文封面要求，BUPTGraduateThesis从v5.0起将依据新版格式要求修正模板。
-目前已经可以生成除了封面之外的所有论文内容，封面由于书脊的存在，需要进一步细调，目前正在增强中。
-因此我们建议仍然使用WORD生成封面（注意：扉页可以正常输出，而封面是打印时需要打印在彩纸上的内容，与扉页相比多了书脊这部分内容，需要根据论文薄厚做细调）。
+BUPTGraduateThesis提供北京邮电大学研究生学位论文LaTeX文档类，其符合北邮研究生院2010年3月发布的《关于研究生学位论文格式的统一要求》。
+2013年12月，北邮研究生院再次发布新版的格式要求以及硕士论文封面要求，并于2014年3月发布博士论文封面要求，于2014年11月细化了论文参考文献格式的要求，BUPTGraduateThesis从v5.0起将依据新版格式要求修正模板。
+目前已经可以生成除了封面之外的所有论文内容，封面由于书脊的存在，需要进一步细调。
+我们建议利用BUPTGraduateThesis生成除了封面之外的所有PDF内容，再使用WORD生成封面。
+（注：扉页可以正常输出，而封面是打印时需要打印在指定彩纸上的内容，与扉页相比多了书脊这部分内容，需要根据论文薄厚做细调。校内的打印店均可以帮忙依据PDF的扉页生成封面。）
 
 该项目源于张煜博士（Dazzle Zhang）发起并维护的BUPTThesis项目。BUPTThesis造福了几代硕博研究生，大大推动北邮的LaTeX学习氛围。在此，特别感谢Dazzle Zhang所做的贡献！
 
 2013年7月5日，王贤凌博士（Xianling Wang）在buptthesis的基础上增添了更加稳健的中文处理方案，发布了BUPTGraduateThesis。
 该项目借助XeTeX引擎，利用xeCJK宏包取代BUPTThesis中的CJK宏包作为中文解决方案。
-同时，BUPTGraduateThesis根据研究生院发布的最新要求，对学位论文格式进行微调，并且提供更为细致具体的用户帮助文档buptgraduatethesis.pdf。
+同时，BUPTGraduateThesis根据研究生院发布的最新要求，对学位论文格式进行微调，并且提供更为详细的用户帮助文档buptgraduatethesis.pdf。
 
 
 Quick Help
@@ -40,7 +41,7 @@ Windows用户请打开CMD，输入如下命令进行安装：
 
     makethesis.bat install
 
-Linux用户请打开SHELL输入如下命令进行安装：
+Linux/OSX用户请打开SHELL输入如下命令进行安装：
 
     chmod a+x makethesis
     ./makethesis install
@@ -61,3 +62,4 @@ Change Logs
 *  v5.1：2014/05/31，修正 makethesis 中分章参考文献编译的 BUG，此 BUG 会影响 Linux 和 Unix 用户的分章参考文献输出
 *  v5.2：2014/07/17，根据新版论文格式对文档类进行精简；修正封面的 BUG；修正最新版 xeCJK 带来的问题；更新帮助文档
 *  v5.3：2014/11/22，修正 buptgraduatethesis.bst 中学位论文类参考文献格式的 BUG
+*  v5.4：2014/11/29，根据新版论文格式要求修正学位论文类参考文献的格式

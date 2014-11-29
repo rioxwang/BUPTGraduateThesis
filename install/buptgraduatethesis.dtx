@@ -32,7 +32,7 @@
 %<cls>\NeedsTeXFormat{LaTeX2e}[2005/12/01] 
 %<cls>\ProvidesClass{buptgraduatethesis.cls}
 %<cfg>\ProvidesFile{buptgraduatethesis.cfg}
-%<cls|cfg>[2014/11/22 v5.3 BUPT graduate thesis LaTeX2e class]
+%<cls|cfg>[2014/11/29 v5.4 BUPT graduate thesis LaTeX2e class]
 %<*driver>
 \documentclass[numbered,a4paper,full]{l3doc}
 \hypersetup{pdfstartview=FitH}
@@ -190,9 +190,10 @@
 % \changes{v5.1}{2014/05/31}{修正 makethesis 中分章参考文献编译的 BUG，此 BUG 会影响 Linux 和 Unix 用户的分章参考文献输出}
 % \changes{v5.2}{2014/07/17}{根据新版论文格式对文档类进行精简；修正封面的 BUG；修正最新版 xeCJK 带来的问题；更新帮助文档}
 % \changes{v5.3}{2014/11/22}{修正 buptgraduatethesis.bst 中学位论文类参考文献格式的 BUG}
+% \changes{v5.4}{2014/11/29}{根据新版论文格式要求修正学位论文类参考文献的格式}
 %
-% \def\fileversion{v5.3}
-% \def\filedate{2014/11/22}
+% \def\fileversion{v5.4}
+% \def\filedate{2014/11/29}
 %
 % \def\BUPTGraduateThesis{\textsc{BUPT}\-\textsc{Graduate}\-\textsc{Thesis}}
 % \def\BUPTThesis{\textsc{BUPT}\-\textsc{Thesis}}
@@ -228,7 +229,7 @@
 % 
 % \section{安装}
 % \subsection{基本要求}
-% \BUPTGraduateThesis{} 支持 Windows 与 Linux 操作系统下大多数主流 \LaTeXe{} 发行版本，不过我们推荐使用 \TeXLive{} 2013 或者 \CTeX{} 2.9.2.164，以及更高的版本 \footnote{尤其推荐使用 \TeXLive{}，因为 \CTeX{} 已经多年没有更新，宏包非常陈旧，而校园网下更新宏包又非常不稳定。}。
+% \BUPTGraduateThesis{} 支持 Windows 与 Linux/OSX 操作系统下大多数主流 \LaTeXe{} 发行版本，不过我们推荐使用 \TeXLive{} 2014 或者 \CTeX{} 2.9.2.164，以及更高的版本 \footnote{尤其推荐使用 \TeXLive{}，因为 \CTeX{} 已经多年没有更新，宏包非常陈旧，而校园网下更新宏包又非常不稳定。}。
 % \BUPTGraduateThesis{} 使用 UTF-8 编码，因此还需要支持 UTF-8 编码的编辑器——Emacs 23 、VIM 或 TeXworks 都是不错的选择。
 % 不过在 Windows 下，大多数用户仍然使用 WinEdt 作为 \LaTeX{} 的编辑器，而当前最新版的 WinEdt 对 UTF-8 的支持与识别仍然比较薄弱。
 % {\bfseries 因此如果真的打算使用 WinEdt，我们建议在所有 \TeX{} 源文件的开头都添加如下一行代码：}
@@ -236,7 +237,6 @@
 % % !Mode:: "TeX:UTF-8"
 % \end{Verbatim}
 % 这样可以强制 WinEdt 使用 UTF-8 打开 \TeX{} 源文件。
-% 原则上，\BUPTGraduateThesis{} 同样支持 Mac 操作系统下的 \LaTeXe{} 发行版本，不过由于条件所限，我们并未做太多测试。
 % 
 % \BUPTGraduateThesis{} 依赖的宏包及其版本要求列于表 \ref{tab:req-pkg}。
 % 如果编译 \BUPTGraduateThesis{} 所带的示例文件出错时，请核对这些宏包的版本是否满足要求。
@@ -265,7 +265,7 @@
 %     |everysel|    & 2011/10/28 v1.2     & |wallpaper|   & 2006/04/21 v1.10 \\
 %     |fontenc|     & 2005/09/27 v1.99g   & |xcolor|      & 2007/01/21 v2.11 \\
 %     |glossaries|  & 2010/02/06 v2.05    & |xkeyval|     & 2008/08/13 v2.6a \\
-%     |xeCJK|       & 2013/11/11 v3.2.7   & |url|         & 2006/04/12 v3.3 \\
+%     |xeCJK|       & 2014/03/01 v3.2.10  & |url|         & 2006/04/12 v3.3 \\
 %     \bottomrule
 %   \end{tabular}
 % \end{table}
@@ -2626,8 +2626,8 @@ FUNCTION {is.print.banners.to.terminal} { #1 }
 % 版本与提示信息
 %%%%%%%%%%%%%%%%
 % 版本信息
-FUNCTION{bst.file.version} { "3.1" }
-FUNCTION{bst.file.date} { "2014/11/22" }
+FUNCTION{bst.file.version} { "3.2" }
+FUNCTION{bst.file.date} { "2014/11/29" }
 FUNCTION{bst.file.website} { "https://github.com/baggiorio18/BUPTGraduateThesis" }
 
 % 开始提示信息
@@ -2770,6 +2770,7 @@ INTEGERS {
   charptr
   max.num.names.before.forced.et.al
   is.for.peer.review
+  numlength
 }
 
 %%%%%%%%%%%%%
@@ -3503,7 +3504,7 @@ FUNCTION {bib.type.designator} {
         { type$ "phdthesis" =
           type$ "mastersthesis" =
           or
-          { language empty$ {"Dissertation"} {"学位论文"} if$ }
+          { "D" }
           { type$ "techreport" =
             { "R" }
             { type$ "article" =
@@ -4583,8 +4584,29 @@ FUNCTION {article} {
   fin.entry
 }
 
+% 文献类型：会议录/会议论文集
+% proceedings和inproceedings的区别在于proceedings是引用整本论文集，而inproceedings只引用其中的一篇文章
+% [序号] 主编. 论文集名[C]. 出版地：出版者，出版年：页码范围.
+FUNCTION {proceedings} {
+  start.entry
+
+  editor empty$
+  { organization empty$
+    { format.institution "author, organization institution" output.warn }
+    { format.organization output.nonnull }
+    if$
+  }
+  { format.editors output.nonnull }
+  if$
+  format.book.title "title"       output.warn
+  format.address.publisher.year   output
+  format.note                     output
+
+  fin.entry
+}
+
 % 文献类型：论文集
-% [序号] 作者. 论文题目[C]. 见（英文用In）：主编. 论文集名. 出版地. 出版年：页码范围.
+% [序号] 作者. 论文题目[A]. // 论文集名[C]. 出版地：出版者，出版年：页码范围.
 FUNCTION {inproceedings} {
   start.entry
 
@@ -4602,7 +4624,7 @@ FUNCTION {inproceedings} {
 }
 
 % 文献类型：学位论文
-% [序号] 作者. 题目[学位论文]（英文用[Dissertation]）. 保存地点：保存单位，年份.
+% [序号] 作者. 题目[D]. 保存地点：保存单位，年份.
 FUNCTION {phdthesis} {
   start.entry
 
@@ -4687,27 +4709,6 @@ FUNCTION {techreport} {
   format.techreport.title "title" output.warn
   format.address.publisher.year   output.nonnull
   format.url                      output
-  format.note                     output
-
-  fin.entry
-}
-
-% 文献类型：会议录/会议论文集
-% proceedings和inproceedings的区别在于proceedings是引用整本论文集，而inproceedings只引用其中的一篇文章
-% [序号] 主编. 论文集名[C]. 会议名称. 出版地. 出版年：页码范围.
-FUNCTION {proceedings} {
-  start.entry
-
-  editor empty$
-  { organization empty$
-    { format.institution "author, organization institution" output.warn }
-    { format.organization output.nonnull }
-    if$
-  }
-  { format.editors output.nonnull }
-  if$
-  format.book.title "title"       output.warn
-  format.address.publisher.year   output
   format.note                     output
 
   fin.entry
