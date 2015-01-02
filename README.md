@@ -1,7 +1,7 @@
 Version
 ==================
-发行版v5.0在GitHub的release条目下获得。
-开发版v5.4，可以通过Git命令获得：
+请注意：BUPTGraduateThesis已经更新至v6.0，为了稳定的互联网访问，本项目已经转移到GitCafe下托管，GitHub中只更新到v5.4，自v6.0起不再更新。关于最新版本，请移步GitCafe下的主页（https://gitcafe.com/rioxwang/BUPTGraduateThesis）。
+v5.4，可以通过Git命令获得：
 
     git clone https://github.com/baggiorio18/BUPTGraduateThesis.git
 
