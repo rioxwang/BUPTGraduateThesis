@@ -1,10 +1,10 @@
 @echo off
 REM --------------------------------------------------------------------------
 REM Filename: makethesis.bat
-REM Author: WANG Xianling
+REM Author: Xianling Wang <rioxwang@foxmail.com>
 REM Created: 2013-07-08
-REM Modified: 2014-04-14
-REM Version: 1.3
+REM Modified: 2015-01-02
+REM Version: 1.4
 REM --------------------------------------------------------------------------
 REM Change Log
 REM v1.0: Batch file created.
@@ -18,6 +18,7 @@ REM       2. '\' in the path are changed into '//' for TeXLive Compatibility.
 REM v1.3: Batch file BUG fixed.
 REM       1. Missuse of 'if...else...' is fixed.
 REM       2. Missuse of 'for loop' is fixed.
+REM v1.4: Modify output redirecting.
 REM --------------------------------------------------------------------------
 REM User Configuration
 REM Project name
@@ -77,8 +78,8 @@ echo Building user guide...
 xelatex -no-pdf install//%PROJECT%.dtx
 makeindex -q -s gglo.ist -o %PROJECT%.gls %PROJECT%.glo
 echo Rebuilding to generate change-log...
-xelatex -no-pdf install//%PROJECT%.dtx
-makeindex -q -s gglo.ist -o %PROJECT%.gls %PROJECT%.glo
+xelatex -no-pdf install//%PROJECT%.dtx >nul
+makeindex -q -s gglo.ist -o %PROJECT%.gls %PROJECT%.glo >nul
 echo Rebuilding to generate cross-reference...
 xelatex install//%PROJECT%.dtx
 echo Clearing TMP files...

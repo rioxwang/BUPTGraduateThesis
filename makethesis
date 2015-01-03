@@ -1,9 +1,9 @@
 #!/bin/bash
 # --------------------------------------------------------------------------
 # Filename: makethesis
-# Author: WANG Xianling
+# Author: Xianling Wang <rioxwang@foxmail.com>
 # Created: 2013-07-08
-# Modified: 2014-05-31
+# Modified: 2015-01-02
 # Version: 1.4
 # --------------------------------------------------------------------------
 # Change Log
@@ -13,6 +13,7 @@
 # v1.1: File mode modified, function added.
 #       1. Change the dos-style line break into unix-style line break: <CR><LF> -> <LF>.
 #       2. 'wordcount' function is defined.
+# v1.4: Modify output redirecting.
 # --------------------------------------------------------------------------
 # User Configuration
 # Project name
@@ -128,8 +129,8 @@ function install()
     xelatex -no-pdf install/${PROJECT}.dtx
     makeindex -q -s gglo.ist -o ${PROJECT}.gls ${PROJECT}.glo
     echo Rebuilding to generate change-log...
-    xelatex -no-pdf install/${PROJECT}.dtx
-    makeindex -q -s gglo.ist -o ${PROJECT}.gls ${PROJECT}.glo
+    xelatex -no-pdf install/${PROJECT}.dtx > /dev/null
+    makeindex -q -s gglo.ist -o ${PROJECT}.gls ${PROJECT}.glo > /dev/null
     echo Rebuilding to generate cross-reference...
     xelatex install/${PROJECT}.dtx
     echo Clearing TMP files...
