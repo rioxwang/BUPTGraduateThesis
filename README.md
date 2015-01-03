@@ -1,8 +1,9 @@
 Version
 ==================
-当前版本v6.0，支持Windows、Linux和OSX平台，可以在项目主页直接下载ZIP压缩包获得，也可以通过git命令获得：
+当前版本v6.0，同时托管于GitHub与GitCafe，支持Windows、Linux和OSX平台。该版本可以在项目主页直接下载ZIP压缩包获得，也可以通过如下任意一条git命令选择一个网速较快的服务器获得：
 
     git clone https://gitcafe.com/rioxwang/BUPTGraduateThesis.git
+    git clone https://github.com/rioxwang/BUPTGraduateThesis.git
 
 
 About
