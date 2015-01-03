@@ -42,7 +42,6 @@ Linux/OSX用户请打开SHELL输入如下命令进行安装：
 
 Change Logs
 ==================
-v5.*及更早的版本只托管在GitHub（https://github.com/baggiorio18/BUPTGraduateThesis）中。
 
 *  v6.0：2014/01/02，重新整理buptgraduatethesis.bst；在bare_thesis.bib中给出各类参考文献模板；更新帮助文档；迁移到GitCafe
 *  v5.4：2014/11/29，根据新版论文格式要求修正学位论文类参考文献的格式
