@@ -1,6 +1,6 @@
 Version
 ==================
-当前版本v6.0，同时托管于GitHub与GitCafe，支持Windows、Linux和OSX平台。该版本可以在项目主页直接下载ZIP压缩包获得，也可以通过如下任意一条git命令选择一个网速较快的服务器获得：
+当前版本v6.1，同时托管于GitHub与GitCafe，支持Windows、Linux和OSX平台。该版本可以在项目主页直接下载ZIP压缩包获得，也可以通过如下任意一条git命令选择一个网速较快的服务器获得：
 
     git clone https://gitcafe.com/rioxwang/BUPTGraduateThesis.git
     git clone https://github.com/rioxwang/BUPTGraduateThesis.git
@@ -43,6 +43,7 @@ Linux/OSX用户请打开SHELL输入如下命令进行安装：
 Change Logs
 ==================
 
+*  v6.1：2015/01/16，修正发表论文列表中序号不对齐的BUG
 *  v6.0：2014/01/02，重新整理buptgraduatethesis.bst；在bare_thesis.bib中给出各类参考文献模板；更新帮助文档；迁移到GitCafe
 *  v5.4：2014/11/29，根据新版论文格式要求修正学位论文类参考文献的格式
 *  v5.3：2014/11/22，修正buptgraduatethesis.bst中学位论文类参考文献格式的BUG
