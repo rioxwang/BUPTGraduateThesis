@@ -192,9 +192,10 @@
 % \changes{v5.3}{2014/11/22}{修正 buptgraduatethesis.bst 中学位论文类参考文献格式的 BUG}
 % \changes{v5.4}{2014/11/29}{根据新版论文格式要求修正学位论文类参考文献的格式}
 % \changes{v6.0}{2015/01/02}{重新整理 buptgraduatethesis.bst；在 bare_thesis.bib 中给出各类参考文献模板；更新帮助文档；迁移到 GitCafe}
+% \changes{v6.1}{2015/01/16}{修正发表论文列表中序号不对齐的 BUG}
 %
-% \def\fileversion{v6.0}
-% \def\filedate{2015/01/02}
+% \def\fileversion{v6.1}
+% \def\filedate{2015/01/16}
 %
 % \def\BUPTGraduateThesis{\textsc{BUPT}\-\textsc{Graduate}\-\textsc{Thesis}}
 % \def\BUPTThesis{\textsc{BUPT}\-\textsc{Thesis}}
@@ -538,6 +539,7 @@
 % \begin{Verbatim}[frame=single]
 % \newcite{jrnl}{期刊论文}
 % \newcite{conf}{会议论文}
+% \newcite{patent}{专利}
 % \end{Verbatim}
 % 
 % \subsubsection{设置论文基本信息}
@@ -642,8 +644,9 @@
 % \begin{Verbatim}[frame=single]
 % \newcite{jrnl}{期刊论文}
 % \newcite{conf}{会议论文}
+% \newcite{patent}{专利}
 % \end{Verbatim}
-% 上面两条命令声明两种新的引用类型，分别为作者发表的期刊论文和会议论文。
+% 上面三条命令声明三种新的引用类型，分别为作者发表的期刊论文、会议论文和专利。
 % 对于期刊论文，包括下列三个命令：
 % \begin{center}
 %   \begin{tabular}{ll}
@@ -652,8 +655,9 @@
 %     |\nocitejrnl| & 用于引用该类型的文献。
 %   \end{tabular}
 % \end{center}
-% 对于会议论文，同样存在以|conf|为后缀的上述三个命令。
+% 对于会议论文和专利，同样存在以|conf|和|patent|为后缀的上述三个命令。
 % 在发表论文列表中将用这些带后缀的命令来区分作者所发表的不同类型的论文。
+% 需要注意的是，用户不需要在pubs.tex中指定|\bibliographystyle<suffix>|，该命令已经在文档类中加入。
 % 
 % \subsection{文档区综述}
 % bare_thesis.tex 的导言区之后就是由 |document| 环境声明的文档区。
@@ -3921,6 +3925,7 @@ EXECUTE { show.banner.end }             % 显示完成提示信息
 %% 用 \newcite{<suffix>}{<caption>} 声明不同的论文类型(例如: 期刊论文、会议论文等)。每一个类型的对应的 .bib 文件用 \bibliography<suffix> 命令加载，用 \nocite<suffix> 命令引用。具体请参考 pubs.tex 中的示例
 \newcite{jrnl}{期刊论文}
 \newcite{conf}{会议论文}
+\newcite{patent}{专利}
 
 \begin{document}
 %% 声明前置部分
@@ -4150,13 +4155,21 @@ EXECUTE { show.banner.end }             % 显示完成提示信息
 %% 攻读学位期间发表论文列表用 tableofpublications 环境产生。需要
 %% 在 bare_thesis.tex 的导言区用 \newcite{<name>}{<caption>} 声明不同类
 %% 型的论文，具体见导言区说明。
+%% 根据各类论文发表数量设置\setbiblabelwidth{<num>}，用于控制发表论文序号的对齐位置。
+%% 例如：发表conf类论文数量为个位数，则<num>=1；发表jrnl类论文数量为两位数，则<num>=10；
 \begin{tableofpublications}
   \thispagestyle{bupt@pubheadings}%
+  \setbiblabelwidth{1}
   \bibliographyjrnl{pubs}
   \nocitejrnl{paper1}
 
+  \setbiblabelwidth{1}
   \bibliographyconf{pubs}
   \nociteconf{paper2}
+
+  \setbiblabelwidth{1}
+  \bibliographypatent{pubs}
+  \nocitepatent{patent1}
 \end{tableofpublications}
 %</pubs>
 % 
