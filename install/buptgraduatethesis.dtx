@@ -32,7 +32,7 @@
 %<cls>\NeedsTeXFormat{LaTeX2e}[2005/12/01] 
 %<cls>\ProvidesClass{buptgraduatethesis.cls}
 %<cfg>\ProvidesFile{buptgraduatethesis.cfg}
-%<cls|cfg>[2015/01/02 v6.0 BUPT graduate thesis LaTeX2e class]
+%<cls|cfg>[2015/04/23 v6.2 BUPT graduate thesis LaTeX2e class]
 %<*driver>
 \documentclass[numbered,a4paper,full]{l3doc}
 \hypersetup{pdfstartview=FitH}
@@ -193,9 +193,10 @@
 % \changes{v5.4}{2014/11/29}{根据新版论文格式要求修正学位论文类参考文献的格式}
 % \changes{v6.0}{2015/01/02}{重新整理 buptgraduatethesis.bst；在 bare_thesis.bib 中给出各类参考文献模板；更新帮助文档；迁移到 GitCafe}
 % \changes{v6.1}{2015/01/16}{修正发表论文列表中序号不对齐的 BUG}
+% \changes{v6.2}{2015/04/23}{修正参考文献列表序号不对齐的 BUG}
 %
-% \def\fileversion{v6.1}
-% \def\filedate{2015/01/16}
+% \def\fileversion{v6.2}
+% \def\filedate{2015/04/23}
 %
 % \def\BUPTGraduateThesis{\textsc{BUPT}\-\textsc{Graduate}\-\textsc{Thesis}}
 % \def\BUPTThesis{\textsc{BUPT}\-\textsc{Thesis}}
@@ -687,6 +688,7 @@
 % \begin{Verbatim}[frame=single]
 % \ifx\usechapbib\empty
 % \nocite{BSTcontrol}
+% \setcounter{NAT@ctr}{0}
 % \bibliographystyle{buptgraduatethesis}
 % \bibliography{bare_thesis}
 % \fi
@@ -696,6 +698,7 @@
 % 注意，ch_intro.tex 和 ch_concln.tex 均使用使用 buptgraduatethesis.bst 作为 \BibTeX{} 样式文件；
 % 使用 bare_thesis.bib 作为 \BibTeX{} 数据库文件，方便统一管理参考文献；
 % 第二行可以通过 |\nocite| 命令引入 bare_thesis.bib 文件 |BTScontrol| 条目中对参考文献样式的自定义配置 \footnote{当前仅实现利用 |BTScontrol| 条目的 |CTLmaxnum_authors| 域控制最多显示的作者数量，超出部分以“等”或者“et al”替代，默认值为3。}。
+% 第三行手动重置参考文献序号计数器，原先通过 multibib 宏包的 resetlabels 选项实现，由于和其他宏包产生冲突，因此改为手动重置。
 % 
 % 论文的附录部分使用 |appendix| 或者 |appendix*| 环境产生。
 % 如果论文只有一个附录，则使用 |appendix*| 环境；
@@ -1223,8 +1226,9 @@
 \else
 \RequirePackage[square,super,numbers,sort&compress]{natbib}
 \fi
-\RequirePackage[resetlabels]{multibib}
-%\RequirePackage{multibib}
+\RequirePackage{multibib}
+% multibib宏包用于产生发表论文列表的参考文献
+% [resetlabels]选项与其他宏包冲突，导致参考文献序号无法对齐，因此取消该选项，改为每一章手动重置参考文献计数器
 %\RequirePackage{bibentry}
 %    \end{macrocode}
 %
@@ -4040,6 +4044,7 @@ EXECUTE { show.banner.end }             % 显示完成提示信息
 %% 本章参考文献
 \ifx\usechapbib\empty
 \nocite{BSTcontrol}
+\setcounter{NAT@ctr}{0}
 \bibliographystyle{buptgraduatethesis}
 \bibliography{bare_thesis}
 \fi
@@ -4086,6 +4091,7 @@ EXECUTE { show.banner.end }             % 显示完成提示信息
 %% 本章参考文献
 \ifx\usechapbib\empty
 \nocite{BSTcontrol}
+\setcounter{NAT@ctr}{0}
 \bibliographystyle{buptgraduatethesis}
 \bibliography{bare_thesis}
 \fi
@@ -4159,6 +4165,7 @@ EXECUTE { show.banner.end }             % 显示完成提示信息
 %% 例如：发表conf类论文数量为个位数，则<num>=1；发表jrnl类论文数量为两位数，则<num>=10；
 \begin{tableofpublications}
   \thispagestyle{bupt@pubheadings}%
+  \setcounter{NAT@ctr}{0}
   \setbiblabelwidth{1}
   \bibliographyjrnl{pubs}
   \nocitejrnl{paper1}

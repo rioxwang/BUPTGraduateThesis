@@ -1,6 +1,6 @@
 Version
 ==================
-当前版本v6.1，同时托管于GitHub与GitCafe，支持Windows、Linux和OSX平台。该版本可以在项目主页直接下载ZIP压缩包获得，也可以通过如下任意一条git命令选择一个网速较快的服务器获得：
+当前版本v6.2，同时托管于GitHub与GitCafe，支持Windows、Linux和OSX平台。该版本可以在项目主页直接下载ZIP压缩包获得，也可以通过如下任意一条git命令选择一个网速较快的服务器获得：
 
     git clone https://gitcafe.com/rioxwang/BUPTGraduateThesis.git
     git clone https://github.com/rioxwang/BUPTGraduateThesis.git
@@ -43,6 +43,8 @@ Linux/OSX用户请打开SHELL输入如下命令进行安装：
 Change Logs
 ==================
 
+*  v6.2：2015/04/23，修正参考文献列表序号不对齐的BUG（v6.1用户升级请在cls文件中搜索multibib宏包，删除其resetlabels选项的调用，在各个ch_xxx.tex和pubs.tex调用参考文献数据库之前使用\setcounter{NAT@ctr}{0}
+重置参考文献计数器）
 *  v6.1：2015/01/16，修正发表论文列表中序号不对齐的BUG
 *  v6.0：2014/01/02，重新整理buptgraduatethesis.bst；在bare_thesis.bib中给出各类参考文献模板；更新帮助文档；迁移到GitCafe
 *  v5.4：2014/11/29，根据新版论文格式要求修正学位论文类参考文献的格式
@@ -60,3 +62,10 @@ Change Logs
 *  v1.2：2013/11/14，修正makethesis.bat的BUG
 *  v1.1：2013/07/30，更新makethesis的换行模式
 *  v1.0：2013/07/08，初始版本
+
+To Do List
+==================
+
+*  整理文档类的代码，增添注释，便于更多人一起学习LaTeX
+*  在书签中输出章节编号
+*  改进文档参考文献输入规范与IEEE参考文献输入规范的兼容性

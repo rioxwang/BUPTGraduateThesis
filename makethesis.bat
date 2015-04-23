@@ -145,6 +145,7 @@ if %DRIVER%==xetex (
   )
   bibtex jrnl.aux >nul
   bibtex conf.aux >nul
+  bibtex patent.aux >nul
   echo Processing index files...
   makeindex -s %TARGET%.ist -t %TARGET%.alg -o %TARGET%.acr %TARGET%.acn >nul 2>nul
   echo Rebuilding to generate cross-reference...

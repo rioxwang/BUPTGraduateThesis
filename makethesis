@@ -101,6 +101,7 @@ function thesis()
         fi
         bibtex jrnl.aux > /dev/null
         bibtex conf.aux > /dev/null
+        bibtex patent.aux > /dev/null
         echo Processing index files...
         makeindex -s ${TARGET}.ist -t ${TARGET}.alg -o ${TARGET}.acr ${TARGET}.acn > /dev/null
         echo Rebuilding to generate cross-reference...
@@ -114,7 +115,6 @@ function thesis()
     echo = Mission Done!
     echo = Thesis PDF is successfully generated!
     echo ===========================================
-    clean
     exit
 }
 # --------------------------------------------------------------------------
