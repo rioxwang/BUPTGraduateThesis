@@ -32,7 +32,7 @@
 %<cls>\NeedsTeXFormat{LaTeX2e}[2005/12/01] 
 %<cls>\ProvidesClass{buptgraduatethesis.cls}
 %<cfg>\ProvidesFile{buptgraduatethesis.cfg}
-%<cls|cfg>[2015/04/23 v6.2 BUPT graduate thesis LaTeX2e class]
+%<cls|cfg>[2016/11/23 v7.0 BUPT graduate thesis LaTeX2e class]
 %<*driver>
 \documentclass[numbered,a4paper,full]{l3doc}
 \hypersetup{pdfstartview=FitH}
@@ -74,10 +74,6 @@
 \AtBeginDocument{\DeleteShortVerb{\"}\MakeShortVerb{\|}}
 \def\contentsname{目录}
 \DeclareUrlCommand\email{\def\UrlLeft##1\UrlRight{\href{mailto:##1}{##1}}}
-\def\ctexkit{\href{http://code.google.com/p/ctex-kit/}{\texttt{ctex-kit}}}
-\def\ctexkitrev#1{%
-  \href{http://code.google.com/p/ctex-kit/source/detail?r=#1}
-       {\texttt{ctex-kit} rev#1}}
 \ExplSyntaxOn
 \cs_new_nopar:Npn \package #1
   {
@@ -136,12 +132,12 @@
   \endlist%
 }
 \def\meta#1{%
-  \orig@meta{\mbox{\itshape\xeCJKsetup{PunctStyle=plain,CJKecglue}#1}}}
+  \orig@meta{\mbox{\slshape\xeCJKsetup{PunctStyle=plain,CJKecglue}#1}}}
 \def\TF{true\orvar{}false}
 \def\TTF{\defaultvar{true}\orvar{}false}
 \def\TFF{true\orvar\defaultvar{false}}
 \def\orvar{\textup{\textbar}}
-\def\defaultvar#1{\textbf{\textup{#1}}}
+\def\defaultvar#1{\textup{#1}}
 \@addtoreset{CodelineNo}{section}
 \def\tokslink#1{\hyperlink{#1}{\ding{51}}}
 \makeatother
@@ -194,9 +190,10 @@
 % \changes{v6.0}{2015/01/02}{重新整理 buptgraduatethesis.bst；在 bare_thesis.bib 中给出各类参考文献模板；更新帮助文档；迁移到 GitCafe}
 % \changes{v6.1}{2015/01/16}{修正发表论文列表中序号不对齐的 BUG}
 % \changes{v6.2}{2015/04/23}{修正参考文献列表序号不对齐的 BUG}
+% \changes{v7.0}{2016/11/23}{修正涉密论文中的 BUG；修正参考文献格式控制的 BUG；增加博士后研究报告类型；根据新版 xeCJK 宏包更新命令；更新声明内容；根据新版 glossaries 宏包更新命令}
 %
-% \def\fileversion{v6.2}
-% \def\filedate{2015/04/23}
+% \def\fileversion{v7.0}
+% \def\filedate{2016/11/23}
 %
 % \def\BUPTGraduateThesis{\textsc{BUPT}\-\textsc{Graduate}\-\textsc{Thesis}}
 % \def\BUPTThesis{\textsc{BUPT}\-\textsc{Thesis}}
@@ -216,12 +213,11 @@
 %
 % \maketitle
 % \tableofcontents
-% \vspace{\baselineskip}
 % 
 % \begin{documentation}
 % 
 % \section{简介}
-% \BUPTGraduateThesis{} 提供北京邮电大学研究生学位论文 \LaTeX{} 文档类，其符合北邮研究生院 2014 年 11 月发布的《关于研究生学位论文格式的统一要求》。
+% \BUPTGraduateThesis{} 提供北京邮电大学研究生学位论文及博士后研究工作报告的 \LaTeX{} 文档类，其符合北邮研究生院 2014 年 11 月发布的《关于研究生学位论文格式的统一要求》及相关博士后报告要求。
 % 
 % 尽管包括作者本人在内，已有数位北邮人使用 \BUPTGraduateThesis{} 完成其学位论文并成功提交，但目前不论是\BUPTThesis{} 还是 \BUPTGraduateThesis{} 均未经过官方认可。
 % {\bfseries 因使用本模板造成的一切后果由使用者自己承担。}
@@ -417,19 +413,21 @@
 %
 % 在 |\documentclass| 的选项列表中列出了 \BUPTGraduateThesis{} 支持的所有类选项。
 % 下面列出了各个类选项的作用和所支持的键值说明。
-% 我们{\bfseries 采用粗体来表示 \BUPTGraduateThesis{} 的默认设置。}
+% 我们{\bfseries 采用直立字体来表示 \BUPTGraduateThesis{} 的默认设置。}
 % 
 % \subsubsection{类选项}
+% \changes{v7.0}{2016/11/23}{增加博士后研究报告类型}
 % \begin{function}{学位类别}
 %   \begin{syntax}
-%     degree=\meta{doctor\orvar{}\defaultvar{master}\orvar{}pmaster}
+%     degree=\meta{doctor\orvar{}\defaultvar{master}\orvar{}pmaster\orvar{}pdoctor}
 %   \end{syntax}
 % \end{function}
-% |degree| 用于指定论文的学位类别：
+% |degree| 用于指定论文申请的学位类别：
 % \begin{description}
 % \item[doctor] 博士学位
 % \item[master] 学术型硕士学位
 % \item[pmaster] 专业硕士学位
+% \item[pdoctor] 博士后研究报告
 % \end{description}
 % 
 % \begin{function}{保密类型}
@@ -437,7 +435,7 @@
 %     classlevel=\meta{\defaultvar{open}\orvar{}control\orvar{}confidential\orvar{}classified\orvar{}topsecret\orvar{}customized}
 %   \end{syntax}
 % \end{function}
-% |classlevel|用于指定保密级别，包括国家标准规定的五种文献保密级别：
+% |classlevel|用于指定保密类型，包括国家标准规定的五种文献保密级别：
 % \begin{description}
 % \item[open] 公开级\quad 可在国内外发行和交换；
 % \item[control] 限制级\quad 不涉及国家秘密，但在一定时间内限制其交流和使用范围；
@@ -490,7 +488,7 @@
 % 需要注意的是，{\bfseries 通过 makethesis 编译生成论文时，需要在 makethesis 中进行相应设置}。
 % 
 % \changes{v6.0}{2015/01/02}{补充盲审功能使用说明}
-% \begin{function}{输出类型}
+% \begin{function}{盲审功能}
 %   \begin{syntax}
 %     finish=\meta{online\orvar{}\defaultvar{print}\orvar{}peerreview}
 %   \end{syntax}
@@ -504,12 +502,12 @@
 % 盲审功能的实现需要同时修改 pubs.bib 中 BSTpeerreview 条目的 |CTLswitch_peerreview| 域为 |"yes"| ，并且为 |CTLname_author_eng| 域和 |CTLname_author_chs| 域添加学位论文作者的姓名\footnote{学位论文作者姓名的编排需要与发表文章中 author 域中对应的姓名编排完全一致，建议采用大括号包围姓名，防止编译过程中对姓名格式的编辑。 }。
 % 如果输出盲审版，则自动隐去论文封面的作者和导师信息，以及致谢、独创性声明和使用授权说明，并将发表论文列表中的作者姓名自动替换为作者序次。
 %
-% \begin{function}{后台驱动}
+% \begin{function}{编译方式}
 %   \begin{syntax}
 %     driver=\meta{\defaultvar{xetex}\orvar{}dvips\orvar{}dvipdf\orvar{}pdftex}
 %   \end{syntax}
 % \end{function}
-% |driver|用于设定后台驱动：
+% |driver|用于设定后台驱动与编译方式：
 % \begin{description}
 % \item[xetex] |xelatex| 直接输出；
 % \item[dvips] |latex| $\to$ |dvips| $\to$ |pspdf| 流程；
@@ -624,7 +622,38 @@
 %   \end{syntax}
 % \end{function}
 % 如果文档类选项的保密类别设置为自定义，那么密级名称由|\customclasslevel|定义。
-% 
+%
+% 以下为博士后研究报告类型才需要设置的论文信息
+% \begin{function}{分类号}
+%   \begin{syntax}
+%     |\classnumber|\marg{博士后报告分类号}
+%   \end{syntax}
+% \end{function}
+%
+% \begin{function}{UDC}
+%   \begin{syntax}
+%     |\udc|\marg{博士后报告UDC}
+%   \end{syntax}
+% \end{function}
+%
+% \begin{function}{学校编号}
+%   \begin{syntax}
+%     |\schoolserial|\marg{博士后报告学校编号}
+%   \end{syntax}
+% \end{function}
+%
+% \begin{function}{研究起始时间}
+%   \begin{syntax}
+%     |\startdate|\marg{博士后报告研究起始时间}
+%   \end{syntax}
+% \end{function}
+%
+% \begin{function}{研究期满时间}
+%   \begin{syntax}
+%     |\finishdate|\marg{博士后报告研究期满时间}
+%   \end{syntax}
+% \end{function}
+%
 % \subsubsection{声明缩略语}
 % 论文用到的所有缩略语在 acronyms.tex 中声明：
 % \begin{function}{声明缩略语}
@@ -1036,7 +1065,7 @@
 %    \begin{macrocode}
 %<*cls>
 \define@choicekey*[bupt]{class}{degree}[\bupt@tempa\bupt@degree]{%
-  doctor,master,pmaster}[doctor]{\relax}
+  doctor,master,pmaster,pdoctor}[doctor]{\relax}
 %    \end{macrocode}
 %
 % 保密等级选项
@@ -1111,26 +1140,26 @@
 % 字体
 %    \begin{macrocode}
 \ifcase\bupt@mathfont\relax
-\RequirePackage{mathptmx}
-\RequirePackage{courier}
-\RequirePackage[scaled=.92]{helvet}
-\RequirePackage{amsmath}
-\RequirePackage{amssymb}
+  \RequirePackage{mathptmx}
+  \RequirePackage{courier}
+  \RequirePackage[scaled=.92]{helvet}
+  \RequirePackage{amsmath}
+  \RequirePackage{amssymb}
 \or
-\RequirePackage{amsmath}
-\RequirePackage{amssymb}
-\RequirePackage[mtbold,subscriptcorrection,mtplusscr,T1]{mathtime}       
-\newcommand\hmmax{0}
+  \RequirePackage{amsmath}
+  \RequirePackage{amssymb}
+  \RequirePackage[mtbold,subscriptcorrection,mtplusscr,T1]{mathtime}       
+  \newcommand\hmmax{0}
 \or
-\RequirePackage{times}
-\RequirePackage[scaled=.92]{helvet} 
-\RequirePackage{amsmath}
-\RequirePackage[subscriptcorrection,slantedGreek]{mtpro}
-\RequirePackage[mtphrb]{mtpams}
-\RequirePackage[mtpscr,mtpfrak]{mtpb}
+  \RequirePackage{times}
+  \RequirePackage[scaled=.92]{helvet} 
+  \RequirePackage{amsmath}
+  \RequirePackage[subscriptcorrection,slantedGreek]{mtpro}
+  \RequirePackage[mtphrb]{mtpams}
+  \RequirePackage[mtpscr,mtpfrak]{mtpb}
 \or
-\RequirePackage{amsmath}
-\RequirePackage{amssymb}
+  \RequirePackage{amsmath}
+  \RequirePackage{amssymb}
 \fi
 \RequirePackage{bm}
 %    \end{macrocode}
@@ -1142,51 +1171,52 @@
 %    \end{macrocode}
 %
 % \changes{v5.2}{2014/07/17}{新版 xeCJK 取消对 CJKnumber 选项的支持，改为手动添加该宏包}
+% \changes{v7.0}{2016/11/23}{新版 xeCJK 取消对 indentfirst 选项的支持，改为手动添加该宏包}
 % 中文相关：\XeTeX{} 采用字体配置文件设定中文字体
 %    \begin{macrocode}
 \ifnum\bupt@driver=3
-\RequirePackage[AutoFakeBold,AutoFakeSlant,indentfirst]{xeCJK}
-\RequirePackage{CJKnumb}
-\xeCJKsetcharclass{"2460}{"2473}{1}
-\xeCJKsetup{EmboldenFactor=3}
-\punctstyle{quanjiao}
-\def\CJK@null{\kern\CJKnullspace\char"3007 \kern\CJKnullspace}
-\defaultfontfeatures{Mapping=tex-text}
-\input{xeCJK-fonts.def}
+  \RequirePackage[AutoFakeBold,AutoFakeSlant]{xeCJK}
+  \RequirePackage{CJKnumb}
+  \xeCJKsetcharclass{"2460}{"2473}{1}
+  \xeCJKsetup{EmboldenFactor=3}
+  \punctstyle{quanjiao}
+  \def\CJK@null{\kern\CJKnullspace\char"3007 \kern\CJKnullspace}
+  \defaultfontfeatures{Mapping=tex-text}
+  \input{xeCJK-fonts.def}
 %</cls>
 %<*def>
-\setCJKmainfont[BoldFont={SimHei}, ItalicFont={KaiTi}]{SimSun}
-\setCJKsansfont{SimHei}
-\setCJKmonofont{KaiTi}
-\setCJKfamilyfont{song}{SimSun}
-\setCJKfamilyfont{hei}{SimHei}
-\setCJKfamilyfont{fs}{FangSong}
-\setCJKfamilyfont{kai}{KaiTi}
-\setCJKfamilyfont{li}{LiSu}
-\setCJKfamilyfont{you}{YouYuan}
-\setCJKfamilyfont{asong}{Adobe Song Std}
-\setCJKfamilyfont{ahei}{Adobe Heiti Std}
-\setmainfont{Times New Roman}
-\setsansfont{Arial}
-\setmonofont{Courier New}
-\newcommand{\song}{\CJKfamily{song}}    % 中易宋体
-\def\songti{\song}
-\newcommand{\hei}{\CJKfamily{hei}}      % 中易黑体
-\def\heiti{\hei}
-\newcommand{\fs}{\CJKfamily{fs}}        % 中易仿宋体
-\def\fangsong{\fs}
-\newcommand{\kai}{\CJKfamily{kai}}      % 中易楷体
-\def\kaishu{\kai}
-\newcommand{\asong}{\CJKfamily{asong}}  % Adobe宋体
-\def\asongti{\asong}
-\newcommand{\ahei}{\CJKfamily{ahei}}    % Adobe黑体
-\def\aheiti{\ahei}
+  \setCJKmainfont[BoldFont={SimHei}, ItalicFont={KaiTi}]{SimSun}
+  \setCJKsansfont{SimHei}
+  \setCJKmonofont{KaiTi}
+  \setCJKfamilyfont{song}{SimSun}
+  \setCJKfamilyfont{hei}{SimHei}
+  \setCJKfamilyfont{fs}{FangSong}
+  \setCJKfamilyfont{kai}{KaiTi}
+  \setCJKfamilyfont{li}{LiSu}
+  \setCJKfamilyfont{you}{YouYuan}
+  \setCJKfamilyfont{asong}{Adobe Song Std}
+  \setCJKfamilyfont{ahei}{Adobe Heiti Std}
+  \setmainfont{Times New Roman}
+  \setsansfont{Arial}
+  \setmonofont{Courier New}
+  \newcommand{\song}{\CJKfamily{song}}    % 中易宋体
+  \def\songti{\song}
+  \newcommand{\hei}{\CJKfamily{hei}}      % 中易黑体
+  \def\heiti{\hei}
+  \newcommand{\fs}{\CJKfamily{fs}}        % 中易仿宋体
+  \def\fangsong{\fs}
+  \newcommand{\kai}{\CJKfamily{kai}}      % 中易楷体
+  \def\kaishu{\kai}
+  \newcommand{\asong}{\CJKfamily{asong}}  % Adobe宋体
+  \def\asongti{\asong}
+  \newcommand{\ahei}{\CJKfamily{ahei}}    % Adobe黑体
+  \def\aheiti{\ahei}
 %</def>
 %<*cls>
 \else
-\RequirePackage{CJKutf8}
-\RequirePackage{CJKnumb}
-\RequirePackage{CJKpunct}
+  \RequirePackage{CJKutf8}
+  \RequirePackage{CJKnumb}
+  \RequirePackage{CJKpunct}
 \fi
 % 控制bibtex生成的参考文献中URL的字体与正文字体相同
 \RequirePackage{url}
@@ -1214,27 +1244,22 @@
 % 参考文献
 %    \begin{macrocode}
 \ifbupt@class@chapbib
-\RequirePackage[sectionbib,square,super,numbers,sort&compress]{natbib}
-\let\bupt@bibcite\bibcite
-\let\bupt@nocite\nocite
-\let\bupt@include\include
-\let\bupt@org@bibcite\org@bibcite
-\let\bupt@bibliographystyle\bibliographystyle
-\let\bupt@bibliography\bibliography
-\RequirePackage{chapterbib}
-\def\usechapbib{}
+  \RequirePackage[sectionbib,square,super,numbers,sort&compress]{natbib}
+  \let\bupt@bibcite\bibcite
+  \let\bupt@nocite\nocite
+  \let\bupt@include\include
+  \let\bupt@org@bibcite\org@bibcite
+  \let\bupt@bibliographystyle\bibliographystyle
+  \let\bupt@bibliography\bibliography
+  \RequirePackage{chapterbib}
+  \def\usechapbib{}
 \else
-\RequirePackage[square,super,numbers,sort&compress]{natbib}
+  \RequirePackage[square,super,numbers,sort&compress]{natbib}
 \fi
 \RequirePackage{multibib}
 % multibib宏包用于产生发表论文列表的参考文献
 % [resetlabels]选项与其他宏包冲突，导致参考文献序号无法对齐，因此取消该选项，改为每一章手动重置参考文献计数器
 %\RequirePackage{bibentry}
-%    \end{macrocode}
-%
-% 缩略语
-%    \begin{macrocode}
-\RequirePackage[toc,section=chapter]{glossaries}
 %    \end{macrocode}
 %
 % 书签与链接
@@ -1248,26 +1273,29 @@
   citebordercolor=white
 }
 \ifnum\bupt@finish=0%
-\hypersetup{%
-  linkcolor=Blue,%
-  citecolor=Blue,%
-  urlcolor=Mahogany%
-}
-\RequirePackage{wallpaper}
+  \hypersetup{%
+    linkcolor=Blue,%
+    citecolor=Blue,%
+    urlcolor=Mahogany%
+  }
+  \RequirePackage{wallpaper}
 \else%
-\hypersetup{%
-  linkcolor=black,%
-  citecolor=black,%
-  urlcolor=black%
-}
+  \hypersetup{%
+    linkcolor=black,%
+    citecolor=black,%
+    urlcolor=black%
+  }
 \fi
+% \changes{v7.0}{2016/11/23}{glossaries 宏包应于 hyperref 宏包之后调用}
+% 缩略语
+\RequirePackage[toc,section=chapter]{glossaries}
 \ifnum\bupt@finish=2
-\def\ispeerreview{}
+  \def\ispeerreview{}
 \fi
 \ifnum\bupt@driver=3
-\relax
+  \relax
 \else
-\RequirePackage{breakurl}
+  \RequirePackage{breakurl}
 \fi
 %</cls>
 %    \end{macrocode}
@@ -1278,12 +1306,12 @@
 %    \begin{macrocode}
 %<*cls>
 \ifnum\bupt@driver=3
-\relax
+  \relax
 \else
-\newcommand\song{\CJKfamily{song}}
-\newcommand\hei{\CJKfamily{hei}}
-\newcommand\kai{\CJKfamily{kai}}
-\newcommand\fs{\CJKfamily{fs}}
+  \newcommand\song{\CJKfamily{song}}
+  \newcommand\hei{\CJKfamily{hei}}
+  \newcommand\kai{\CJKfamily{kai}}
+  \newcommand\fs{\CJKfamily{fs}}
 \fi
 \newlength\CJKtwospaces
 \newlength\CJKfourspaces
@@ -1335,55 +1363,55 @@
 % 特殊 CJK 符号: 空白字符、脚注用带圈数字
 %    \begin{macrocode}
 \ifnum\bupt@driver=3
-\def\CJK@spaceChar{\char"3007} % why 0x3007?
-\def\CJKtwochars{\CJK@spaceChar\CJK@spaceChar}
-\def\bupt@circnum#1{%
-\ifnum \value{#1} = 1 \char"2460
-\else\ifnum \value{#1} = 2 \char"2461
-\else\ifnum \value{#1} = 3 \char"2462
-\else\ifnum \value{#1} = 4 \char"2463
-\else\ifnum \value{#1} = 5 \char"2464
-\else\ifnum \value{#1} = 6 \char"2465
-\else\ifnum \value{#1} = 7 \char"2466
-\else\ifnum \value{#1} = 8 \char"2467
-\else\ifnum \value{#1} = 9 \char"2468
-\else\ifnum \value{#1} = 10 \char"2469
-\else\ifnum \value{#1} = 11 \char"246A
-\else\ifnum \value{#1} = 12 \char"246B
-\else\ifnum \value{#1} = 13 \char"246C
-\else\ifnum \value{#1} = 14 \char"246D
-\else\ifnum \value{#1} = 15 \char"246E
-\else\ifnum \value{#1} = 16 \char"246F
-\else\ifnum \value{#1} = 17 \char"2470
-\else\ifnum \value{#1} = 18 \char"2471
-\else\ifnum \value{#1} = 19 \char"2472
-\else\ifnum \value{#1} = 20 \char"2473
-  \else \textcircled{\qihao\arabic{#1}}
-  \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi
-}
-\def\CJKleftparen{\char"FF08}
-\def\CJKrightparen{\char"FF09}
+  \def\CJK@spaceChar{\char"3007} % why 0x3007?
+  \def\CJKtwochars{\CJK@spaceChar\CJK@spaceChar}
+  \def\bupt@circnum#1{%
+  \ifnum \value{#1} = 1 \char"2460
+  \else\ifnum \value{#1} = 2 \char"2461
+  \else\ifnum \value{#1} = 3 \char"2462
+  \else\ifnum \value{#1} = 4 \char"2463
+  \else\ifnum \value{#1} = 5 \char"2464
+  \else\ifnum \value{#1} = 6 \char"2465
+  \else\ifnum \value{#1} = 7 \char"2466
+  \else\ifnum \value{#1} = 8 \char"2467
+  \else\ifnum \value{#1} = 9 \char"2468
+  \else\ifnum \value{#1} = 10 \char"2469
+  \else\ifnum \value{#1} = 11 \char"246A
+  \else\ifnum \value{#1} = 12 \char"246B
+  \else\ifnum \value{#1} = 13 \char"246C
+  \else\ifnum \value{#1} = 14 \char"246D
+  \else\ifnum \value{#1} = 15 \char"246E
+  \else\ifnum \value{#1} = 16 \char"246F
+  \else\ifnum \value{#1} = 17 \char"2470
+  \else\ifnum \value{#1} = 18 \char"2471
+  \else\ifnum \value{#1} = 19 \char"2472
+  \else\ifnum \value{#1} = 20 \char"2473
+    \else \textcircled{\qihao\arabic{#1}}
+    \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi
+  }
+  \def\CJKleftparen{\char"FF08}
+  \def\CJKrightparen{\char"FF09}
 \else
-\def\CJKtwochars{\CJKchar{"030}{"000}\CJKchar{"030}{"000}}
-\def\bupt@circnum#1{%
+  \def\CJKtwochars{\CJKchar{"030}{"000}\CJKchar{"030}{"000}}
+  \def\bupt@circnum#1{%
 % 1$\sim$10的带圈数字直接使用字库中的带圈数字
-\ifnum \value{#1} = 1 \CJKchar{"024}{"060}
-\else\ifnum \value{#1} = 2 \CJKchar{"024}{"061}
-\else\ifnum \value{#1} = 3 \CJKchar{"024}{"062}
-\else\ifnum \value{#1} = 4 \CJKchar{"024}{"063}
-\else\ifnum \value{#1} = 5 \CJKchar{"024}{"064}
-\else\ifnum \value{#1} = 6 \CJKchar{"024}{"065}
-\else\ifnum \value{#1} = 7 \CJKchar{"024}{"066}
-\else\ifnum \value{#1} = 8 \CJKchar{"024}{"067}
-\else\ifnum \value{#1} = 9 \CJKchar{"024}{"068}
-\else\ifnum \value{#1} = 10 \CJKchar{"024}{"069}
+  \ifnum \value{#1} = 1 \CJKchar{"024}{"060}
+  \else\ifnum \value{#1} = 2 \CJKchar{"024}{"061}
+  \else\ifnum \value{#1} = 3 \CJKchar{"024}{"062}
+  \else\ifnum \value{#1} = 4 \CJKchar{"024}{"063}
+  \else\ifnum \value{#1} = 5 \CJKchar{"024}{"064}
+  \else\ifnum \value{#1} = 6 \CJKchar{"024}{"065}
+  \else\ifnum \value{#1} = 7 \CJKchar{"024}{"066}
+  \else\ifnum \value{#1} = 8 \CJKchar{"024}{"067}
+  \else\ifnum \value{#1} = 9 \CJKchar{"024}{"068}
+  \else\ifnum \value{#1} = 10 \CJKchar{"024}{"069}
 % 11$\sim$99的带圈数字
   \else \textcircled{\qihao\arabic{#1}}
   \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi
-}
+  }
 % 圆括号
-\def\CJKleftparen{\CJKchar{"0FF}{"008}}
-\def\CJKrightparen{\CJKchar{"0FF}{"009}}
+  \def\CJKleftparen{\CJKchar{"0FF}{"008}}
+  \def\CJKrightparen{\CJKchar{"0FF}{"009}}
 \fi
 \def\CJKfourchars{\CJKtwochars\CJKtwochars}
 % 破折号
@@ -1552,6 +1580,8 @@
 %    \begin{macrocode}
 %<*cfg>
 \renewcommand\contentsname{目\hspace{1em}录}
+\renewcommand\listfigurename{插图索引}
+\renewcommand\listtablename{表格索引}
 %</cfg>
 %<*cls>
 \setcounter{secnumdepth}{3}
@@ -1691,14 +1721,14 @@
 \end{CJK*}%
 }
 \ifnum\bupt@driver=3
-\AtBeginDocument{\CJKindent}
+  \AtBeginDocument{\CJKindent}
 \else
-\let\bupt@begindocumenthook\@begindocumenthook
-\let\bupt@enddocumenthook\@enddocumenthook
-\def\AtBeginDocument{\g@addto@macro\bupt@begindocumenthook}
-\def\AtEndDocument{\g@addto@macro\bupt@enddocumenthook}
-\def\@begindocumenthook{\bupt@begindocumenthook\bupt@beginCJK}
-\def\@enddocumenthook{\bupt@endCJK\bupt@enddocumenthook}
+  \let\bupt@begindocumenthook\@begindocumenthook
+  \let\bupt@enddocumenthook\@enddocumenthook
+  \def\AtBeginDocument{\g@addto@macro\bupt@begindocumenthook}
+  \def\AtEndDocument{\g@addto@macro\bupt@enddocumenthook}
+  \def\@begindocumenthook{\bupt@begindocumenthook\bupt@beginCJK}
+  \def\@enddocumenthook{\bupt@endCJK\bupt@enddocumenthook}
 \fi
 %</cls>
 %    \end{macrocode}
@@ -1885,9 +1915,9 @@
 \newcommand\bupt@def@metadata[2][]{%
   \def\@tempa{#1}
   \ifx\@tempa\@empty
-  \def\bupt@def{\expandafter\gdef}
+    \def\bupt@def{\expandafter\gdef}
   \else
-  \def\bupt@def{\long\expandafter\gdef}
+    \def\bupt@def{\long\expandafter\gdef}
   \fi
   \bupt@def\csname #2\endcsname##1{%
     \bupt@def\csname bupt@meta@#2\endcsname{##1}
@@ -1906,10 +1936,15 @@
 \bupt@def@metadata{cdepartment}
 \bupt@def@metadata{cmajor}
 \bupt@def@metadata{cauthor}
+\bupt@def@metadata{classnumber}
+\bupt@def@metadata{udc}
+\bupt@def@metadata{schoolserial}
 \bupt@def@metadata{csupervisor}
 \bupt@def@metadata{cassosupervisor}
 \bupt@def@metadata{ccosupervisor}
 \bupt@def@metadata{cdate}
+\bupt@def@metadata{startdate}
+\bupt@def@metadata{finishdate}
 \bupt@def@metadata[long]{cabstract}
 \bupt@def@metadata{ckeywords}
 \bupt@def@metadata{etitle}
@@ -1933,26 +1968,43 @@
 %    \begin{macrocode}
 %<*cfg>
 \ifcase\bupt@degree\relax
-\def\bupt@page@head{北京邮电大学工学博士学位论文}
-\def\bupt@label@covertitle{博士学位论文}
-\def\bupt@label@cmajor{专\hspace{2em}业}
+  \def\bupt@page@head{北京邮电大学工学博士学位论文}
+  \def\bupt@label@covertitle{博士学位论文}
+  \def\bupt@label@cmajor{专\hspace{2em}业}
 \or
-\def\bupt@page@head{北京邮电大学工学硕士学位论文}
-\def\bupt@label@covertitle{硕士学位论文}
-\def\bupt@label@cmajor{专\hspace{2em}业}
+  \def\bupt@page@head{北京邮电大学工学硕士学位论文}
+  \def\bupt@label@covertitle{硕士学位论文}
+  \def\bupt@label@cmajor{专\hspace{2em}业}
 \or
-\def\bupt@page@head{北京邮电大学工学硕士学位论文}
-\def\bupt@label@covertitle{硕士学位论文}
-\def\bupt@label@cmajor{专业领域}
+  \def\bupt@page@head{北京邮电大学工学硕士学位论文}
+  \def\bupt@label@covertitle{硕士学位论文}
+  \def\bupt@label@cmajor{专业领域}
+\or
+  \def\bupt@page@head{北京邮电大学博士后研究工作报告}
+  \def\bupt@label@covertitle{博士后研究工作报告}
+  \def\bupt@label@classnumber{分类号}
+  \def\bupt@label@udc{U\hfill D\hfill C}
+  \def\bupt@label@schoolserial{编\hspace{1em}号}
+  \def\bupt@label@cmajor{专\hspace{1em}业（二级学科）名称}
 \fi
-\def\bupt@label@cauthor{姓\hspace{2em}名}
-\def\bupt@label@csupervisor{导\hspace{2em}师}
-\def\bupt@label@cdepartment{学\hspace{2em}院}
+\ifnum\bupt@degree=3
+  \def\bupt@label@cauthor{博\hfill 士\hfill 后\hfill 姓\hfill 名}
+  \def\bupt@label@csupervisor{合\hfill 作\hfill 导\hfill 师}
+  \def\bupt@label@cdepartment{流动站（一级学科）名称}
+  \def\bupt@label@classlevel{密\hspace{1em}级}
+  \def\bupt@label@startdate{研究工作起始时间}
+  \def\bupt@label@finishdate{研究工作期满时间}
+\else
+  \def\bupt@label@cauthor{姓\hspace{2em}名}
+  \def\bupt@label@csupervisor{导\hspace{2em}师}
+  \def\bupt@label@cdepartment{学\hspace{2em}院}
+  \def\bupt@label@studentid{学\hspace{2em}号}
+  \def\bupt@label@classlevel{密级}
+\fi
 \def\bupt@label@ctitle{题目}
-\def\bupt@label@classlevel{密级}
 \def\bupt@label@classdur{保密期限}
-\def\bupt@schoolename{北京邮电大学}
-\def\bupt@label@studentid{学\hspace{2em}号}
+\def\bupt@label@cschoolname{北京邮电大学}
+\def\bupt@label@eschoolname{Beijing University of Posts and Telecommunications}
 \def\bupt@title@sep{：}
 \cdate{\CJKdigits{\the\year}年\CJKnumber{\the\month}月}
 %</cfg>
@@ -1963,9 +2015,9 @@
 %<*cls>
 \def\bupt@hide#1{%
   \ifnum\bupt@finish=2
-  \bupt@meta@hiddenmark
+    \bupt@meta@hiddenmark
   \else
-  {#1}
+    {#1}
   \fi%
 }
 %</cls>
@@ -1975,17 +2027,17 @@
 %    \begin{macrocode}
 %<*cfg>
 \ifcase\bupt@classlevel\relax
-\def\bupt@meta@classlevel{公开}
+  \def\bupt@meta@classlevel{公开}
 \or
-\def\bupt@meta@classlevel{限制}
+  \def\bupt@meta@classlevel{限制}
 \or
-\def\bupt@meta@classlevel{秘密}
+  \def\bupt@meta@classlevel{秘密}
 \or
-\def\bupt@meta@classlevel{机密}
+  \def\bupt@meta@classlevel{机密}
 \or
-\def\bupt@meta@classlevel{绝密}
+  \def\bupt@meta@classlevel{绝密}
 \or
-\def\bupt@meta@classlevel\bupt@meta@customclasslevel
+  \def\bupt@meta@classlevel\bupt@meta@customclasslevel
 \fi
 %</cfg>
 %    \end{macrocode}
@@ -1995,6 +2047,61 @@
 %<*cls>
 \newlength\bupt@titlewidth
 \newcommand{\titlebreak}{}
+\ifnum\bupt@degree=3
+\newcommand{\bupt@front@cover}{%
+  \song\noindent%
+  \begin{minipage}[t]{.4\textwidth}
+    \sihao[1.24]
+    \setlength{\extrarowheight}{0pt}
+    \setlength{\arrayrulewidth}{0.5bp}
+    \begin{tabular}{lp{5em}}
+      \bupt@label@classnumber\bupt@title@sep & {\hfil\bupt@hide{\bupt@meta@classnumber}\hfil} \\
+      [-3pt] \cline{2-2} \\
+      \bupt@label@udc\bupt@title@sep & {\hfil\bupt@hide{\bupt@meta@udc}\hfil} \\
+      [-3pt] \cline{2-2} \\
+    \end{tabular}%
+    \hfill%
+  \end{minipage}
+  \hspace{\fill}%
+  \begin{minipage}[t]{.4\textwidth}
+    \hfill%
+    \sihao[1.24]
+    \setlength{\extrarowheight}{0pt}
+    \setlength{\arrayrulewidth}{0.5bp}
+    \begin{tabular}{lp{5em}}
+      \bupt@label@classlevel\bupt@title@sep & {\hfil\bupt@hide{\bupt@meta@classlevel}\hfil} \\
+      [-3pt] \cline{2-2} \\
+      \bupt@label@schoolserial\bupt@title@sep & {\hfil\bupt@hide{\bupt@meta@schoolserial}\hfil} \\
+      [-3pt] \cline{2-2} \\
+    \end{tabular}
+  \end{minipage}\\[2cm]
+  \begin{minipage}[t]{\textwidth}
+    \centering
+    \covertitlesize[1.0]{\ziju{0.5em}\hei\bupt@label@cschoolname}\par
+  \end{minipage}\\[2cm]
+  \begin{minipage}[t]{\textwidth}
+    \centering
+    \covertitlesize[1.0]{\ziju{0.5em}\hei\bupt@label@covertitle}\par
+  \end{minipage}\\[2.5cm]
+  \begin{minipage}[t]{\textwidth}
+    \centering
+    \xiaoer[1.5]
+    \renewcommand\titlebreak{\\\global\let\bupt@long@title\@empty}
+    {\hei\bupt@meta@ctitle}\par
+  \end{minipage}\\[2cm]
+  \begin{minipage}[t]{\textwidth}
+    \centering
+    \xiaoer[1.5]
+    {\hei\bupt@meta@cauthor}\par
+  \end{minipage}\\[4cm]
+  \begin{minipage}[t]{\textwidth}
+    \centering
+    \sihao[2.0]{\ziju{0.5em}\bupt@label@cschoolname}\par
+    \bupt@meta@cdate
+  \end{minipage}
+  \normalfont
+}
+\else
 \newcommand{\bupt@front@cover}{%
   \asong\bfseries
   \vspace*{-1.15cm}
@@ -2002,11 +2109,11 @@
     \sihao
     \hspace*{76.6mm}
     \ifnum\bupt@classlevel=0
-    \bupt@label@classlevel\bupt@title@sep
-    \hspace{4em}\bupt@label@classdur\bupt@title@sep
+      \bupt@label@classlevel\bupt@title@sep
+      \hspace{4em}\bupt@label@classdur\bupt@title@sep
     \else
-    \bupt@label@classlevel\bupt@title@sep\bupt@meta@classlevel
-    \hspace{2em}\bupt@label@classdur\bupt@title@sep\bupt@meta@classdur
+      \bupt@label@classlevel\bupt@title@sep\bupt@meta@classlevel
+      \hspace{2em}\bupt@label@classdur\bupt@title@sep\bupt@meta@classdur
     \fi
   \end{minipage}\\[1.71cm]
   \begin{minipage}[t]{\textwidth}
@@ -2035,7 +2142,7 @@
       }%
       \\%
       \ifx\bupt@long@title\@empty
-      \cline{2-2}
+        \cline{2-2}
       \else
         \ifdim\bupt@titlewidth>95mm
         \cline{2-2}
@@ -2067,6 +2174,7 @@
   \end{minipage}
   \normalfont
 }
+\fi
 %</cls>
 %    \end{macrocode}
 %
@@ -2075,6 +2183,45 @@
 %<*cls>
 \newcommand{\bupt@inside@front@cover}{%
   \cleardoublepage
+  \ifnum\bupt@degree=3
+    \song\noindent%
+    \begin{minipage}[t]{\textwidth}
+      \centering
+      \xiaoer[1.5]
+      \renewcommand\titlebreak{\\\global\let\bupt@long@title\@empty}
+      {\hei\bupt@meta@ctitle}\par
+    \end{minipage}\\[1cm]
+    \begin{minipage}[t]{\textwidth}
+      \centering
+      \xiaoer[1.5]
+      {\hei\bupt@meta@etitle}\par
+    \end{minipage}\\[6cm]
+    \begin{minipage}[t]{\textwidth}
+      \centering
+      \xiaosan[1.5]
+      \setlength{\extrarowheight}{0pt}
+      \setlength{\arrayrulewidth}{0.5bp}
+      \begin{tabular}{lc}
+        \bupt@label@cauthor\bupt@title@sep & {\bupt@hide{\bupt@meta@cauthor}\hfill} \\
+        \bupt@label@cdepartment\bupt@title@sep & {\bupt@meta@cdepartment\hfill} \\
+        \bupt@label@cmajor\bupt@title@sep & {\bupt@meta@cmajor\hfill} \\
+        \bupt@label@csupervisor\bupt@title@sep & {\bupt@hide{\bupt@meta@csupervisor}\hfill} \\
+      \end{tabular}
+    \end{minipage}\\[3cm]
+    \begin{minipage}[t]{\textwidth}
+      \centering
+      \xiaosan[1.5]
+      \setlength{\extrarowheight}{0pt}
+      \setlength{\arrayrulewidth}{0.5bp}
+      \begin{tabular}{lc}
+        \bupt@label@startdate\bupt@title@sep & \bupt@meta@startdate \\
+        \bupt@label@finishdate\bupt@title@sep & \bupt@meta@finishdate \\
+      \end{tabular}
+    \end{minipage}
+    \normalfont
+  \else
+    \relax
+  \fi
 }
 \newcommand{\bupt@inside@back@cover}{%
   \cleardoublepage
@@ -2096,14 +2243,13 @@
 }
 \def\bupt@authorization@title{关于论文使用授权的说明}
 \long\def\bupt@authorization@body{%
-  学位论文作者完全了解北京邮电大学有关保留和使用学位论文的规定，即：研究生在校攻读学位期间论文工作的知识产权单位属北京邮电大学。%
-  学校有权保留并向国家有关部门或机构送交论文的复印件和磁盘，允许学位论文被查阅和借阅；%
-  学校可以公布学位论文的全部或部分内容，可以允许采用影印、缩印或其它复制手段保存、汇编学位论文。%
+  本人完全了解并同意北京邮电大学有关保留、使用学位论文的规定，即：北京邮电大学拥有以下关于学位论文的无偿使用权，具体包括：学校有权保留并向国家有关部门或机构送交论文，有权允许学位论文被查阅和借阅；%
+  学校可以公布学位论文的全部或部分内容，有权允许采用影印、缩印或其它复制手段保存、汇编学位论文，将学位论文的全部或部分内容编入有关数据库进行检索。%
   （保密的学位论文在解密后遵守此规定）%
   \ifnum\bupt@classlevel=0 \par%
   本学位论文不属于保密范围，适用本授权书。%
   \else\par%
-  本学位论文属于保密在\bupt@meta@classdur解密后适用本授权书。%
+  本学位论文属于保密在\bupt@meta@classdur 解密后适用本授权书。%
   \fi%
 } 
 \def\bupt@label@authorsigniture{本人签名：}
@@ -2186,9 +2332,12 @@
   \begin{titlepage}
     \bupt@front@cover
     \bupt@inside@front@cover
-    \ifnum\bupt@finish=2
+    \ifnum\bupt@degree=3
     \else
-    \bupt@makedeclauth
+      \ifnum\bupt@finish=2
+      \else
+      \bupt@makedeclauth
+      \fi
     \fi
   \end{titlepage}
   \ifbupt@class@dedication
@@ -2199,6 +2348,8 @@
   \bupt@makeabstract
   \let\@tabular\bupt@tabular%
   \tableofcontents
+  \listoftables
+  \listoffigures
 }
 %% 生成中英文摘要页
 \newcommand{\bupt@makeabstract}{%
@@ -2323,31 +2474,28 @@
 %<*cls>
 \setlength{\glsdescwidth}{0.9\linewidth} % 缩略语描述列宽
 \newglossarystyle{bupt@acronyms@style}{  % 设置自定义缩略语表格式
-  \glossarystyle{long}                   % 以 long 样式为基础
-  \renewcommand*{\glossaryentryfield}[5]{% 
-  	\ifnum\bupt@driver=3
-  	\@glstarget{glo:##1}{##2} & ##3\char"FF0C ##4\\%
-  	\else
-    \@glstarget{glo:##1}{##2} & ##3\CJKchar{"0FF}{"00C}##4\\
-    \fi}%
+  \setglossarystyle{long}                % 以 long 样式为基础
+  \renewcommand*{\glossentry}[2]{%
+    \glossentryname{##1} & \glossentrydesc{##1}\char"FF0C\glossentrysymbol{##1}\\
+  }
 }
-\glossarystyle{bupt@acronyms@style} % 选择自定义的缩略语表样式
+\setglossarystyle{bupt@acronyms@style} % 选择自定义的缩略语表样式
 % 设置 acronym 词汇表的标题
 \newglossary[alg]{acronym}{acr}{acn}{\bupt@label@listofacronyms}
 \makeglossaries
 % 重载 \newacronym 命令
-\renewcommand{\newacronym}[5][]{
-  \newglossaryentry{#2}{%
+\renewcommand{\newacronym}[4]{%
+  \newglossaryentry{#1}{%
     type=\acronymtype,%
-    name={#3},
-    description={#4},
-    text={#3},%
-    descriptionplural={#4\acrpluralsuffix},%
-    first={#3}, %{#4 (#3)},%
-    plural={#3\acrpluralsuffix},%
-    firstplural={\@glo@descplural\space (\@glo@plural)},
-    symbol={#5},% 
-    #1}
+    name={#2},%
+    description={#3},%
+    text={#2},%
+    descriptionplural={#3\acrpluralsuffix},%
+    first={#2}, %{#3 (#2)},%
+    plural={#2\acrpluralsuffix},%
+    firstplural={\@glo@descplural\space (\@glo@plural)},%
+    symbol={#4}%
+  }%
 }
 % 重载 \cs{glsdisplayfirst} 命令
 \renewcommand{\glsdisplayfirst}[4]{
@@ -2369,22 +2517,6 @@
 \renewcommand{\glsdefaulttype}{acronym}
 \renewcommand{\glossarysection}[2][\@gls@title]{\chapter{#2}}
 \newcommand{\tableofacronyms}{\printglossary[type=\acronymtype]}
-\newenvironment{listofacronyms}[1][2.5cm]{%
-  \noindent
-  \begin{list}{}{%
-      \vskip-30bp\xiaosi[1.5]
-      \renewcommand\makelabel[1]{##1\hfil}
-      \setlength{\labelwidth}{#1}  % 标签盒子宽度
-      \setlength{\labelsep}{0.5cm} % 标签与列表文本距离
-      \setlength{\itemindent}{0cm} % 标签缩进量
-      \setlength{\leftmargin}{\labelwidth+\labelsep} %×ó±ß½ç
-      \setlength{\rightmargin}{0cm}
-      \setlength{\parsep}{0cm} % 段落间距
-      \setlength{\itemsep}{0cm} % 
-      \setlength{\listparindent}{0cm} % 段落缩进量
-      \setlength{\topsep}{0pt} % 
-    }
-  }{\end{list}}
 %</cls>
 %    \end{macrocode}
 %
@@ -4121,6 +4253,21 @@ EXECUTE { show.banner.end }             % 显示完成提示信息
 %% 你的姓名
 \cauthor{学生姓名}
 
+%% 博士后研究工作报告-分类号
+\classnumber{O441.3}
+
+%% 博士后研究工作报告-UDC
+\udc{621.396.9}
+
+%% 博士后研究工作报告-学校编号
+\schoolserial{147227}
+
+%% 博士后研究工作起始时间
+\startdate{2014年10月29日}
+
+%% 博士后研究工作期满时间
+\finishdate{2016年4月2日}
+
 %% 你导师的姓名
 \csupervisor{导师姓名}
 
@@ -4230,8 +4377,8 @@ EXECUTE { show.banner.end }             % 显示完成提示信息
 % \subsection{bare_thesis.bib}
 %<*bare-thesis-bib>
 @BUPTGraduateThesisBSTCTL{BSTcontrol,
-  CTLmaxnum_authors = "3"
-  CTLswitch_chs_punc = "no",
+  CTLmaxnum_authors = "3",
+  CTLswitch_chs_punc = "no"
 }
 
 @BOOK{CITATION_BOOK,
