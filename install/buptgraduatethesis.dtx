@@ -1623,9 +1623,6 @@
   \penalty\@highpenalty
   \endgroup
   \fi}
-\renewcommand*\l@section{\@dottedtocline{1}{0em}{2.1em}} % 第二个参数控制目录项的缩进，原来分别为1.2、2和3.5
-\renewcommand*\l@subsection{\@dottedtocline{2}{0em}{3em}}
-\renewcommand*\l@subsubsection{\@dottedtocline{3}{0em}{3.8em}}
 %</cls>
 %    \end{macrocode}
 %
@@ -2334,10 +2331,7 @@
     \bupt@inside@front@cover
     \ifnum\bupt@degree=3
     \else
-      \ifnum\bupt@finish=2
-      \else
       \bupt@makedeclauth
-      \fi
     \fi
   \end{titlepage}
   \ifbupt@class@dedication
@@ -4076,6 +4070,11 @@ EXECUTE { show.banner.end }             % 显示完成提示信息
 \include{ch_intro}
 \include{ch_concln}
 
+\ifx\usechapbib\undefined
+\bibliographystyle{buptgraduatethesis}
+\bibliography{bare_thesis}
+\fi
+
 %% 附录部分
 
 %% 如果有两个或两个以上的附录, 使用appendix环境
@@ -4092,11 +4091,6 @@ EXECUTE { show.banner.end }             % 显示完成提示信息
 %%   % 自动抽取生成缩略语表作为附录A
 %%   % \tableofacronyms
 %% \end{appendix*}
-
-\ifx\usechapbib\undefined
-\bibliographystyle{buptgraduatethesis}
-\bibliography{bare_thesis}
-\fi
 
 \backmatter
 %% 致谢
