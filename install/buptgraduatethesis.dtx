@@ -1344,6 +1344,7 @@
 \bupt@define@fontsize{bahao}{5bp}
 % 封面标题字号
 \bupt@define@fontsize{covertitlesize}{32bp}
+\bupt@define@fontsize{ecovertitlesize}{26bp}
 % 图注字号
 \bupt@define@fontsize{annotationsize}{8pt}
 % 默认字号
@@ -1967,22 +1968,30 @@
 \ifcase\bupt@degree\relax
   \def\bupt@page@head{北京邮电大学工学博士学位论文}
   \def\bupt@label@covertitle{博士学位论文}
+  \def\bupt@label@ecovertitle{Thesis for Doctor Degree}
   \def\bupt@label@cmajor{专\hspace{2em}业}
-\or
+  \def\bupt@label@emajor{Subject}
+  \or
   \def\bupt@page@head{北京邮电大学工学硕士学位论文}
   \def\bupt@label@covertitle{硕士学位论文}
+  \def\bupt@label@ecovertitle{Thesis for Master Degree}
   \def\bupt@label@cmajor{专\hspace{2em}业}
-\or
+  \def\bupt@label@emajor{Subject}
+  \or
   \def\bupt@page@head{北京邮电大学工程硕士学位论文}
   \def\bupt@label@covertitle{硕士学位论文}
+  \def\bupt@label@ecovertitle{Thesis for Master Degree}
   \def\bupt@label@cmajor{专业领域}
-\or
+  \def\bupt@label@emajor{Subject}
+  \or
   \def\bupt@page@head{北京邮电大学博士后研究工作报告}
   \def\bupt@label@covertitle{博士后研究工作报告}
+  \def\bupt@label@ecovertitle{Report for Postdoctoral Research}
   \def\bupt@label@classnumber{分类号}
   \def\bupt@label@udc{U\hfill D\hfill C}
   \def\bupt@label@schoolserial{编\hspace{1em}号}
   \def\bupt@label@cmajor{专\hspace{1em}业（二级学科）名称}
+  \def\bupt@label@emajor{Subject}
 \fi
 \ifnum\bupt@degree=3
   \def\bupt@label@cauthor{博\hfill 士\hfill 后\hfill 姓\hfill 名}
@@ -1993,17 +2002,25 @@
   \def\bupt@label@finishdate{研究工作期满时间}
 \else
   \def\bupt@label@cauthor{姓\hspace{2em}名}
+  \def\bupt@label@eauthor{Candidate}
   \def\bupt@label@csupervisor{导\hspace{2em}师}
+  \def\bupt@label@esupervisor{Supervisor}
   \def\bupt@label@cdepartment{学\hspace{2em}院}
+  \def\bupt@label@edepartment{Institute}
   \def\bupt@label@studentid{学\hspace{2em}号}
+  \def\bupt@label@estudentid{Student No.}
   \def\bupt@label@classlevel{密级}
 \fi
 \def\bupt@label@ctitle{题目}
+\def\bupt@label@etitle{Topic}
 \def\bupt@label@classdur{保密期限}
 \def\bupt@label@cschoolname{北京邮电大学}
 \def\bupt@label@eschoolname{Beijing University of Posts and Telecommunications}
 \def\bupt@title@sep{：}
+\def\bupt@title@esep{:}
 \cdate{\the\year 年\the\month 月\the\day 日}
+\edate{\today}
+
 %</cfg>
 %    \end{macrocode}
 %
@@ -2102,7 +2119,7 @@
 \newcommand{\bupt@front@cover}{%
   \asong\bfseries
   \vspace*{-1.15cm}
-  \begin{minipage}[t]{\textwidth}
+  \begin{minipage}[t]{\textwidth}%右上角密级、保密期限
     \sihao
     \hspace*{76.6mm}
     \ifnum\bupt@classlevel=0
@@ -2113,7 +2130,7 @@
       \hspace{2em}\bupt@label@classdur\bupt@title@sep\bupt@meta@classdur
     \fi
   \end{minipage}\\[1.71cm]
-  \begin{minipage}[t]{\textwidth}
+  \begin{minipage}[t]{\textwidth}%北京邮电大学、硕士（博士）学位论文、logo
     \centering
     \hspace{0.3cm}
     \includegraphics[width=11.6cm]{logo/buptname}\par
@@ -2122,7 +2139,7 @@
     \vspace{0.95cm}
     \includegraphics[width=3.09cm]{logo/buptseal}
   \end{minipage}\\[1.8cm]
-  \begin{minipage}[t]{\textwidth}%
+  \begin{minipage}[t]{\textwidth}%题目
     \centering
     \xiaoer[1.5]
     \vspace{0.5cm}
@@ -2147,7 +2164,7 @@
       \fi
     \end{tabular}
   \end{minipage}\\[1.3cm]
-  \begin{minipage}[t]{\textwidth}
+  \begin{minipage}[t]{\textwidth}%学号姓名等
     \centering
     \sihao[1.24]
     \setlength{\extrarowheight}{0pt}
@@ -2165,13 +2182,82 @@
       [-3pt] \cline{2-2} \\
     \end{tabular}
   \end{minipage}\\[0.7cm]
-  \begin{minipage}[t]{\textwidth}
+  \begin{minipage}[t]{\textwidth}%日期
     \centering
     {\sihao[1.0] \asong \bupt@meta@cdate}
   \end{minipage}
   \normalfont
 }
 \fi
+%</cls>
+%    \end{macrocode}
+%
+% 英文封面(封一)
+%    \begin{macrocode}
+%<*cls>
+\newcommand{\bupt@front@ecover}{
+  \cleardoublepage
+  \ifnum\bupt@degree=3
+    \relax
+  \else
+  \asong\bfseries
+  \begin{minipage}[t]{\textwidth}%北京邮电大学、硕士（博士）学位论文、logo
+    \vspace{2cm}
+    \centering
+    \includegraphics[width=14cm]{logo/bupt_en_name_and_seal}\par
+    \vspace{1cm}
+    \ecovertitlesize[1.0]{\ahei\bupt@label@ecovertitle}\par
+  \end{minipage}\\[1.8cm]
+  \begin{minipage}[t]{\textwidth}%题目
+    \centering
+    \xiaoer[1.5]
+    \settowidth{\bupt@titlewidth}{\bupt@meta@etitle}
+    \setlength{\extrarowheight}{0pt}
+    \setlength{\arrayrulewidth}{0.5bp}
+    \begin{tabular}{@{}p{42bp}@{\bupt@title@esep}p{95mm}@{}}
+      \bupt@label@etitle & %
+      \parbox[t]{95mm}{%
+        \centering%
+        \renewcommand\titlebreak{\\\global\let\bupt@long@title\@empty}
+        \rule[-5bp]{95mm}{0.5bp}\\[-27bp]
+        \bupt@meta@etitle%
+      }%
+      \\%
+      \ifx\bupt@long@title\@empty
+        \cline{2-2}
+      \else
+        \ifdim\bupt@titlewidth>95mm
+        \cline{2-2}
+        \fi
+      \fi
+    \end{tabular}
+  \end{minipage}\\[1.3cm]
+  \begin{minipage}[t]{\textwidth}%学号姓名等
+    \centering
+    \sihao[1.24]
+    \setlength{\extrarowheight}{0pt}
+    \setlength{\arrayrulewidth}{0.5bp}
+    \begin{tabular}{rc}
+      \bupt@label@estudentid\bupt@title@esep & {\hfill\bupt@hide{\bupt@meta@studentid}\hfill} \\
+      [-3pt] \cline{2-2} \\
+      \bupt@label@eauthor\bupt@title@esep & {\hfill\bupt@hide{\bupt@meta@eauthor}\hfill} \\
+      [-3pt] \cline{2-2} \\
+      \bupt@label@emajor\bupt@title@esep & {\hfill\bupt@meta@emajor\hfill} \\
+      [-3pt] \cline{2-2} \\
+      \bupt@label@esupervisor\bupt@title@esep & {\hfill\bupt@hide{\bupt@meta@esupervisor}\hfill} \\
+      [-3pt] \cline{2-2} \\
+      \bupt@label@edepartment\bupt@title@esep & {\hfill\bupt@meta@edepartment\hfill} \\
+      [-3pt] \cline{2-2} \\
+    \end{tabular}
+  \end{minipage}\\[0.7cm]
+  \begin{minipage}[t]{\textwidth}%日期
+    \begin{flushright}
+      {\sihao[1.0] \asong \bupt@meta@edate}
+    \end{flushright}
+  \end{minipage}
+  \normalfont
+  \fi
+}
 %</cls>
 %    \end{macrocode}
 %
@@ -2315,7 +2401,7 @@
 }
 %    \end{macrocode}
 %
-% 生成封面 (包括封面、封面里、创新性声明与授权说明页、献辞页、中英文摘要)
+% 生成封面 (包括封面、封面里、英文封面、创新性声明与授权说明页、献辞页、中英文摘要)
 %    \begin{macrocode}
 \newcommand{\makefrontmatter}{
   \frontmatter%
@@ -2328,6 +2414,7 @@
   \normalsize%
   \begin{titlepage}
     \bupt@front@cover
+    \bupt@front@ecover
     \bupt@inside@front@cover
     \ifnum\bupt@degree=3
     \else
@@ -4233,19 +4320,22 @@ EXECUTE { show.banner.end }             % 显示完成提示信息
 
 %% 论文题目
 \ctitle{北京邮电大学研究生学位论文\LaTeXe{}模板使用示例文档}
-\etitle{Example of BUPT Graduate Thesis \LaTeXe{} Template}
+\etitle{Example of BUPT Graduate Thesis \LaTeXe{} Template With longlonglong Title}
 
 %% 申请学位
 \cdegree{工学硕士}
 
 %% 院系名称
 \cdepartment{信息与通信工程学院}
+\edepartment{School of Information and Communication Engineering}
 
 %% 专业名称
 \cmajor{移动通信}
+\emajor{Mobile Communication}
 
 %% 你的姓名
 \cauthor{学生姓名}
+\eauthor{Pinyin Name}
 
 %% 博士后研究工作报告-分类号
 \classnumber{O441.3}
@@ -4264,9 +4354,11 @@ EXECUTE { show.banner.end }             % 显示完成提示信息
 
 %% 你导师的姓名
 \csupervisor{导师姓名}
+\esupervisor{Supervisor Name}
 
 %% 日期自动生成，也可以取消注释下面一行，自行指定日期
 % \cdate{2013年12月25日}
+% \edate{Dec 25 2013}
 
 %% 中文摘要
 \cabstract{%
