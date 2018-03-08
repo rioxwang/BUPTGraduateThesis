@@ -4076,6 +4076,11 @@ EXECUTE { show.banner.end }             % 显示完成提示信息
 \include{ch_intro}
 \include{ch_concln}
 
+\ifx\usechapbib\undefined
+\bibliographystyle{buptgraduatethesis}
+\bibliography{bare_thesis}
+\fi
+
 %% 附录部分
 
 %% 如果有两个或两个以上的附录, 使用appendix环境
@@ -4092,11 +4097,6 @@ EXECUTE { show.banner.end }             % 显示完成提示信息
 %%   % 自动抽取生成缩略语表作为附录A
 %%   % \tableofacronyms
 %% \end{appendix*}
-
-\ifx\usechapbib\undefined
-\bibliographystyle{buptgraduatethesis}
-\bibliography{bare_thesis}
-\fi
 
 \backmatter
 %% 致谢
