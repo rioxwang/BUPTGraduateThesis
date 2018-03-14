@@ -2201,110 +2201,114 @@
     \relax
   \else
   \asong\bfseries
-  \begin{minipage}[t]{\textwidth}%北京邮电大学、硕士（博士）学位论文、logo
-    \vspace{2cm}
-    \centering
-    \includegraphics[width=14cm]{logo/bupt_en_name_and_seal}\par
-    \vspace{1cm}
-    \ecovertitlesize[1.0]{\ahei\bupt@label@ecovertitle}\par
-  \end{minipage}\\[1.8cm]
-  \begin{minipage}[t]{\textwidth}%题目
-    \centering
-    \xiaoer[1.5]
-    \settowidth{\bupt@titlewidth}{\bupt@meta@etitle}
-    \setlength{\extrarowheight}{0pt}
-    \setlength{\arrayrulewidth}{0.5bp}
-    \begin{tabular}{@{}p{42bp}@{\bupt@title@esep}p{95mm}@{}}
-      \bupt@label@etitle & %
-      \parbox[t]{95mm}{%
-        \centering%
-        \renewcommand\titlebreak{\\\global\let\bupt@long@title\@empty}
-        \rule[-5bp]{95mm}{0.5bp}\\[-27bp]
-        \bupt@meta@etitle%
-      }%
-      \\%
-      \ifx\bupt@long@title\@empty
-        \cline{2-2}
-      \else
-        \ifdim\bupt@titlewidth>95mm
-        \cline{2-2}
+  \begin{center}
+    \begin{minipage}[t]{\textwidth}%北京邮电大学、硕士（博士）学位论文、logo
+      \vspace{2.5cm}
+      \centering
+      \includegraphics[width=14cm]{logo/bupt_en_name_and_seal}\par
+      \vspace{1cm}
+      \ecovertitlesize[1.0]{\ahei\bupt@label@ecovertitle}\par
+    \end{minipage}\\[1.8cm]
+    \begin{minipage}[t]{\textwidth}%题目
+      \centering
+      \xiaoer[1.5]
+      \vspace{0.5cm}
+      \settowidth{\bupt@titlewidth}{\bupt@meta@etitle}
+      \setlength{\extrarowheight}{0pt}
+      \setlength{\arrayrulewidth}{0.5bp}
+      \begin{tabular}{@{}p{42bp}@{\bupt@title@esep}p{95mm}@{}}
+        \bupt@label@etitle & %
+        \parbox[t]{95mm}{%
+          \centering%
+          \renewcommand\titlebreak{\\\global\let\bupt@long@title\@empty}
+          \rule[-5bp]{95mm}{0.5bp}\\[-27bp]
+          \bupt@meta@etitle%
+        }%
+        \\%
+        \ifx\bupt@long@title\@empty
+          \cline{2-2}
+        \else
+          \ifdim\bupt@titlewidth>95mm
+          \cline{2-2}
+          \fi
         \fi
-      \fi
-    \end{tabular}
-  \end{minipage}\\[1.3cm]
-  \begin{minipage}[t]{\textwidth}%学号姓名等
-    \centering
-    \sihao[1.24]
-    \setlength{\extrarowheight}{0pt}
-    \setlength{\arrayrulewidth}{0.5bp}
-    \begin{tabular}{rc}
-      \bupt@label@estudentid\bupt@title@esep & {\hfill\bupt@hide{\bupt@meta@studentid}\hfill} \\
-      [-3pt] \cline{2-2} \\
-      \bupt@label@eauthor\bupt@title@esep & {\hfill\bupt@hide{\bupt@meta@eauthor}\hfill} \\
-      [-3pt] \cline{2-2} \\
-      \bupt@label@emajor\bupt@title@esep & {\hfill\bupt@meta@emajor\hfill} \\
-      [-3pt] \cline{2-2} \\
-      \bupt@label@esupervisor\bupt@title@esep & {\hfill\bupt@hide{\bupt@meta@esupervisor}\hfill} \\
-      [-3pt] \cline{2-2} \\
-      \bupt@label@edepartment\bupt@title@esep & {\hfill\bupt@meta@edepartment\hfill} \\
-      [-3pt] \cline{2-2} \\
-    \end{tabular}
-  \end{minipage}\\[0.7cm]
-  \begin{minipage}[t]{\textwidth}%日期
-    \begin{flushright}
-      {\sihao[1.0] \asong \bupt@meta@edate}
-    \end{flushright}
-  \end{minipage}
-  \normalfont
-  \fi
-}
-%</cls>
-%    \end{macrocode}
-%
-% 前封里(封二)、底封里(封三)与封底(封四)
-%    \begin{macrocode}
-%<*cls>
-\newcommand{\bupt@inside@front@cover}{%
-  \cleardoublepage
-  \ifnum\bupt@degree=3
-    \song\noindent%
-    \begin{minipage}[t]{\textwidth}
+      \end{tabular}
+    \end{minipage}\\[1.3cm]
+    \begin{minipage}[t]{\textwidth}%学号姓名等
       \centering
-      \xiaoer[1.5]
-      \renewcommand\titlebreak{\\\global\let\bupt@long@title\@empty}
-      {\hei\bupt@meta@ctitle}\par
-    \end{minipage}\\[1cm]
-    \begin{minipage}[t]{\textwidth}
-      \centering
-      \xiaoer[1.5]
-      {\hei\bupt@meta@etitle}\par
-    \end{minipage}\\[6cm]
-    \begin{minipage}[t]{\textwidth}
-      \centering
-      \xiaosan[1.5]
+      \sihao[1.24]
       \setlength{\extrarowheight}{0pt}
       \setlength{\arrayrulewidth}{0.5bp}
-      \begin{tabular}{lc}
-        \bupt@label@cauthor\bupt@title@sep & {\bupt@hide{\bupt@meta@cauthor}\hfill} \\
-        \bupt@label@cdepartment\bupt@title@sep & {\bupt@meta@cdepartment\hfill} \\
-        \bupt@label@cmajor\bupt@title@sep & {\bupt@meta@cmajor\hfill} \\
-        \bupt@label@csupervisor\bupt@title@sep & {\bupt@hide{\bupt@meta@csupervisor}\hfill} \\
+      \begin{tabular}{rc}
+        \bupt@label@estudentid\bupt@title@esep & {\hfill\bupt@hide{\bupt@meta@studentid}\hfill} \\
+        [-3pt] \cline{2-2} \\
+        \bupt@label@eauthor\bupt@title@esep & {\hfill\bupt@hide{\bupt@meta@eauthor}\hfill} \\
+        [-3pt] \cline{2-2} \\
+        \bupt@label@emajor\bupt@title@esep & {\hfill\bupt@meta@emajor\hfill} \\
+        [-3pt] \cline{2-2} \\
+        \bupt@label@esupervisor\bupt@title@esep & {\hfill\bupt@hide{\bupt@meta@esupervisor}\hfill} \\
+        [-3pt] \cline{2-2} \\
+        \bupt@label@edepartment\bupt@title@esep & {\hfill\bupt@meta@edepartment\hfill} \\
+        [-3pt] \cline{2-2} \\
       \end{tabular}
-    \end{minipage}\\[3cm]
-    \begin{minipage}[t]{\textwidth}
-      \centering
-      \xiaosan[1.5]
-      \setlength{\extrarowheight}{0pt}
-      \setlength{\arrayrulewidth}{0.5bp}
-      \begin{tabular}{lc}
-        \bupt@label@startdate\bupt@title@sep & \bupt@meta@startdate \\
-        \bupt@label@finishdate\bupt@title@sep & \bupt@meta@finishdate \\
-      \end{tabular}
+    \end{minipage}\\[0.7cm]
+    \begin{minipage}[t]{\textwidth}%日期
+      \begin{flushright}
+        {\sihao[1.0] \asong \bupt@meta@edate}
+      \end{flushright}
     \end{minipage}
     \normalfont
-  \else
-    \relax
-  \fi
+    \fi
+  \end{center}  
+}
+  %</cls>
+  %    \end{macrocode}
+  %
+  % 前封里(封二)、底封里(封三)与封底(封四)
+  %    \begin{macrocode}
+  %<*cls>
+  \newcommand{\bupt@inside@front@cover}{%
+    \cleardoublepage
+    \ifnum\bupt@degree=3
+      \song\noindent%
+      \begin{minipage}[t]{\textwidth}
+        \centering
+        \xiaoer[1.5]
+        \renewcommand\titlebreak{\\\global\let\bupt@long@title\@empty}
+        {\hei\bupt@meta@ctitle}\par
+      \end{minipage}\\[1cm]
+      \begin{minipage}[t]{\textwidth}
+        \centering
+        \xiaoer[1.5]
+        {\hei\bupt@meta@etitle}\par
+      \end{minipage}\\[6cm]
+      \begin{minipage}[t]{\textwidth}
+        \centering
+        \xiaosan[1.5]
+        \setlength{\extrarowheight}{0pt}
+        \setlength{\arrayrulewidth}{0.5bp}
+        \begin{tabular}{lc}
+          \bupt@label@cauthor\bupt@title@sep & {\bupt@hide{\bupt@meta@cauthor}\hfill} \\
+          \bupt@label@cdepartment\bupt@title@sep & {\bupt@meta@cdepartment\hfill} \\
+          \bupt@label@cmajor\bupt@title@sep & {\bupt@meta@cmajor\hfill} \\
+          \bupt@label@csupervisor\bupt@title@sep & {\bupt@hide{\bupt@meta@csupervisor}\hfill} \\
+        \end{tabular}
+      \end{minipage}\\[3cm]
+      \begin{minipage}[t]{\textwidth}
+        \centering
+        \xiaosan[1.5]
+        \setlength{\extrarowheight}{0pt}
+        \setlength{\arrayrulewidth}{0.5bp}
+        \begin{tabular}{lc}
+          \bupt@label@startdate\bupt@title@sep & \bupt@meta@startdate \\
+          \bupt@label@finishdate\bupt@title@sep & \bupt@meta@finishdate \\
+        \end{tabular}
+      \end{minipage}
+      \normalfont
+    \else
+      \relax
+    \fi
+  \end{center}
 }
 \newcommand{\bupt@inside@back@cover}{%
   \cleardoublepage
