@@ -191,8 +191,9 @@
 % \changes{v6.1}{2015/01/16}{修正发表论文列表中序号不对齐的 BUG}
 % \changes{v6.2}{2015/04/23}{修正参考文献列表序号不对齐的 BUG}
 % \changes{v7.0}{2016/11/23}{修正涉密论文中的 BUG；修正参考文献格式控制的 BUG；增加博士后研究报告类型；根据新版 xeCJK 宏包更新命令；更新声明内容；根据新版 glossaries 宏包更新命令}
+% \changes{v7.1}{2018/03/16}{添加英文扉页、根据2017年标准修正格式}
 %
-% \def\fileversion{v7.0}
+% \def\fileversion{v7.1}
 % \def\filedate{2016/11/23}
 %
 % \def\BUPTGraduateThesis{\textsc{BUPT}\-\textsc{Graduate}\-\textsc{Thesis}}
@@ -557,7 +558,7 @@
 % 
 % \begin{function}{作者姓名}
 %   \begin{syntax}
-%     |\cauthor|\marg{作者姓名}
+%     |\cauthor|\marg{作者姓名} |\eauthor|\marg{Author Name}
 %   \end{syntax}
 % \end{function}
 % 
@@ -569,31 +570,31 @@
 % 
 % \begin{function}{申请学位}
 %   \begin{syntax}
-%     |\cauthor|\marg{申请学位}
+%     |\cdegree|\marg{申请学位}
 %   \end{syntax}
 % \end{function}
 % 
 % \begin{function}{院系名称}
 %   \begin{syntax}
-%     |\cdepartment|\marg{院系名称}
+%     |\cdepartment|\marg{院系名称} |\edepartment|\marg{院系英文名称}
 %   \end{syntax}
 % \end{function}
 % 
 % \begin{function}{专业名称}
 %   \begin{syntax}
-%     |\cmajor|\marg{专业名称}
+%     |\cmajor|\marg{专业名称}  |\emajor|\marg{专业英文名称}
 %   \end{syntax}
 % \end{function}
 % 
 % \begin{function}{导师名称}
 %   \begin{syntax}
-%     |\csupervisor|\marg{导师名称}
+%     |\csupervisor|\marg{导师名称} |\esupervisor|\marg{Supervisor Name}
 %   \end{syntax}
 % \end{function}
 % 
 % \begin{function}{论文提交日期}
 %   \begin{syntax}
-%     |\cdate|\marg{论文提交日期}
+%     |\cdate|\marg{论文提交日期} |\edate|\marg{论文提交日期}
 %   \end{syntax}
 % \end{function}
 % 
