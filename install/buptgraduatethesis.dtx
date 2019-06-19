@@ -2011,10 +2011,12 @@
   \def\bupt@label@studentid{学\hspace{2em}号}
   \def\bupt@label@estudentid{Student No.}
   \def\bupt@label@classlevel{密级}
+  \def\bupt@label@eclasslevel{Secret Level}
 \fi
 \def\bupt@label@ctitle{题目}
 \def\bupt@label@etitle{Topic}
 \def\bupt@label@classdur{保密期限}
+\def\bupt@label@eclassdur{Confidentiality Period}
 \def\bupt@label@cschoolname{北京邮电大学}
 \def\bupt@label@eschoolname{Beijing University of Posts and Telecommunications}
 \def\bupt@title@sep{：}
@@ -2202,11 +2204,23 @@
     \relax
   \else
   \asong\bfseries
+  \vspace*{-1.15cm}
+  \begin{minipage}[t]{\textwidth}%右上角密级、保密期限
+    \sihao
+    \hspace*{40.6mm}
+    \ifnum\bupt@classlevel=0
+      \bupt@label@eclasslevel\bupt@title@sep
+      \hspace{4em}\bupt@label@eclassdur\bupt@title@sep
+    \else
+      \bupt@label@eclasslevel\bupt@title@sep\bupt@meta@classlevel
+      \hspace{2em}\bupt@label@eclassdur\bupt@title@sep\bupt@meta@classdur
+    \fi
+  \end{minipage}\\[1.71cm]
   \begin{center}
     \begin{minipage}[t]{\textwidth}%北京邮电大学、硕士（博士）学位论文、logo
-      \vspace{2.5cm}
+%      \vspace{2.5cm}
       \centering
-      \includegraphics[width=14cm]{logo/bupt_en_name_and_seal}\par
+      \includegraphics[width=15cm]{logo/bupt_en_name_and_seal}\par
       \vspace{1cm}
       \ecovertitlesize[1.0]{\ahei\bupt@label@ecovertitle}\par
     \end{minipage}\\[1.8cm]
