@@ -1969,7 +1969,7 @@
 \ifcase\bupt@degree\relax
   \def\bupt@page@head{北京邮电大学工学博士学位论文}
   \def\bupt@label@covertitle{博士学位论文}
-  \def\bupt@label@ecovertitle{Thesis for Doctor Degree}
+  \def\bupt@label@ecovertitle{Doctoral Dissertation}
   \def\bupt@label@cmajor{专\hspace{2em}业}
   \def\bupt@label@emajor{Subject}
   \or
@@ -2014,7 +2014,7 @@
   \def\bupt@label@eclasslevel{Secret Level}
 \fi
 \def\bupt@label@ctitle{题目}
-\def\bupt@label@etitle{Topic}
+\def\bupt@label@etitle{Title}
 \def\bupt@label@classdur{保密期限}
 \def\bupt@label@eclassdur{Confidentiality Period}
 \def\bupt@label@cschoolname{北京邮电大学}
@@ -2156,15 +2156,17 @@
         \renewcommand\titlebreak{\\\global\let\bupt@long@title\@empty}
         \rule[-5bp]{95mm}{0.5bp}\\[-27bp]
         \bupt@meta@ctitle%
+        \ifx\bupt@long@title\@empty
+          \\[-27bp]%
+          \rule[-5bp]{95mm}{0.5bp}%
+        \else
+          \ifdim\bupt@titlewidth>95mm
+            \\[-27bp]%
+            \rule[-5bp]{95mm}{0.5bp}%
+          \fi
+        \fi
       }%
       \\%
-      \ifx\bupt@long@title\@empty
-        \cline{2-2}
-      \else
-        \ifdim\bupt@titlewidth>95mm
-        \cline{2-2}
-        \fi
-      \fi
     \end{tabular}
   \end{minipage}\\[1.3cm]
   \begin{minipage}[t]{\textwidth}%学号姓名等
@@ -2231,24 +2233,31 @@
       \settowidth{\bupt@titlewidth}{\bupt@meta@etitle}
       \setlength{\extrarowheight}{0pt}
       \setlength{\arrayrulewidth}{0.5bp}
-      \begin{tabular}{@{}p{42bp}@{\bupt@title@esep}p{95mm}@{}}
-        \bupt@label@etitle & %
-        \parbox[t]{95mm}{%
+      \begin{tabular}{r p{110mm}}
+        \bupt@label@etitle~\bupt@title@esep & %
+        \parbox[t]{110mm}{%
           \centering%
           \renewcommand\titlebreak{\\\global\let\bupt@long@title\@empty}
-          \rule[-5bp]{95mm}{0.5bp}\\[-27bp]
-          \bupt@meta@etitle%
+          \ifdim\bupt@titlewidth<110mm
+            \bupt@meta@etitle
+            \ifx \bupt@long@etitle\@empty
+              \\[-54bp]%
+              \rule[-5bp]{110mm}{0.5bp}\\
+              \rule[-5bp]{110mm}{0.5bp}
+            \else
+              \\[-27bp]%
+              \rule[-5bp]{110mm}{0.5bp}
+            \fi
+          \else
+            \rule[-5bp]{110mm}{0.5bp}\\%
+            \rule[-5bp]{110mm}{0.5bp}\\[-54bp]%
+            \bupt@meta@etitle\\[-27bp]%
+            \rule[-5bp]{110mm}{0.5bp}
+          \fi
         }%
         \\%
-        \ifx\bupt@long@title\@empty
-          \cline{2-2}
-        \else
-          \ifdim\bupt@titlewidth>95mm
-          \cline{2-2}
-          \fi
-        \fi
       \end{tabular}
-    \end{minipage}\\[1.3cm]
+    \end{minipage}\\[1.5cm]
     \begin{minipage}[t]{\textwidth}%学号姓名等
       \centering
       \sihao[1.24]
@@ -2266,7 +2275,7 @@
         \bupt@label@edepartment\bupt@title@esep & {\hfill\bupt@meta@edepartment\hfill} \\
         [-3pt] \cline{2-2} \\
       \end{tabular}
-    \end{minipage}\\[0.7cm]
+    \end{minipage}\\[1cm]
     \begin{minipage}[t]{\textwidth}%日期
       \begin{flushright}
         {\sihao[1.0] \asong \bupt@meta@edate}
