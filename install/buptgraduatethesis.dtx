@@ -192,9 +192,10 @@
 % \changes{v6.2}{2015/04/23}{修正参考文献列表序号不对齐的 BUG}
 % \changes{v7.0}{2016/11/23}{修正涉密论文中的 BUG；修正参考文献格式控制的 BUG；增加博士后研究报告类型；根据新版 xeCJK 宏包更新命令；更新声明内容；根据新版 glossaries 宏包更新命令}
 % \changes{v7.1}{2018/03/16}{添加英文扉页、根据2017年标准修正格式}
+% \changes{v7.2}{2020/01/03}{更新 subfigure 宏包为较新的 subfig 宏包}
 %
-% \def\fileversion{v7.1}
-% \def\filedate{2016/11/23}
+% \def\fileversion{v7.2}
+% \def\filedate{2020/01/03}
 %
 % \def\BUPTGraduateThesis{\textsc{BUPT}\-\textsc{Graduate}\-\textsc{Thesis}}
 % \def\BUPTThesis{\textsc{BUPT}\-\textsc{Thesis}}
@@ -262,7 +263,7 @@
 %     |booktabs|    & 2005/04/14 v1.61803 & |natbib|      & 2010/09/13 v8.31b \\
 %     |breakurl|    & 2009/01/24 v1.30    & |ntheorem|    & 2011/02/16 v1.31 \\  
 %     |calc|        & 2007/08/22 v4.3     & |subdepth|    & 2007/09/02 v0.1 \\   
-%     |caption|     & 2011/09/30 v3.2c    & |subfigure|   & 2005/04/29 v2.1.5 \\
+%     |caption|     & 2011/09/30 v3.2c    & |subfig|      & 2005/06/28 v1.3 \\
 %     |chapterbib|  & 2010/09/18 v1.17    & |textcomp|    & 2005/09/27 v1.99g \\
 %     |courier|     & 2005/04/12 v9.2a    & |titlesec|    & 2011/08/28 v2.9.1 \\
 %     |everysel|    & 2011/10/28 v1.2     & |wallpaper|   & 2006/04/21 v1.10 \\
@@ -1235,7 +1236,8 @@
 % 图形与表格
 %    \begin{macrocode}
 \RequirePackage{graphicx}
-\RequirePackage{subfigure}
+\RequirePackage{subfig}
+%由subfigure宏包改为较新的subfig宏包，配合\subfloat实现更方便的子图功能，不再需要结合minipage
 \RequirePackage{array}
 \RequirePackage{longtable}
 \RequirePackage{booktabs}
