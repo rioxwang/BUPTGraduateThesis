@@ -1,6 +1,6 @@
 Version
 ==================
-当前版本v7.1，同时托管于GitHub与GitCafe，支持Windows、Linux和OSX平台。该版本可以在项目主页直接下载ZIP压缩包获得，也可以通过如下任意一条git命令选择一个网速较快的服务器获得：
+当前版本v7.2，同时托管于GitHub与GitCafe，支持Windows、Linux和OSX平台。该版本可以在项目主页直接下载ZIP压缩包获得，也可以通过如下任意一条git命令选择一个网速较快的服务器获得：
 
     git clone https://gitcafe.com/rioxwang/BUPTGraduateThesis.git
     git clone https://github.com/rioxwang/BUPTGraduateThesis.git
@@ -43,6 +43,7 @@ Linux/OSX用户请打开SHELL输入如下命令进行安装：
 
 Change Logs
 ==================
+*  v7.2：2020/01/03，更新 `subfigure` 宏包为较新的 `subfig` 宏包，配合`\subfloat{}`实现更方便的子图功能，在`\subfloat{}`与另一个`\subfloat{}`之间用`\\`隔开，可以实现子图的上下垂直排列。
 *  v7.1：2018/03/16，添加英文扉页、根据2017年标准修正格式
 *  v7.0：2016/11/23，修正涉密论文中的BUG；修正参考文献格式控制的BUG；增加博士后研究报告类型；根据新版xeCJK宏包更新命令；更新声明内容；根据新版glossaries宏包更新命令
 *  v6.2：2015/04/23，修正参考文献列表序号不对齐的BUG（v6.1用户升级请在cls文件中搜索multibib宏包，删除其resetlabels选项的调用，在各个ch_xxx.tex和pubs.tex调用参考文献数据库之前使用\setcounter{NAT@ctr}{0}
