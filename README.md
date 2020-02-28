@@ -1,14 +1,13 @@
 Version
 ==================
-当前版本v7.2，同时托管于GitHub与GitCafe，支持Windows、Linux和OSX平台。该版本可以在项目主页直接下载ZIP压缩包获得，也可以通过如下任意一条git命令选择一个网速较快的服务器获得：
+当前版本v7.2，托管于GitHub，支持Windows、Linux和OSX平台。该版本可以在项目主页直接下载ZIP压缩包获得，也可以通过如下git命令获得：
 
-    git clone https://gitcafe.com/rioxwang/BUPTGraduateThesis.git
     git clone https://github.com/rioxwang/BUPTGraduateThesis.git
 
 
 About
 ==================
-BUPTGraduateThesis提供北京邮电大学研究生学位论文LaTeX文档类，其符合北邮研究生院2014年11月发布的《关于研究生学位论文格式的统一要求》。目前已经可以生成除了封面之外的所有论文内容，封面由于书脊的存在，需要进一步细调。我们建议利用BUPTGraduateThesis生成除了封面之外的所有PDF内容，再使用WORD生成封面。（注：扉页可以正常输出，而封面是打印时需要打印在指定彩纸上的内容，与扉页相比多了书脊这部分内容，需要根据论文薄厚做细调。校内的打印店均可以帮忙依据PDF的扉页生成封面。）
+BUPTGraduateThesis提供北京邮电大学研究生学位论文LaTeX文档类，其符合北邮研究生院2014年11月发布的《关于研究生学位论文格式的统一要求》，目前已根据2017年标准修正格式、添加英文扉页。目前已经可以生成除了封面之外的所有论文内容，封面由于书脊的存在，需要进一步细调。我们建议利用BUPTGraduateThesis生成除了封面之外的所有PDF内容，再使用WORD生成封面。（注：扉页可以正常输出，而封面是打印时需要打印在指定彩纸上的内容，与扉页相比多了书脊这部分内容，需要根据论文薄厚做细调。校内的打印店均可以帮忙依据PDF的扉页生成封面。）
 
 该项目源于张煜博士（Dazzle Zhang）发起并维护的BUPTThesis项目，并由王贤凌博士（rioxwang）在其基础上增添了更加稳健的中文处理方案，于2013年7月5日发布。该项目借助XeTeX引擎，利用xeCJK宏包取代BUPTThesis中的CJK宏包作为中文解决方案。同时，BUPTGraduateThesis根据研究生院发布的最新要求，对学位论文格式进行微调，并且提供更为详细的用户帮助文档buptgraduatethesis.pdf。
 
@@ -19,8 +18,8 @@ Quick Help
 
 更具体的安装说明与帮助文档请参见buptgraduatethesis.pdf。
 
-为了方便新手入门，BUPTGraduateThesis提供了基于Docstrip的安装方式和免安装压缩包release.zip，用户可以依照自己的习惯选择，免安装方式暂不支持v7.1版。
-使用免安装压缩包的用户，只需要将release.zip解压，并将所有文件拷贝到主目录下即可正常使用（注意备份已有工作！）。
+为了方便新手入门，BUPTGraduateThesis提供了基于Docstrip的安装方式和免安装压缩包release_7.2.zip，用户可以依照自己的习惯选择，免安装方式支持v7.2版。
+使用免安装压缩包的用户，只需要将release_7.2.zip解压，并将所有文件拷贝到主目录下即可正常使用（注意备份已有工作！）。
 
 为了生成用户帮助文档buptgraduatethesis.pdf，安装前请保证Adobe系列中文字体已经安装。
 
@@ -39,6 +38,16 @@ Linux/OSX用户请打开SHELL输入如下命令进行安装：
 
     chmod a+x makethesis
     ./makethesis install
+
+
+Read Me（使用前必读）
+==================
+由于BUPTGraduateThesis的编译过程较为复杂，Windows用户直接使用WinEdt的按钮执行编译会出现参考文献、已发表学术论文目录等不能正确编译，因此建议Windows用户在CMD下使用预先编写好的批处理文件`makethesis.bat`编译，Linux/OSX用户在SHELL下使用文件`makethesis`。高阶用户可以阅读批处理文件，深入了解BUPTGraduateThesis编译的过程。
+
+此外，用户在编译前需要对`makethesis.bat`（`makethesis`）进行简单的配置，详细内容请查阅用户帮助文档`buptgraduatethesis.pdf`。配置的方法为：用编辑器打开批处理文件`makethesis.bat`，定位到`User Configuration`模块，修改
+* `TARGET` 目标文件，生成论文的文件名，同时也是最外层TEX文件的文件名
+* `MAINMATTER` 各章节TEX文件的文件名，以空格分开，不包括附录。示例：`MAINMATTERS=(ch_intro ch_chapter2 ch_chapter3 ch_chapter4 ch_chapter5 ch_concln)`
+* `BIBTYPE` 参考文献方式，`chapbib` 为分章参考文献，`allbib` 为全文参考文献
 
 
 Change Logs
