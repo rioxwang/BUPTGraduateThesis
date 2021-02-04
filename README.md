@@ -30,6 +30,8 @@ Adobe系列字体用于提供免费的常用中文字体：
 *  AdobeKaitiStd-Regular.otf
 *  AdobeSongStd-Light.otf
 
+注意：win10系统，需要在下载字体上右击选择为所有用户安装
+
 Windows用户请打开CMD，输入如下命令进行安装：
 
     makethesis.bat install
