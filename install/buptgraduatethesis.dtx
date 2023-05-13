@@ -586,7 +586,13 @@
 %     |\cmajor|\marg{专业名称}  |\emajor|\marg{专业英文名称}
 %   \end{syntax}
 % \end{function}
-% 
+%
+% \begin{function}{培养方式}
+%   \begin{syntax}
+%     |\ctrainingmode|\marg{培养方式} |\etrainingmode|\marg{Training Mode}
+%   \end{syntax}
+% \end{function} 
+%
 % \begin{function}{导师名称}
 %   \begin{syntax}
 %     |\csupervisor|\marg{导师名称} |\esupervisor|\marg{Supervisor Name}
@@ -1940,6 +1946,7 @@
 \bupt@def@metadata{classnumber}
 \bupt@def@metadata{udc}
 \bupt@def@metadata{schoolserial}
+\bupt@def@metadata{ctrainingmode}
 \bupt@def@metadata{csupervisor}
 \bupt@def@metadata{cassosupervisor}
 \bupt@def@metadata{ccosupervisor}
@@ -1953,6 +1960,7 @@
 \bupt@def@metadata{edepartment}
 \bupt@def@metadata{emajor}
 \bupt@def@metadata{eauthor}
+\bupt@def@metadata{etrainingmode}
 \bupt@def@metadata{esupervisor}
 \bupt@def@metadata{eassosupervisor}
 \bupt@def@metadata{ecosupervisor}
@@ -1976,15 +1984,15 @@
   \def\bupt@label@emajor{Subject}
   \or
   \def\bupt@page@head{北京邮电大学工学硕士学位论文}
-  \def\bupt@label@covertitle{硕士学位论文}
+  \def\bupt@label@covertitle{硕士学位论文（学术学位）}
   \def\bupt@label@ecovertitle{Thesis for Master Degree}
-  \def\bupt@label@cmajor{专\hspace{2em}业}
+  \def\bupt@label@cmajor{学科专业}
   \def\bupt@label@emajor{Subject}
   \or
   \def\bupt@page@head{北京邮电大学工程硕士学位论文}
-  \def\bupt@label@covertitle{硕士学位论文}
+  \def\bupt@label@covertitle{硕士学位论文（专业学位）}
   \def\bupt@label@ecovertitle{Thesis for Master Degree}
-  \def\bupt@label@cmajor{专\hspace{2em}业}
+  \def\bupt@label@cmajor{学科专业}
   \def\bupt@label@emajor{Subject}
   \or
   \def\bupt@page@head{北京邮电大学博士后研究工作报告}
@@ -2008,6 +2016,8 @@
   \def\bupt@label@eauthor{Candidate}
   \def\bupt@label@csupervisor{导\hspace{2em}师}
   \def\bupt@label@esupervisor{Supervisor}
+  \def\bupt@label@ctrainingmode{培养方式}
+  \def\bupt@label@etrainingmode{Training Mode}
   \def\bupt@label@cdepartment{学\hspace{2em}院}
   \def\bupt@label@edepartment{Institute}
   \def\bupt@label@studentid{学\hspace{2em}号}
@@ -2183,6 +2193,8 @@
       [-3pt] \cline{2-2} \\
       \bupt@label@cmajor\bupt@title@sep & {\hfill\bupt@meta@cmajor\hfill} \\
       [-3pt] \cline{2-2} \\
+      \bupt@label@ctrainingmode\bupt@title@sep & {\hfill\bupt@hide{\bupt@meta@ctrainingmode}\hfill} \\
+      [-3pt] \cline{2-2} \\
       \bupt@label@csupervisor\bupt@title@sep & {\hfill\bupt@hide{\bupt@meta@csupervisor}\hfill} \\
       [-3pt] \cline{2-2} \\
       \bupt@label@cdepartment\bupt@title@sep & {\hfill\bupt@meta@cdepartment\hfill} \\
@@ -2272,6 +2284,8 @@
         [-3pt] \cline{2-2} \\
         \bupt@label@emajor\bupt@title@esep & {\hfill\bupt@meta@emajor\hfill} \\
         [-3pt] \cline{2-2} \\
+        \bupt@label@etrainingmode\bupt@title@esep & {\hfill\bupt@hide{\bupt@meta@etrainingmode}\hfill} \\
+        [-3pt] \cline{2-2} \\
         \bupt@label@esupervisor\bupt@title@esep & {\hfill\bupt@hide{\bupt@meta@esupervisor}\hfill} \\
         [-3pt] \cline{2-2} \\
         \bupt@label@edepartment\bupt@title@esep & {\hfill\bupt@meta@edepartment\hfill} \\
@@ -2317,6 +2331,7 @@
           \bupt@label@cauthor\bupt@title@sep & {\bupt@hide{\bupt@meta@cauthor}\hfill} \\
           \bupt@label@cdepartment\bupt@title@sep & {\bupt@meta@cdepartment\hfill} \\
           \bupt@label@cmajor\bupt@title@sep & {\bupt@meta@cmajor\hfill} \\
+          \bupt@label@ctrainingmode\bupt@title@sep & {\bupt@hide{\bupt@meta@ctrainingmode}\hfill} \\
           \bupt@label@csupervisor\bupt@title@sep & {\bupt@hide{\bupt@meta@csupervisor}\hfill} \\
         \end{tabular}
       \end{minipage}\\[3cm]
@@ -4378,6 +4393,10 @@ EXECUTE { show.banner.end }             % 显示完成提示信息
 
 %% 博士后研究工作期满时间
 \finishdate{2016年4月2日}
+
+%% 培养方式：填写内容应为“全日制”或“非全日制”。
+\ctrainingmode{全日制 或 非全日制}
+\etrainingmode{Part-Time or Full-Time}
 
 %% 你导师的姓名
 \csupervisor{导师姓名}
