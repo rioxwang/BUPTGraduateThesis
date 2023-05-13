@@ -599,11 +599,6 @@
 %   \end{syntax}
 % \end{function}
 % 
-% \begin{function}{论文提交日期}
-%   \begin{syntax}
-%     |\cdate|\marg{论文提交日期} |\edate|\marg{论文提交日期}
-%   \end{syntax}
-% \end{function}
 % 
 % \begin{function}{论文摘要}
 %   \begin{syntax}
@@ -617,12 +612,6 @@
 %   \end{syntax}
 % \end{function}
 % 关键词之间使用 |\kwsep| 分隔，根据格式要求，使用空格隔开。
-% 
-% \begin{function}{保密年限}
-%   \begin{syntax}
-%     |\classdur|\marg{保密年限}
-%   \end{syntax}
-% \end{function}
 % 
 % \begin{function}{自定义密级}
 %   \begin{syntax}
@@ -1950,7 +1939,6 @@
 \bupt@def@metadata{csupervisor}
 \bupt@def@metadata{cassosupervisor}
 \bupt@def@metadata{ccosupervisor}
-\bupt@def@metadata{cdate}
 \bupt@def@metadata{startdate}
 \bupt@def@metadata{finishdate}
 \bupt@def@metadata[long]{cabstract}
@@ -1964,10 +1952,8 @@
 \bupt@def@metadata{esupervisor}
 \bupt@def@metadata{eassosupervisor}
 \bupt@def@metadata{ecosupervisor}
-\bupt@def@metadata{edate}
 \bupt@def@metadata[long]{eabstract}
 \bupt@def@metadata{ekeywords}
-\bupt@def@metadata{classdur}
 \bupt@def@metadata{hiddenmark}
 \bupt@def@metadata{customclasslevel}
 %</cls>
@@ -2027,14 +2013,11 @@
 \fi
 \def\bupt@label@ctitle{题目}
 \def\bupt@label@etitle{Title}
-\def\bupt@label@classdur{保密期限}
-\def\bupt@label@eclassdur{Confidentiality Period}
 \def\bupt@label@cschoolname{北京邮电大学}
 \def\bupt@label@eschoolname{Beijing University of Posts and Telecommunications}
 \def\bupt@title@sep{：}
 \def\bupt@title@esep{:}
-\cdate{\the\year 年\the\month 月\the\day 日}
-\edate{\today}
+
 
 %</cfg>
 %    \end{macrocode}
@@ -2057,16 +2040,22 @@
 %<*cfg>
 \ifcase\bupt@classlevel\relax
   \def\bupt@meta@classlevel{公开}
+  \def\bupt@meta@eclasslevel{open}
 \or
   \def\bupt@meta@classlevel{限制}
+  \def\bupt@meta@eclasslevel{control}
 \or
   \def\bupt@meta@classlevel{秘密}
+  \def\bupt@meta@eclasslevel{confidential}
 \or
   \def\bupt@meta@classlevel{机密}
+  \def\bupt@meta@eclasslevel{classified}
 \or
   \def\bupt@meta@classlevel{绝密}
+  \def\bupt@meta@eclasslevel{topsecret}
 \or
   \def\bupt@meta@classlevel\bupt@meta@customclasslevel
+  \def\bupt@meta@eclasslevel\bupt@meta@customclasslevel
 \fi
 %</cfg>
 %    \end{macrocode}
@@ -2126,7 +2115,6 @@
   \begin{minipage}[t]{\textwidth}
     \centering
     \sihao[2.0]{\ziju{0.5em}\bupt@label@cschoolname}\par
-    \bupt@meta@cdate
   \end{minipage}
   \normalfont
 }
@@ -2134,15 +2122,13 @@
 \newcommand{\bupt@front@cover}{%
   \asong\bfseries
   \vspace*{-1.15cm}
-  \begin{minipage}[t]{\textwidth}%右上角密级、保密期限
+  \begin{minipage}[t]{\textwidth}%右上角密级
     \sihao
-    \hspace*{76.6mm}
+    \raggedleft
     \ifnum\bupt@classlevel=0
-      \bupt@label@classlevel\bupt@title@sep
-      \hspace{4em}\bupt@label@classdur\bupt@title@sep
+      \bupt@label@classlevel\bupt@title@sep\bupt@meta@classlevel
     \else
       \bupt@label@classlevel\bupt@title@sep\bupt@meta@classlevel
-      \hspace{2em}\bupt@label@classdur\bupt@title@sep\bupt@meta@classdur
     \fi
   \end{minipage}\\[1.71cm]
   \begin{minipage}[t]{\textwidth}%北京邮电大学、硕士（博士）学位论文、logo
@@ -2201,10 +2187,6 @@
       [-3pt] \cline{2-2} \\
     \end{tabular}
   \end{minipage}\\[0.7cm]
-  \begin{minipage}[t]{\textwidth}%日期
-    \centering
-    {\sihao[1.0] \asong \bupt@meta@cdate}
-  \end{minipage}
   \normalfont
 }
 \fi
@@ -2221,15 +2203,13 @@
   \else
   \asong\bfseries
   \vspace*{-1.15cm}
-  \begin{minipage}[t]{\textwidth}%右上角密级、保密期限
+  \begin{minipage}[t]{\textwidth}%右上角密级
     \sihao
-    \hspace*{40.6mm}
+    \raggedleft
     \ifnum\bupt@classlevel=0
-      \bupt@label@eclasslevel\bupt@title@sep
-      \hspace{4em}\bupt@label@eclassdur\bupt@title@sep
+      \bupt@label@eclasslevel\bupt@title@sep\bupt@meta@eclasslevel
     \else
-      \bupt@label@eclasslevel\bupt@title@sep\bupt@meta@classlevel
-      \hspace{2em}\bupt@label@eclassdur\bupt@title@sep\bupt@meta@classdur
+      \bupt@label@eclasslevel\bupt@title@sep\bupt@meta@eclasslevel
     \fi
   \end{minipage}\\[1.71cm]
   \begin{center}
@@ -2292,11 +2272,6 @@
         [-3pt] \cline{2-2} \\
       \end{tabular}
     \end{minipage}\\[1cm]
-    \begin{minipage}[t]{\textwidth}%日期
-      \begin{flushright}
-        {\sihao[1.0] \asong \bupt@meta@edate}
-      \end{flushright}
-    \end{minipage}
     \normalfont
     \fi
   \end{center}  
@@ -4354,8 +4329,6 @@ EXECUTE { show.banner.end }             % 显示完成提示信息
 % 
 % \subsection{metadata.tex}
 %<*metadata>
-%% 涉密论文保密年限
-\classdur{三年}
 
 %% 学号
 \studentid{2011000000}             
@@ -4402,9 +4375,6 @@ EXECUTE { show.banner.end }             % 显示完成提示信息
 \csupervisor{导师姓名}
 \esupervisor{Supervisor Name}
 
-%% 日期自动生成，也可以取消注释下面一行，自行指定日期
-% \cdate{2013年12月25日}
-% \edate{Dec 25 2013}
 
 %% 中文摘要
 \cabstract{%
