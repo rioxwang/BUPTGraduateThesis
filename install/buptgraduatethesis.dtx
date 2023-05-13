@@ -2330,6 +2330,23 @@
 }
 \newcommand{\bupt@back@cover}{%
 }
+  %</cls>
+  %    \end{macrocode}
+  %
+  % 答辩委员会名单页
+  %    \begin{macrocode}
+  %<*cls>
+\def\bupt@committee@title{答辩委员会名单}
+\newcommand{\bupt@committee}{%
+  \cleardoublepage
+  \begin{center}
+    \sanhao\hei\bupt@committee@title
+  \end{center}
+  \input{committee}
+  
+}
+
+
 %</cls>
 %    \end{macrocode}
 %
@@ -2434,6 +2451,7 @@
     \else
       \ifnum\bupt@finish=2
       \else
+      \bupt@committee
       \bupt@makedeclauth
       \fi
     \fi
@@ -4700,6 +4718,34 @@ EXECUTE { show.banner.end }             % 显示完成提示信息
   集合 $\mathcal{A}$ 与集合 $\mathcal{B}$ 的 Cartesian 积，即 $\mathcal{A}\times\mathcal{B}=\{(a,b):a\in\mathcal{A},b\in\mathcal{B}\}$
 \end{listofnotations}
 %</notations>
+% 
+% \subsection{committee.tex}
+%<*committee>
+\begin{table*}[h]
+  \centering
+  \caption*{}
+  \label{tab:committee}
+  \begin{tabular}{|>{\centering\arraybackslash}m{2cm} | >{\centering\arraybackslash}m{2cm} | >{\centering\arraybackslash}m{2cm} | >{\centering\arraybackslash}m{4cm}|}
+    \hline
+    职务     & 姓 名                          & 职 称 & 工 作 单 位 \\
+    \hline
+    主席     &                                &       &             \\
+    \hline
+    委员     &                                &       &             \\
+    \hline
+    委员     &                                &       &             \\
+    \hline
+    委员     &                                &       &             \\
+    \hline
+    委员     &                                &       &             \\
+    \hline
+    秘书     &                                &       &             \\
+    \hline
+    答辩日期 & \multicolumn{3}{|c|}{2023.05.13}                       \\
+    \hline
+  \end{tabular}
+\end{table*}
+%</committee>
 % 
 % \subsection{app_lhospital.tex}
 %<*app-lhospital>
