@@ -408,6 +408,7 @@
 %   classlevel=classified,%
 %   mathfont=mathptmx,%
 %   dedication=false,%
+%   committee=true,%
 %   chapbib=true,%
 %   finish=print,%
 %   driver=xetex]{buptgraduatethesis}
@@ -465,6 +466,17 @@
 % \end{description}
 % \changes{v5.0}{2014/04/14}{增加使用 mathptmx 字体时提示找不到 rsfs10 的解决方案}
 % 注意：使用默认的 mathptmx 字体时，可能会提示找不到 rsfs10 的错误，此时需要运行 mf rsfs10 命令，并且清除辅助文件之后再次编译，即可解决此问题。
+% 
+% \begin{function}{答辩委员会名单页}
+%   \begin{syntax}
+%     committee=\meta{\TFF}
+%   \end{syntax}
+% \end{function}
+% |committee|用于指定是否在扉页后添加答辩委员会名单页，如果有，则答辩委员会名单页的内容在 committee.tex 中描述。
+% \begin{description}
+% \item[true] 有答辩委员会名单页；
+% \item[false] 无答辩委员会名单页。
+% \end{description}
 % 
 % \begin{function}{献词页}
 %   \begin{syntax}
@@ -1077,6 +1089,11 @@
 \define@boolkey[bupt]{class}{dedication}[false]{\relax}
 %    \end{macrocode}
 %
+% 答辩委员会名单页选项
+%    \begin{macrocode}
+\define@boolkey[bupt]{class}{committee}[true]{\relax}
+%    \end{macrocode}
+%
 % 数学字体选项
 %    \begin{macrocode}
 \define@choicekey*[bupt]{class}{mathfont}[\bupt@tempa\bupt@mathfont]{%
@@ -1110,6 +1127,7 @@
   degree=doctor,%
   classlevel=open,%
   dedication=false,%
+  committee=true,%
   mathfont=mathptmx,%
   chapbib=false,%
   finish=print,%
@@ -2451,7 +2469,9 @@
     \else
       \ifnum\bupt@finish=2
       \else
+      \ifbupt@class@committee
       \bupt@committee
+      \fi
       \bupt@makedeclauth
       \fi
     \fi
@@ -4153,6 +4173,7 @@ EXECUTE { show.banner.end }             % 显示完成提示信息
   classlevel=open,%
   mathfont=mathptmx,%
   dedication=false,%
+  committee=true,%
   chapbib=true,%
   finish=print,%
   driver=xetex]{buptgraduatethesis}
