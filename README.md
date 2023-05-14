@@ -1,8 +1,3 @@
-Version
-==================
-当前版本v7.2，托管于GitHub，支持Windows、Linux和OSX平台。该版本可以在项目主页直接下载ZIP压缩包获得，也可以通过如下git命令获得：
-
-    git clone https://github.com/rioxwang/BUPTGraduateThesis.git
 
 
 About
