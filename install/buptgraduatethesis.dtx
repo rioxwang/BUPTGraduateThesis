@@ -4746,9 +4746,10 @@ EXECUTE { show.banner.end }             % 显示完成提示信息
   \centering
   \caption*{}
   \label{tab:committee}
-  \begin{tabular}{|>{\centering\arraybackslash}m{2cm} | >{\centering\arraybackslash}m{2cm} | >{\centering\arraybackslash}m{2cm} | >{\centering\arraybackslash}m{4cm}|}
+  \renewcommand\arraystretch{1.5}
+  \begin{tabular}{|>{\centering\arraybackslash}m{2cm} | >{\centering\arraybackslash}m{2cm} | >{\centering\arraybackslash}m{2cm} | >{\centering\arraybackslash}m{6cm}|}
     \hline
-    职务     & 姓 名                          & 职 称 & 工 作 单 位 \\
+    职务     & 姓 \hspace{1em} 名               & 职 \hspace{1em} 称 & 工\hspace{1em} 作\hspace{1em} 单\hspace{1em} 位 \\
     \hline
     主席     &                                &       &             \\
     \hline
