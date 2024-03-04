@@ -598,7 +598,11 @@
 %     |\cmajor|\marg{专业名称}  |\emajor|\marg{专业英文名称}
 %   \end{syntax}
 % \end{function}
-%
+%% \begin{function}{论文提交日期}
+%   \begin{syntax}
+%     |\cdate|\marg{论文提交日期} |\edate|\marg{论文提交日期}
+%   \end{syntax}
+% \end{function}
 % \begin{function}{培养方式}
 %   \begin{syntax}
 %     |\ctrainingmode|\marg{培养方式} |\etrainingmode|\marg{Training Mode}
@@ -1947,6 +1951,7 @@
 \bupt@def@metadata{studentid}
 \bupt@def@metadata{ctitle}
 \bupt@def@metadata{cdegree}
+\bupt@def@metadata{cdate}
 \bupt@def@metadata{cdepartment}
 \bupt@def@metadata{cmajor}
 \bupt@def@metadata{cauthor}
@@ -1959,6 +1964,7 @@
 \bupt@def@metadata{ccosupervisor}
 \bupt@def@metadata{startdate}
 \bupt@def@metadata{finishdate}
+\bupt@def@metadata{edate}
 \bupt@def@metadata[long]{cabstract}
 \bupt@def@metadata{ckeywords}
 \bupt@def@metadata{etitle}
@@ -2028,6 +2034,8 @@
   \def\bupt@label@estudentid{Student No.}
   \def\bupt@label@classlevel{密级}
   \def\bupt@label@eclasslevel{Secret Level}
+  \cdate{\the\year 年\the\month 月\the\day 日}
+  \edate{\today}
 \fi
 \def\bupt@label@ctitle{题目}
 \def\bupt@label@etitle{Title}
@@ -2133,6 +2141,7 @@
   \begin{minipage}[t]{\textwidth}
     \centering
     \sihao[2.0]{\ziju{0.5em}\bupt@label@cschoolname}\par
+    \bupt@meta@cdate
   \end{minipage}
   \normalfont
 }
@@ -2184,7 +2193,7 @@
       }%
       \\%
     \end{tabular}
-  \end{minipage}\\[1.3cm]
+  \end{minipage}\\[0.7cm]
   \begin{minipage}[t]{\textwidth}%学号姓名等
     \centering
     \sihao[1.24]
@@ -2204,7 +2213,11 @@
       \bupt@label@cdepartment\bupt@title@sep & {\hfill\bupt@meta@cdepartment\hfill} \\
       [-3pt] \cline{2-2} \\
     \end{tabular}
-  \end{minipage}\\[0.7cm]
+  \end{minipage}\\[0.3cm]
+  \begin{minipage}[ht]{\textwidth}%日期
+    \centering
+    {\sihao[1.0] \asong \bupt@meta@cdate}
+  \end{minipage}
   \normalfont
 }
 \fi
@@ -2289,7 +2302,11 @@
         \bupt@label@edepartment\bupt@title@esep & {\hfill\bupt@meta@edepartment\hfill} \\
         [-3pt] \cline{2-2} \\
       \end{tabular}
-    \end{minipage}\\[1cm]
+    \end{minipage}\\[0.7cm]
+    \begin{minipage}[ht]{\textwidth}%日期
+      \centering
+        {\sihao[1.0] \asong \bupt@meta@edate}
+    \end{minipage}
     \normalfont
     \fi
   \end{center}  
@@ -4413,6 +4430,9 @@ EXECUTE { show.banner.end }             % 显示完成提示信息
 %% 你导师的姓名
 \csupervisor{导师姓名}
 \esupervisor{Supervisor Name}
+%% 日期自动生成，也可以取消注释下面一行，自行指定日期
+% \cdate{2013年12月25日}
+% \edate{Dec 25 2013}
 
 
 %% 中文摘要
