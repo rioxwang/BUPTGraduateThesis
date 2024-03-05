@@ -624,10 +624,10 @@
 % 
 % \begin{function}{论文关键词}
 %   \begin{syntax}
-%     |\ckeywords|\marg{中文关键词} |\ekeywords|\marg{英文关键词} |\kwsep|
+%     |\ckeywords|\marg{中文关键词} |\ekeywords|\marg{英文关键词}
 %   \end{syntax}
 % \end{function}
-% 关键词之间使用 |\kwsep| 分隔，根据格式要求，使用空格隔开。
+% 关键词之间使用分号分隔，根据格式要求，中文用全角分号，英文用半角分号。
 % 
 % \begin{function}{自定义密级}
 %   \begin{syntax}
@@ -4441,11 +4441,11 @@ EXECUTE { show.banner.end }             % 显示完成提示信息
   重点说明本项科研的目的和意义、研究方法、研究成果、结论，注意突出具有创新性的成果和新见解的部分。
 
   关键词是为文献标引工作而从论文中选取出来的、用以表示全文主题内容信息的术语。
-  关键词排列在摘要内容的左下方，具体关键词之间以均匀间隔分开排列，无需其它符号。
+  关键词排列在摘要内容的左下方，具体关键词之间以分号分隔。
 }
 
-%% 中文关键词，关键词之间用 \kwsep 分割
-\ckeywords{\TeX \kwsep \LaTeX \kwsep xeCJK \kwsep 模板 \kwsep 排版 \kwsep 论文}
+%% 中文关键词，关键词之间用 全角分号(；) 分隔
+\ckeywords{\TeX；\LaTeX；xeCJK；模板；排版；论文}
 
 %% 英文摘要
 \eabstract{%
@@ -4454,12 +4454,12 @@ EXECUTE { show.banner.end }             % 显示完成提示信息
 
   Key words are terms selected for documentation indexing, which should present the main contributions of the thesis.
   Key words are aligned at the bottom left side of the abstract content.
-  Key words should be seperated by spaces but not any other symbols.
+  Key words should be seperated by semicolon.
 }
 
-%% 英文关键词，也用 \kwsep 分割
+%% 英文关键词，关键字用半角分号(;)分隔
 \ekeywords{%
-  \TeX \kwsep \LaTeX \kwsep xeCJK \kwsep template \kwsep typesetting \kwsep thesis}
+  \TeX; \LaTeX; xeCJK; template; typesetting; thesis}
 %</metadata>
 % 
 % \subsection{pubs.tex}
@@ -4791,7 +4791,7 @@ EXECUTE { show.banner.end }             % 显示完成提示信息
 % 
 % \subsection{app_lhospital.tex}
 %<*app-lhospital>
-\chapter{不定型（$0/0$）极限的计算}
+\chapter{不定型极限的计算}
 \begin{theorem}[L'Hospital法则]
   若
   \begin{enumerate}
