@@ -1522,7 +1522,7 @@
 }
 \def\@schapter#1{%
   \cleardoublepage\phantomsection%
-  \thispagestyle{bupt@plain}%
+  \thispagestyle{bupt@headings}%
   \global\@topnum\z@%
   \@afterindenttrue%
   \ifx\bupt@preschapter\empty
@@ -2506,7 +2506,7 @@
 }
 %% 生成中英文摘要页
 \newcommand{\bupt@makeabstract}{%
-  \pagestyle{bupt@plain}
+  \pagestyle{bupt@headings}
   \pagenumbering{Roman}
   \bupt@chapter*[\bupt@label@cabstract]%
   {\bupt@label@cabstract}%
