@@ -409,7 +409,7 @@
 %   mathfont=mathptmx,%
 %   dedication=false,%
 %   committee=true,%
-%   chapbib=true,%
+%   chapbib=false,%
 %   finish=print,%
 %   driver=xetex]{buptgraduatethesis}
 % \end{Verbatim}
@@ -1878,7 +1878,7 @@
   \def\@oddhead{%
     \vbox to\headheight{%
       \hb@xt@\textwidth{%
-        \xiaowu\song\hfill\leftmark%
+        \xiaowu\song\hfil\leftmark\hfil%
       }%
       \vskip3pt\hbox{%
         \vrule width\textwidth height0.4pt depth0pt
@@ -1888,7 +1888,7 @@
   \def\@evenhead{%
     \vbox to\headheight{%
       \hb@xt@\textwidth{%
-        \xiaowu\song\bupt@page@head\hfill
+        \xiaowu\song\hfil\bupt@page@head\hfil
       }%
       \vskip3pt\hbox{%
         \vrule width\textwidth height0.4pt depth0pt
@@ -1903,7 +1903,7 @@
   \def\@oddhead{%
     \vbox to\headheight{%
       \hb@xt@\textwidth{%
-        \xiaowu\song\hfill\bupt@label@tableofpublications%
+        \xiaowu\song\hfil\bupt@label@tableofpublications\hfil%
       }%
       \vskip3pt\hbox{%
         \vrule width\textwidth height0.4pt depth0pt
@@ -1913,7 +1913,7 @@
   \def\@evenhead{%
     \vbox to\headheight{%
       \hb@xt@\textwidth{%
-        \xiaowu\song\bupt@page@head\hfill
+        \xiaowu\song\hfil\bupt@page@head\hfil
       }%
       \vskip3pt\hbox{%
         \vrule width\textwidth height0.4pt depth0pt
@@ -1993,13 +1993,13 @@
   \def\bupt@label@cmajor{专\hspace{2em}业}
   \def\bupt@label@emajor{Subject}
   \or
-  \def\bupt@page@head{北京邮电大学工学硕士学位论文}
+  \def\bupt@page@head{北京邮电大学硕士学位论文}
   \def\bupt@label@covertitle{硕士学位论文（学术学位）}
   \def\bupt@label@ecovertitle{Thesis for Master Degree}
   \def\bupt@label@cmajor{学科专业}
   \def\bupt@label@emajor{Subject}
   \or
-  \def\bupt@page@head{北京邮电大学工程硕士学位论文}
+  \def\bupt@page@head{北京邮电大学硕士学位论文}
   \def\bupt@label@covertitle{硕士学位论文（专业学位）}
   \def\bupt@label@ecovertitle{Thesis for Master Degree}
   \def\bupt@label@cmajor{学科专业}
@@ -2508,7 +2508,7 @@
 \newcommand{\bupt@makeabstract}{%
   \pagestyle{bupt@plain}
   \pagenumbering{Roman}
-  \bupt@chapter*[]%
+  \bupt@chapter*[\bupt@label@cabstract]%
   {\bupt@label@cabstract}%
   [\xiaosan\hei]%
   [\centering\sanhao\bupt@meta@ctitle]
@@ -2675,7 +2675,7 @@
 %
 % 攻读学位期间发表的学术论文目录
 %    \begin{macrocode}
-%<cfg>\def\bupt@label@tableofpublications{攻读学位期间发表的学术论文目录}
+%<cfg>\def\bupt@label@tableofpublications{攻读学位期间取得的“创新成果”目录}
 %<*cls>
 \def\newcite#1#2{%
   \expandafter\gdef\csname bupt@cite@#1\endcsname{#2}
@@ -4191,7 +4191,7 @@ EXECUTE { show.banner.end }             % 显示完成提示信息
   mathfont=mathptmx,%
   dedication=false,%
   committee=true,%
-  chapbib=true,%
+  chapbib=false,%
   finish=print,%
   driver=xetex]{buptgraduatethesis}
 
