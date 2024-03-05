@@ -2501,8 +2501,8 @@
   \bupt@makeabstract
   \let\@tabular\bupt@tabular%
   \tableofcontents
-  \listoftables
-  \listoffigures
+  %%\listoftables %Jimmy:取消表格和图示索引
+  %%\listoffigures
 }
 %% 生成中英文摘要页
 \newcommand{\bupt@makeabstract}{%
@@ -2522,7 +2522,7 @@
     \setbox0=\hbox{{\hei \bupt@label@ckeywords}}
     \noindent\hangindent\wd0\hangafter1\box0\bupt@meta@ckeywords
   }
-  \bupt@chapter*[]%
+  \bupt@chapter*[\bupt@label@eabstract]%
   {\bupt@label@eabstract} % no tocline
   [\xiaosan]
   [\centering\sanhao\textbf{\MakeUppercase\bupt@meta@etitle}] % 此处控制英文摘要标题的字体
