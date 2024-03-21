@@ -1,9 +1,26 @@
-Version
+About New
 ==================
-当前版本v7.2，托管于GitHub，支持Windows、Linux和OSX平台。该版本可以在项目主页直接下载ZIP压缩包获得，也可以通过如下git命令获得：
+BUPTGraduateThesis原始版本是由[BUPTGraduateThesis](https://github.com/rioxwang/BUPTGraduateThesis.git)仓库提供,但该项目在2020后停止了更新，为了继续推动此文档的发展，本项目在原有基础上做出修改，具体修改内容请查看Commits。因个人能力有限，如有疏漏，请提PR或直接指正：licm@bupt.edu.cn
 
-    git clone https://github.com/rioxwang/BUPTGraduateThesis.git
+v1.2：根据2024年北京邮电大学研究生学位论文写作与制作规范，同步修改一下内容：
+* 页眉居中
+* 摘要页、目录页添加页眉页脚
+* 添加扉页日期字段
+* 摘要关键字分隔方式改为分号分隔
+* 修改成果页标题：攻读学位期间取得的“创新成果”目录
+* 解决新版本TexLive的Command \glsdisplayfirst undefined错误
 
+v1.1：根据2023年北邮研究生院论文要求，本仓库同步修改以下内容：
+1. 扉页修改内容：
+* 去除保密期限字段，密集字段右对齐
+* 去除日期字段
+* 修改 专业 为 学科专业
+* 硕士学位论文后添加 学术学位 or 专业学位
+* 添加培养方式字段 （training mode）
+2. 解决英文扉页密级显示中文的bug
+3. 添加学术委员会名单页面(committee)：bear_thesis.tex 中指定是否添加学术委员会名单页面，install后生成 committee.tex文件
+
+以下是原仓库README内容：
 
 About
 ==================
